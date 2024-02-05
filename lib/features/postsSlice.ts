@@ -16,9 +16,9 @@ const postSlice = createSlice({
       const { id, title, description } = action.payload;
       state.push({ id, title, description });
     },
-    deletePost: (state, action: PayloadAction<any>) => {
+    deletePost: (state, action: PayloadAction<number>) => {
       const postId = action.payload;
-      return state.filter((post: any) => post.id === postId);
+      return state.filter((post: any) => post.id !== postId);
     },
   },
 });
