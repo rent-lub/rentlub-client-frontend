@@ -1,10 +1,9 @@
-import Image from "next/image";
-import Posts from "./posts/pages";
+import Shopping from "./shopping/pages";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Posts />
+    <main className="flex min-h-screen">
+      <Shopping />
     </main>
   );
 }
