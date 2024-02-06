@@ -3,8 +3,13 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { ShoppingTabStyle } from "~/styles/shoppingTabStyles";
+import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 
-export default function ShoppingTab() {
+interface tabProps {
+  onChange?: (selected: ShoppingCatEnum) => void;
+}
+
+export default function ShoppingTab(props: tabProps) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -25,13 +30,9 @@ export default function ShoppingTab() {
         TabIndicatorProps={{ sx: ShoppingTabStyle.indicatorStyle }}
         sx={ShoppingTabStyle.tabStyle}
       >
-        <Tab label="Item One" />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
-        <Tab label="Item Four" />
-        <Tab label="Item Five" />
-        <Tab label="Item Six" />
-        <Tab label="Item Seven" />
+        {Object.values(ShoppingCatEnum).map((value) => {
+          return <Tab key={value} label={value} />;
+        })}
       </Tabs>
     </Box>
   );
