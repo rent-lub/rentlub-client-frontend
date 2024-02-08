@@ -4,7 +4,6 @@ export const ShoppingTabStyle: Record<string, SxProps<Theme> | undefined> = {
   tabStyle: {
     "& .MuiButtonBase-root.MuiTab-root": {
       color: "black",
-      paddingX: "8px",
       transition: "color 0.2s ease-in-out",
       "&:hover": {
         color: "#4CC764",
