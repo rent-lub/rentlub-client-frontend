@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { Avatar } from "@mui/material";
 import ShoppingTab from "~/components/shopping/shoppingTab";
 import HeaderFilterButton from "~/components/shopping/headerFilterButton";
+import BottomNavMenu from "~/components/bottomNavMenu";
 
 const Shopping = () => {
   const [title, setTitle] = useState("");
@@ -20,15 +21,17 @@ const Shopping = () => {
 
   return (
     <>
-      <div className="bg-white min-h-screen min-w-full py-14">
-        <div className="flex justify-between items-center px-5">
+      <div className="bg-white min-h-screen min-w-full py-14 relative">
+        <div className="flex justify-start items-center px-5">
           <h3 className="text-black font-bold">SHOP</h3>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
         </div>
         <div className="px-5 py-3">
           <HeaderFilterButton />
         </div>
         <ShoppingTab />
+        <div className="absolute bottom-10 left-8 right-8">
+          <BottomNavMenu />
+        </div>
       </div>
     </>
   );
