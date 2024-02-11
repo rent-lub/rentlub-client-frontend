@@ -1,9 +1,9 @@
 export enum ShoppingCatEnum {
   All = "All",
   Fashion = "แฟชั่น",
-  HealthAndBeauty = "สุขภาพและความงาม",
-  ItGadget = "ไอทีและแก็ตเจ๊ต",
-  HomeAndGarden = "บ้านและสวน",
+  HealthAndBeauty = "สุขภาพ",
+  ItGadget = "ไอที",
+  HomeAndGarden = "บ้าน",
   Travel = "ท่องเที่ยว",
   Book = "หนังสือ",
   Electric = "เครื่องใช้ไฟฟ้า",

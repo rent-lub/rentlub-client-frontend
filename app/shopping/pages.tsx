@@ -9,6 +9,8 @@ import { Avatar } from "@mui/material";
 import ShoppingTab from "~/components/shopping/shoppingTab";
 import HeaderFilterButton from "~/components/shopping/headerFilterButton";
 import BottomNavMenu from "~/components/bottomNavMenu";
+import ProductCard from "~/components/shopping/productCard";
+import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 
 const Shopping = () => {
   const [title, setTitle] = useState("");
@@ -21,15 +23,20 @@ const Shopping = () => {
 
   return (
     <>
-      <div className="bg-white min-h-screen min-w-full py-14 relative">
-        <div className="flex justify-start items-center px-5">
-          <h3 className="text-black font-bold">SHOP</h3>
-        </div>
-        <div className="px-5 py-3">
+      <div className="bg-white h-screen min-w-full  relative flex flex-col overflow-y-hidden">
+        <div className="px-5 py-3 flex-grow-0">
           <HeaderFilterButton />
         </div>
-        <ShoppingTab />
-        <div className="absolute bottom-10 left-8 right-8">
+        <div className="flex flex-col flex-grow h-64 gap-y-5 pb-32">
+          <ShoppingTab />
+          <div className="grid grid-cols-2 gap-x-4 px-4 overflow-y-auto">
+            <ProductCard productCat={ShoppingCatEnum.Fashion} />
+            <ProductCard productCat={ShoppingCatEnum.Fashion} />
+            <ProductCard productCat={ShoppingCatEnum.Fashion} />
+            <ProductCard productCat={ShoppingCatEnum.Fashion} />
+          </div>
+        </div>
+        <div className="absolute bottom-10 left-8 right-8 flex-grow-0">
           <BottomNavMenu />
         </div>
       </div>
