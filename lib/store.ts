@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import postsReducer from "./features/postsSlice";
+import searchDateReducer from "./features/searchDateSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       posts: postsReducer,
+      searchDate: searchDateReducer,
     },
   });
 };

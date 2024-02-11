@@ -27,9 +27,9 @@ const Shopping = () => {
         <div className="px-5 py-3 flex-grow-0">
           <HeaderFilterButton />
         </div>
-        <div className="flex flex-col flex-grow h-64 gap-y-5 pb-32">
+        <div className="flex flex-col flex-grow h-64 gap-y-5">
           <ShoppingTab />
-          <div className="grid grid-cols-2 gap-x-4 px-4 overflow-y-auto">
+          <div className="grid grid-cols-2 gap-x-4 px-4 overflow-y-auto pb-32">
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
             <ProductCard productCat={ShoppingCatEnum.Fashion} />

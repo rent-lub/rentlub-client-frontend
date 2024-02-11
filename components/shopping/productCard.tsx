@@ -7,6 +7,7 @@ import { buildIcon } from "~/lib/shoppingCatIcon";
 
 interface ProductCard {
   productCat: ShoppingCatEnum;
+  onSelect?: (product: number) => void;
 }
 
 const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
@@ -26,7 +27,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
         className="rounded-xl object-contain"
       />
       <div className="grid grid-rows-3">
-        <div className="grid grid-cols-4 py-2">
+        <div className="grid grid-cols-4 pt-2">
           <p className="col-span-3 text-black line-clamp-2 text-ellipsis overflow-hidden text-sm">
             ชุดตรุษจีน โมเดิรน์ สวยๆ ลายดอกไม้มงคลของจีน ชุดกี่เพ้าแฟชั่น คนอ้วน
             อวบ ใส่สวย KPL171
@@ -39,31 +40,30 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
             />
           </IconButton>
         </div>
-        <div className="flex flex-wrap gap-1">
+        <div className="flex gap-1 overflow-hidden self-center">
           <Chip
             label="Dress"
-            icon={buildIcon(productCat, "white")}
-            className="bg-black text-white w-auto h-auto"
+            icon={buildIcon(productCat)}
+            className="bg-black text-white w-fit h-fit p-1"
+            size="small"
           />
           <Chip
             label="Dress"
-            icon={buildIcon(productCat, "white")}
-            className="bg-black text-white w-auto h-auto"
+            icon={buildIcon(productCat)}
+            className="bg-black text-white w-fit h-fit p-1"
           />
           <Chip
             label="Dress"
-            icon={buildIcon(productCat, "white")}
-            className="bg-black text-white w-auto h-auto"
+            icon={buildIcon(productCat)}
+            className="bg-black text-white w-fit h-fit p-1"
           />
         </div>
-        <div className="pt-1">
-          <p className="text-black font-medium text-xl">
-            ฿ 3200
-            <span className="inline-flex items-baseline">
-              <p className="font-normal text-sm text-gray-500"> / DAY</p>
-            </span>
-          </p>
-        </div>
+        <p className="text-black font-medium text-xl">
+          ฿ 3200
+          <span className="inline-flex items-baseline">
+            <span className="font-normal text-sm text-gray-500"> / DAY</span>
+          </span>
+        </p>
       </div>
     </div>
   );
