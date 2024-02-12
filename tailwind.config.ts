@@ -20,7 +20,7 @@ const config: Config = {
     },
   },
   color: {
-    "primary-green": "#4CC764",
+    "primary-green": "#40C090",
   },
   darkMode: "class",
   plugins: [nextui()],

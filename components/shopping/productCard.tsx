@@ -3,7 +3,8 @@ import Image from "next/image";
 import { FavIcon } from "../favIcon";
 import { Chip, IconButton } from "@mui/material";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
-import { buildIcon } from "~/lib/shoppingCatIcon";
+import { CustomIcon, buildIcon } from "~/lib/shoppingCatIcon";
+import { Dress } from "@phosphor-icons/react/dist/ssr";
 
 interface ProductCard {
   productCat: ShoppingCatEnum;
@@ -20,7 +21,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
   return (
     <div className="col-span-1 flex flex-col">
       <Image
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5GGCjz2Cn7jNzHnBo49YLwV5hUq92_5AFVjyI78_70wQ4Puzigdcsu2MQYINlI0C5_NI&usqp=CAU"
+        src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg"
         width={500}
         height={500}
         alt="Product"
@@ -40,22 +41,18 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
             />
           </IconButton>
         </div>
-        <div className="flex gap-1 overflow-hidden self-center">
+        <div className=" inline-flex gap-1 self-center text-ellipsis max-w-[fit-content] overflow-hidden">
           <Chip
             label="Dress"
-            icon={buildIcon(productCat)}
-            className="bg-black text-white w-fit h-fit p-1"
+            icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
+            className="bg-black text-white w-fit h-fit p-1 "
             size="small"
           />
           <Chip
             label="Dress"
-            icon={buildIcon(productCat)}
-            className="bg-black text-white w-fit h-fit p-1"
-          />
-          <Chip
-            label="Dress"
-            icon={buildIcon(productCat)}
-            className="bg-black text-white w-fit h-fit p-1"
+            icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
+            className="bg-black text-white w-fit h-fit p-1 "
+            size="small"
           />
         </div>
         <p className="text-black font-medium text-xl">

@@ -9,13 +9,13 @@ export const BottomNavMenuStyles: Record<string, SxProps<Theme> | undefined> = {
       color: "black",
       transition: "color 0.2s ease-in-out",
       "&:hover": {
-        color: "#4CC764",
+        color: "#40C090",
       },
       "&.Mui-selected": {
         minWidth: 80,
         width: 80,
         height: 60,
-        color: "#4CC764",
+        color: "#40C090",
       },
     },
   },

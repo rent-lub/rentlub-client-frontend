@@ -9,30 +9,59 @@ import {
   Package,
   Car,
   Television,
+  IconContext,
+  Icon,
+  IconProps,
 } from "@phosphor-icons/react";
+import React from "react";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 
-export const buildIcon = (cat: ShoppingCatEnum, color?: string) => {
+export const buildIcon = (cat: ShoppingCatEnum) => {
   switch (cat) {
     case ShoppingCatEnum.Fashion:
-      return <Dress size={20} />;
+      return <CustomIcon icon={<Dress />} />;
     case ShoppingCatEnum.Book:
-      return <Books size={20} />;
+      return <CustomIcon icon={<Books />} />;
     case ShoppingCatEnum.Sport:
-      return <Barbell size={20} />;
+      return <CustomIcon icon={<Barbell />} />;
     case ShoppingCatEnum.HealthAndBeauty:
-      return <Heartbeat size={20} />;
+      return <CustomIcon icon={<Heartbeat />} />;
     case ShoppingCatEnum.ItGadget:
-      return <Headphones size={20} />;
+      return <CustomIcon icon={<Headphones />} />;
     case ShoppingCatEnum.Travel:
-      return <SuitcaseRolling size={20} />;
+      return <CustomIcon icon={<SuitcaseRolling />} />;
     case ShoppingCatEnum.HomeAndGarden:
-      return <HouseLine size={20} />;
+      return <CustomIcon icon={<HouseLine />} />;
     case ShoppingCatEnum.All:
-      return <Package size={20} />;
+      return <CustomIcon icon={<Package />} />;
     case ShoppingCatEnum.Vehicle:
-      return <Car size={20} />;
+      return <CustomIcon icon={<Car />} />;
     case ShoppingCatEnum.Electric:
-      return <Television size={20} />;
+      return <CustomIcon icon={<Television />} />;
   }
+};
+
+interface customIconProps {
+  icon: React.ReactElement<any, string>;
+  style?: IconProps;
+}
+
+export const CustomIcon: React.FC<customIconProps> = ({
+  icon,
+  style,
+  ...props
+}) => {
+  return (
+    <>
+      <IconContext.Provider
+        value={{
+          ...style,
+          size: style?.size ?? 20,
+          weight: style?.weight ?? "bold",
+        }}
+      >
+        {icon}
+      </IconContext.Provider>
+    </>
+  );
 };
