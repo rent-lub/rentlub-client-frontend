@@ -34,7 +34,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
             </div>
           ))}
         </Slider>
-        <div className="absolute right-10 bottom-10 text-white bg-black bg-opacity-70 px-4 py-1 text-sm rounded-xl">
+        <div className="absolute right-1 bottom-10 text-white bg-black bg-opacity-70 px-4 py-1 text-sm rounded-xl">
           {currentImage + 1}/{images.length}
         </div>
       </div>

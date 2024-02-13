@@ -1,3 +1,4 @@
+import { green } from "@mui/material/colors";
 import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
 
@@ -18,9 +19,9 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
-  },
-  color: {
-    "primary-green": "#40C090",
+    color: {
+      green: "#40C090",
+    },
   },
   darkMode: "class",
   plugins: [nextui()],

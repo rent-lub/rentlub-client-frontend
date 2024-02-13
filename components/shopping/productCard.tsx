@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
           />
         </div>
         <p className="text-black font-medium text-xl">
-          ฿ 3200
+          ฿ {Number(3200).toLocaleString()}
           <span className="inline-flex items-baseline">
             <span className="font-normal text-sm text-gray-500"> / DAY</span>
           </span>
