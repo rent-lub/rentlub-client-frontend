@@ -1,3 +1,4 @@
+"use client";
 import { CalendarBlank, MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 import React, { useState } from "react";
 import { ModalFullScreen } from "../modalFullScreen";

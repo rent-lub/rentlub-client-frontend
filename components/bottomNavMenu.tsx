@@ -1,3 +1,5 @@
+"use client";
+
 import { Avatar, Tab, Tabs } from "@mui/material";
 import {
   Dress,
