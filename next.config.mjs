@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withTM = require('next-transpile-modules')([
+const withTM = import('next-transpile-modules')([
       '@mui/material',
       '@mui/system',
       '@mui/icons-material', 
