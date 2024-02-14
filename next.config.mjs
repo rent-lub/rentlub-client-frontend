@@ -5,8 +5,8 @@ const withTM = require('next-transpile-modules')([
       '@mui/icons-material', 
 ]);
 
-const nextConfig = {
-    images: {
+module.exports = withTM({
+    images:{
         remotePatterns: [
             {
                 protocol: 'https',
@@ -16,9 +16,6 @@ const nextConfig = {
             },
         ],
     },
-};
-
-module.exports = withTM({
     webpack: (config) => {
       config.resolve.alias = {
         ...config.resolve.alias,
