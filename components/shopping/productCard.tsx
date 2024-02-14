@@ -53,13 +53,25 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
           <Chip
             label="Dress"
             icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
-            className="bg-black text-white w-fit h-fit p-1 "
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              width: "fit-content",
+              height: "height-content",
+              padding: 1,
+            }}
             size="small"
           />
           <Chip
             label="Dress"
             icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
-            className="bg-black text-white w-fit h-fit p-1 "
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              width: "fit-content",
+              height: "height-content",
+              padding: 1,
+            }}
             size="small"
           />
         </div>

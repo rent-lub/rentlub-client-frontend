@@ -13,7 +13,8 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.9",
     "@mui/material": "^5.15.9",
-    "@mui/styled-engine-sc": "6.0.0-alpha.14",
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
+    "@mui/styled-engine-sc": "6.0.0-alpha.16",
     "@nextui-org/button": "^2.0.26",
     "@nextui-org/chip": "^2.0.25",
     "@nextui-org/react": "^2.2.9",
@@ -28,6 +29,9 @@
     "react-slick": "^0.30.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8"
+  },
+  "resolutions":{
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",

@@ -17,9 +17,12 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.9
     version: 5.15.9(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)
+  '@mui/styled-engine':
+    specifier: npm:@mui/styled-engine-sc@latest
+    version: /@mui/styled-engine-sc@6.0.0-alpha.16(styled-components@6.1.8)
   '@mui/styled-engine-sc':
-    specifier: 6.0.0-alpha.14
-    version: 6.0.0-alpha.14(styled-components@6.1.8)
+    specifier: 6.0.0-alpha.16
+    version: 6.0.0-alpha.16(styled-components@6.1.8)
   '@nextui-org/button':
     specifier: ^2.0.26
     version: 2.0.26(@nextui-org/system@2.0.15)(@nextui-org/theme@2.1.17)(framer-motion@11.0.3)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.2.0)
@@ -562,8 +565,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@mui/styled-engine-sc@6.0.0-alpha.14(styled-components@6.1.8):
-    resolution: {integrity: sha512-wbExDyFa5qton1KejbMzN2haVuymBt+Lhxvochv9tMw98/9qcvyML4Q84j4sJTY1F535iryGNLm5i3iFi/DYxQ==}
+  /@mui/styled-engine-sc@6.0.0-alpha.16(styled-components@6.1.8):
+    resolution: {integrity: sha512-hZT4xPk/zvFtNvUS/VumrtSe+sV2eZB2Z048z0RGgxMDLTGgWAIs4kJ+YAS16ugmE2nwrlaZhpfr/1lD7gd7xg==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       styled-components: ^6.0.0
