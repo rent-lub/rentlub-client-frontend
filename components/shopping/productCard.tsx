@@ -5,6 +5,7 @@ import { Chip, IconButton } from "@mui/material";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import { CustomIcon, buildIcon } from "~/lib/shoppingCatIcon";
 import { Dress } from "@phosphor-icons/react/dist/ssr";
+import { useRouter } from "next/navigation";
 
 interface ProductCard {
   productCat: ShoppingCatEnum;
@@ -13,13 +14,20 @@ interface ProductCard {
 
 const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
   const [isFavorited, setIsFavorited] = useState(false);
+  const router = useRouter();
 
   const handleFavClick = () => {
     setIsFavorited(!isFavorited);
   };
 
   return (
-    <div className="col-span-1 flex flex-col">
+    <div
+      className="col-span-1 flex flex-col"
+      onClick={(e) => {
+        e.preventDefault();
+        router.push("/shoppingDetail/");
+      }}
+    >
       <Image
         src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg"
         width={500}
