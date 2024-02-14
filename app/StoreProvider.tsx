@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../lib/store";
 import { NextUIProvider } from "@nextui-org/react";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 
 export default function StoreProvider({
   children,
@@ -15,8 +16,10 @@ export default function StoreProvider({
   }
 
   return (
-    <NextUIProvider>
-      <Provider store={storeRef.current}>{children}</Provider>
-    </NextUIProvider>
+    <AppRouterCacheProvider>
+      <NextUIProvider>
+        <Provider store={storeRef.current}>{children}</Provider>
+      </NextUIProvider>
+    </AppRouterCacheProvider>
   );
 }

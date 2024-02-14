@@ -8,6 +8,9 @@ overrides:
   '@mui/styled-engine': npm:@mui/styled-engine-sc@latest
 
 dependencies:
+  '@emotion/cache':
+    specifier: ^11.11.0
+    version: 11.11.0
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.3(@types/react@18.2.55)(react@18.2.0)
@@ -20,6 +23,9 @@ dependencies:
   '@mui/material':
     specifier: ^5.15.9
     version: 5.15.9(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+  '@mui/material-nextjs':
+    specifier: ^5.15.9
+    version: 5.15.9(@emotion/cache@11.11.0)(@mui/material@5.15.9)(@types/react@18.2.55)(next@14.1.0)(react@18.2.0)
   '@mui/styled-engine':
     specifier: npm:@mui/styled-engine-sc@latest
     version: /@mui/styled-engine-sc@6.0.0-alpha.16(styled-components@6.1.8)
@@ -515,6 +521,31 @@ packages:
       '@babel/runtime': 7.23.9
       '@mui/material': 5.15.9(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
       '@types/react': 18.2.55
+      react: 18.2.0
+    dev: false
+
+  /@mui/material-nextjs@5.15.9(@emotion/cache@11.11.0)(@mui/material@5.15.9)(@types/react@18.2.55)(next@14.1.0)(react@18.2.0):
+    resolution: {integrity: sha512-Bk4Qb/cLpRhnoYPIyVJZvIlmjDNAHAUGB+UYaiRMEOnS1puQHxq81uw5gdBw+h3Q1WsT4PQ+ARmrfTkzN0RsFw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@emotion/cache': ^11.11.0
+      '@emotion/server': ^11.11.0
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      next: ^13.0.0 || ^14.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/cache':
+        optional: true
+      '@emotion/server':
+        optional: true
+      '@types/react':
+        optional: true
+    dependencies:
+      '@emotion/cache': 11.11.0
+      '@mui/material': 5.15.9(@emotion/react@11.11.3)(@emotion/styled@11.11.0)(@types/react@18.2.55)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+      '@types/react': 18.2.55
+      next: 14.1.0(react-dom@18.2.0)(react@18.2.0)
       react: 18.2.0
     dev: false
 

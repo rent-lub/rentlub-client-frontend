@@ -1,3 +1,5 @@
+"use client";
+
 import { SxProps, Theme } from "@mui/material";
 
 export const BottomNavMenuStyles: Record<string, SxProps<Theme> | undefined> = {

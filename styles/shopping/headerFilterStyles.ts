@@ -1,3 +1,4 @@
+"use client";
 import { SxProps, Theme } from "@mui/material";
 
 export const HeaderFilterStyles: Record<string, SxProps<Theme> | undefined> = {
