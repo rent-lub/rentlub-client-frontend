@@ -38,7 +38,13 @@ const ShoppingDetailPage = () => {
                       style={{ weight: "regular" }}
                     />
                   }
-                  className="bg-black text-white w-fit h-fit p-1 "
+                  sx={{
+                    backgroundColor: "black",
+                    color: "white",
+                    width: "fit-content",
+                    height: "height-content",
+                    padding: 1,
+                  }}
                   size="small"
                 />
                 <Chip
@@ -49,7 +55,13 @@ const ShoppingDetailPage = () => {
                       style={{ weight: "regular" }}
                     />
                   }
-                  className="bg-black text-white w-fit h-fit p-1 "
+                  sx={{
+                    backgroundColor: "black",
+                    color: "white",
+                    width: "fit-content",
+                    height: "height-content",
+                    padding: 1,
+                  }}
                   size="small"
                 />
               </div>

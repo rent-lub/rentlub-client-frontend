@@ -58,7 +58,6 @@ export const CustomIcon: React.FC<customIconProps> = ({
           ...style,
           size: style?.size ?? 20,
           weight: style?.weight ?? "bold",
-          color: style?.color ?? "black",
         }}
       >
         {icon}

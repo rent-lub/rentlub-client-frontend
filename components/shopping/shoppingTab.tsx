@@ -38,28 +38,29 @@ export default function ShoppingTab(props: tabProps) {
               SORT
             </p>
           </div>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            variant="scrollable"
-            scrollButtons={false}
-            allowScrollButtonsMobile
-            aria-label="scrollable force tabs example"
-            TabIndicatorProps={{ sx: ShoppingTabStyle.indicatorStyle }}
-            sx={ShoppingTabStyle.tabStyle}
-            className="col-span-4 pl-4 gap-x-6"
-          >
-            {Object.values(ShoppingCatEnum).map((value) => {
-              return (
-                <Tab
-                  key={value}
-                  label={value}
-                  icon={buildIcon(value)}
-                  className="text-xs line-clamp-2 text-center px-0 flex items-center justify-center"
-                />
-              );
-            })}
-          </Tabs>
+          <div className="col-span-4 pl-4 gap-x-6">
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons={false}
+              allowScrollButtonsMobile
+              aria-label="scrollable force tabs example"
+              TabIndicatorProps={{ sx: ShoppingTabStyle.indicatorStyle }}
+              sx={ShoppingTabStyle.tabStyle}
+            >
+              {Object.values(ShoppingCatEnum).map((value) => {
+                return (
+                  <Tab
+                    key={value}
+                    label={value}
+                    icon={buildIcon(value)}
+                    className="text-xs line-clamp-2 text-center px-0 flex items-center justify-center"
+                  />
+                );
+              })}
+            </Tabs>
+          </div>
         </div>
       </Box>
     </div>

@@ -33,8 +33,14 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
         <div className="col-span-3 flex justify-end">
           <Button
             variant="contained"
-            className="bg-[#40C090] font-bold px-12 py-3 rounded-xl text-base"
-            sx={{ textTransform: "none" }}
+            sx={{
+              textTransform: "none",
+              backgroundColor: "#40C090",
+              fontWeight: "bold",
+              paddingX: "3rem",
+              borderRadius: "0.75rem",
+              fontSize: "1rem",
+            }}
           >
             Select Date
           </Button>
