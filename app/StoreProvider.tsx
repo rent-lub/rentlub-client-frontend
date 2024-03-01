@@ -15,8 +15,8 @@ export default function StoreProvider({
   }
 
   return (
-    <NextUIProvider>
-      <Provider store={storeRef.current}>{children}</Provider>
-    </NextUIProvider>
+    <Provider store={storeRef.current}>
+      <NextUIProvider>{children}</NextUIProvider>
+    </Provider>
   );
 }
