@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FavIcon } from "../favIcon";
 import { Chip, IconButton } from "@mui/material";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
-import { CustomIcon, buildIcon } from "~/lib/shoppingCatIcon";
+import { CustomIcon, buildIcon } from "~/components/shoppingCatIcon";
 import { Dress } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
 

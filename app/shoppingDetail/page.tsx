@@ -7,7 +7,7 @@ import { useState } from "react";
 import { FavIcon } from "~/components/favIcon";
 import BottomCheckout from "~/components/shoppingDetail/bottomCheckout";
 import ImageCarousel from "~/components/shoppingDetail/imageCarousel";
-import { CustomIcon } from "~/lib/shoppingCatIcon";
+import { CustomIcon } from "~/components/shoppingCatIcon";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);

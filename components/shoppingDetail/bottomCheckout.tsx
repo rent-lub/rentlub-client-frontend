@@ -1,7 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup } from "@nextui-org/button";
+import BottomSheet from "./bottomSheet";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { trigger } from "~/lib/features/bottomSheetSlice";
 
 interface BottomCheckOutProps {
   price: number;
@@ -13,6 +16,14 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   className,
   ...props
 }) => {
+  const openBottomSheet: boolean = useAppSelector(
+    (selector) => selector.bottomSheet
+  );
+  const dispatch = useAppDispatch();
+  const handleOnTriggerBottomSheet = () => {
+    dispatch(trigger(!openBottomSheet));
+  };
+
   return (
     <>
       <div
@@ -33,11 +44,17 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
           </div>
         </div>
         <div className="flex-grow-0">
-          <Button className="font-bold px-12 rounded-xl bg-[#40C090] text-white">
+          <Button
+            className="font-bold px-12 rounded-xl bg-[#40C090] text-white"
+            onClick={() => {
+              handleOnTriggerBottomSheet();
+            }}
+          >
             Select Date
           </Button>
         </div>
       </div>
+      <BottomSheet openSheet={openBottomSheet} />
     </>
   );
 };

@@ -8,7 +8,7 @@ import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import { SortAscending } from "@phosphor-icons/react/dist/ssr";
 import ProductCard from "./productCard";
-import { buildIcon } from "~/lib/shoppingCatIcon";
+import { buildIcon } from "~/components/shoppingCatIcon";
 
 interface tabProps {
   onChange?: (selected: ShoppingCatEnum) => void;
