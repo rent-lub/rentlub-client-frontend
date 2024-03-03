@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@mui/material";
 import React from "react";
+import { Button, ButtonGroup } from "@nextui-org/button";
 
 interface BottomCheckOutProps {
   price: number;
@@ -16,32 +16,24 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   return (
     <>
       <div
-        className={`w-full bg-white py-4 px-5 grid grid-cols-5 border-2 border-t-[#E5E5E5] ${className}`}
+        className={`w-full bg-white py-4 px-5 flex flex-row border-2 border-t-[#E5E5E5] ${className}`}
       >
-        <div className="col-span-2 flex flex-row gap-x-4">
-          <div className="text-black self-center text-2xl">฿</div>
-          <div className="text-black flex flex-col">
-            <div>
-              <span className="text-2xl font-medium">
-                {price.toLocaleString()}{" "}
-              </span>
-              <span>บาท</span>
+        <div className="flex-grow">
+          <div className="flex flex-row gap-x-4">
+            <div className="text-black self-center text-2xl">฿</div>
+            <div className="text-black flex flex-col">
+              <div>
+                <span className="text-2xl font-medium">
+                  {price.toLocaleString()}{" "}
+                </span>
+                <span>บาท</span>
+              </div>
+              <div className="text-black self-start">ต่อวัน</div>
             </div>
-            <div className="text-black self-start">ต่อวัน</div>
           </div>
         </div>
-        <div className="col-span-3 flex justify-end">
-          <Button
-            variant="contained"
-            sx={{
-              textTransform: "none",
-              backgroundColor: "#40C090",
-              fontWeight: "bold",
-              paddingX: "3rem",
-              borderRadius: "0.75rem",
-              fontSize: "1rem",
-            }}
-          >
+        <div className="flex-grow-0">
+          <Button className="font-bold px-12 rounded-xl bg-[#40C090] text-white">
             Select Date
           </Button>
         </div>
