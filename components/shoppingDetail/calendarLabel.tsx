@@ -24,12 +24,14 @@ const buildLabel = (value: CalendarLabelEnum) => {
 
 const labelComponent = (value: string, color: string) => {
   return (
-    <div className="flex flex-row items-center justify-center">
-      <div className="flex flex-row gap-x-2 items-center justify-center">
-        <div className={`rounded-full ${color} w-2 h-2`}></div>
-        <p className=" text-xs">{value}</p>
+    <React.Fragment key={value}>
+      <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-row gap-x-2 items-center justify-center">
+          <div className={`rounded-full ${color} w-2 h-2`}></div>
+          <p className=" text-xs">{value}</p>
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

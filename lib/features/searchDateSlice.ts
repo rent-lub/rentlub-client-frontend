@@ -8,6 +8,7 @@ const searchDateSlice = createSlice({
   reducers: {
     trigger: (state, action: PayloadAction<boolean>) => {
       state = action.payload;
+      console.log(state);
       return state;
     },
   },

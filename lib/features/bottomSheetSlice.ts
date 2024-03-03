@@ -6,8 +6,8 @@ const bottomSheetSlice = createSlice({
   name: "bottomSheet",
   initialState,
   reducers: {
-    trigger: (state, action: PayloadAction<boolean>) => {
-      state = action.payload;
+    trigger: (state) => {
+      state = !state;
       return state;
     },
   },

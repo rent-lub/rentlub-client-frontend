@@ -9,20 +9,18 @@ import {
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { trigger } from "~/lib/features/bottomSheetSlice";
-import { CalendarBlank } from "@phosphor-icons/react/dist/ssr";
+import { CalendarBlank, Vault } from "@phosphor-icons/react/dist/ssr";
 import CalendarLabel from "./calendarLabel";
+import BottomCheckout from "./bottomCheckout";
+import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
 
-interface BottomSheetProps {
-  openSheet: boolean;
-}
-
-const BottomSheet: React.FC<BottomSheetProps> = ({ openSheet, ...props }) => {
+const BottomSheet: React.FC = ({ ...props }) => {
   const openBottomSheet: boolean = useAppSelector(
     (selector) => selector.bottomSheet
   );
   const dispatch = useAppDispatch();
   const handleOnTriggerBottomSheet = () => {
-    dispatch(trigger(!openBottomSheet));
+    dispatch(trigger());
   };
 
   return (
@@ -80,17 +78,29 @@ const BottomSheet: React.FC<BottomSheetProps> = ({ openSheet, ...props }) => {
                       <CalendarLabel />
                     </div>
                     <div className="pt-4  flex flex-col justify-center items-center">
-                      <p>ค่ามัดจำ</p>
+                      <div className="flex flex-row items-center gap-x-3">
+                        <Vault size={30} />
+                        <div className="flex flex-col">
+                          <p className="text-sm text-black text-opacity-50 font-semibold">
+                            ค่ามัดจำ
+                          </p>
+                          <p className="font-bold text-md">
+                            {Number(1200).toLocaleString()} บาท
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </ModalBody>
-                <ModalFooter>
-                  <Button color="danger" variant="light" onPress={onClose}>
-                    Close
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Action
-                  </Button>
+                <ModalFooter className="px-0">
+                  <BottomCheckout
+                    className="sticky bottom-0"
+                    price={3200}
+                    status={BottomSheetShoppingDetailStatus.Shipping}
+                    onClick={() => {
+                      dispatch(trigger());
+                    }}
+                  />
                 </ModalFooter>
               </>
             )}

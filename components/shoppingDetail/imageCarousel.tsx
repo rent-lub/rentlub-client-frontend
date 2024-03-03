@@ -26,8 +26,10 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
           {images.map((item, index) => (
             <div key={item[index]}>
               <Image
+                priority
                 width={500}
                 height={500}
+                className="m-auto"
                 src={
                   "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg"
                 }

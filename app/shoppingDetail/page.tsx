@@ -8,12 +8,22 @@ import { FavIcon } from "~/components/favIcon";
 import BottomCheckout from "~/components/shoppingDetail/bottomCheckout";
 import ImageCarousel from "~/components/shoppingDetail/imageCarousel";
 import { CustomIcon } from "~/components/shoppingCatIcon";
+import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+
+import BottomSheet from "~/components/shoppingDetail/bottomSheet";
+import { trigger } from "~/lib/features/bottomSheetSlice";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
 
   const handleFavClick = () => {
     setIsFavorited(!isFavorited);
+  };
+
+  const dispatch = useAppDispatch();
+  const handleOnTriggerBottomSheet = () => {
+    dispatch(trigger());
   };
   return (
     <>
@@ -133,7 +143,15 @@ const ShoppingDetailPage = () => {
           </div>
         </div>
       </div>
-      <BottomCheckout className="sticky bottom-0" price={3200} />
+      <BottomCheckout
+        className="sticky bottom-0"
+        price={3200}
+        status={BottomSheetShoppingDetailStatus.SelectDate}
+        onClick={() => {
+          dispatch(trigger());
+        }}
+      />
+      <BottomSheet />
     </>
   );
 };
