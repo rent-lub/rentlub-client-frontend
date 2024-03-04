@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button, ButtonGroup } from "@nextui-org/button";
-import BottomSheet from "./bottomSheet";
+import BottomSheet from "./bottomSheet/bottomSheet";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { trigger } from "~/lib/features/bottomSheetSlice";
 import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";

@@ -11,12 +11,11 @@ import { CustomIcon } from "~/components/shoppingCatIcon";
 import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 
-import BottomSheet from "~/components/shoppingDetail/bottomSheet";
+import BottomSheet from "~/components/shoppingDetail/bottomSheet/bottomSheet";
 import { trigger } from "~/lib/features/bottomSheetSlice";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
-
   const handleFavClick = () => {
     setIsFavorited(!isFavorited);
   };
@@ -147,9 +146,7 @@ const ShoppingDetailPage = () => {
         className="sticky bottom-0"
         price={3200}
         status={BottomSheetShoppingDetailStatus.SelectDate}
-        onClick={() => {
-          dispatch(trigger());
-        }}
+        onClick={handleOnTriggerBottomSheet}
       />
       <BottomSheet />
     </>
