@@ -149,8 +149,7 @@ const ShoppingDetailPage = () => {
         status={BottomSheetShoppingDetailStatus.SelectDate}
         onClick={handleOnTriggerBottomSheet}
       />
-      {/* <BottomSheet /> */}
-      <TermAndConditionSheet />
+      <BottomSheet />
     </>
   );
 };
