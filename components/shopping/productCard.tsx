@@ -31,13 +31,13 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
       }}
     >
       <Image
-        src="https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg"
+        src="https://www.osotspa.com/upload/picture/l-content-b43e43012009de5705ecd1468312b830.png"
         width={500}
         height={500}
         alt="Product"
-        className="rounded-xl object-contain"
+        className="rounded-xl object-cover h-auto aspect-square"
       />
-      <div className="grid grid-rows-3">
+      <div className="grid grid-rows-2">
         <div className="grid grid-cols-4 pt-2">
           <p className="col-span-3 text-black line-clamp-2 text-ellipsis overflow-hidden text-sm">
             ชุดตรุษจีน โมเดิรน์ สวยๆ ลายดอกไม้มงคลของจีน ชุดกี่เพ้าแฟชั่น คนอ้วน
@@ -51,33 +51,8 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
             />
           </IconButton>
         </div>
-        <div className=" inline-flex gap-1 self-center text-ellipsis max-w-[fit-content] overflow-hidden">
-          <Chip
-            label="Dress"
-            icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
-            sx={{
-              backgroundColor: "black",
-              color: "white",
-              width: "fit-content",
-              height: "height-content",
-              padding: 1,
-            }}
-            size="small"
-          />
-          <Chip
-            label="Dress"
-            icon={<CustomIcon icon={<Dress />} style={{ weight: "regular" }} />}
-            sx={{
-              backgroundColor: "black",
-              color: "white",
-              width: "fit-content",
-              height: "height-content",
-              padding: 1,
-            }}
-            size="small"
-          />
-        </div>
-        <p className="text-black font-medium text-xl">
+
+        <p className="text-black font-medium text-md">
           ฿ {Number(3200).toLocaleString()}
           <span className="inline-flex items-baseline">
             <span className="font-normal text-sm text-gray-500"> / DAY</span>
