@@ -1,14 +1,18 @@
 import React from "react";
 import CalendarLabel from "../calendarLabel";
 import { Vault } from "@phosphor-icons/react/dist/ssr";
-import ReserveCalendar from "~/components/reserveCalendar";
+import CustomCalendar from "~/components/customCalendar";
 
 const ShippingContent = () => {
   return (
     <>
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
         <div className="flex flex-col items-center ">
-          <ReserveCalendar />
+          <CustomCalendar
+            onDateSelect={(date) => {
+              console.log(date);
+            }}
+          />
           <CalendarLabel />
         </div>
         <div className="pt-4 w-full flex flex-col justify-center items-center">

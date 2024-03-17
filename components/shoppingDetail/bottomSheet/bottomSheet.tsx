@@ -49,6 +49,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
             handleOnTriggerBottomSheet();
             setBottomSheetStatus(BottomSheetShoppingDetailStatus.Shipping);
           }}
+          scrollBehavior="inside"
         >
           <ModalContent>
             {(onClose) => (
