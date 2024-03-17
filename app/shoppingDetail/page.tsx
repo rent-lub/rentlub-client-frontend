@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 
 import BottomSheet from "~/components/shoppingDetail/bottomSheet/bottomSheet";
 import { trigger } from "~/lib/features/bottomSheetSlice";
+import TermAndConditionSheet from "~/components/shoppingDetail/bottomSheet/termAndConditionSheet";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
