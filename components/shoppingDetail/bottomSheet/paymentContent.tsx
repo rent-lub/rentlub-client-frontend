@@ -61,14 +61,14 @@ const PaymentContent = () => {
           </form>
         </div>
         <div className="w-full pt-4 grid grid-cols-2 gap-2">
-          {buildShippingMethod()}
+          {BuildShippingMethod()}
         </div>
       </div>
     </>
   );
 };
 
-const buildShippingMethod = () => {
+const BuildShippingMethod = () => {
   const [selectMethod, setSelectMethod] = useState<number>();
   return (
     <>

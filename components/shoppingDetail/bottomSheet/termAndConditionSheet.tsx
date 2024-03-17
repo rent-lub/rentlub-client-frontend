@@ -40,7 +40,7 @@ const TermAndConditionSheet = () => {
                     1. In order to secure the reservation, the tenant must
                     complete a deposit of 50% of the monthly rental rate at the
                     time of room reservation. The balance amount can be paid by
-                    "Thai Baht" cash or credit card (VISA /MASTER) upon arrival.
+                    Thai Baht cash or credit card VISA /MASTER upon arrival.
                     Processing fee is charged per transaction. All rates are
                     calculated in Thai Baht.
                   </p>
