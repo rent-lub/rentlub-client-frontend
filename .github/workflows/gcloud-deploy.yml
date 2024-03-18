@@ -1,0 +1,34 @@
+name: 'Frontend Google Cloud Deploy'
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy-frontend:
+    permissions:
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'G-Cloud Auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+      
+      - id: 'compute-ssh'
+        name: 'G-Cloud Deploy'
+        uses: 'google-github-actions/ssh-compute@v1'
+        with:
+          instance_name: 'line-rentlub-backend'
+          zone: 'asia-southeast1-b'
+          ssh_private_key: '${{ secrets.SSH_PRIVATE_KEY }}'
+          command: |
+            whoami
+            echo "Hello, world!"
+    
+      - name: 'Output'
+        run: |-
+          echo '${{ steps.compute-ssh.outputs.stdout }}'
+          echo '${{ steps.compute-ssh.outputs.stderr }}'
