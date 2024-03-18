@@ -9,8 +9,10 @@ const ShippingContent = () => {
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
         <div className="flex flex-col items-center ">
           <CustomCalendar
-            onDateSelect={(date) => {
-              console.log(date);
+            onDateSelect={(startDate, endDate) => {
+              console.log(
+                `${startDate?.toLocaleDateString()} ${endDate?.toLocaleDateString()}`
+              );
             }}
           />
           <CalendarLabel />

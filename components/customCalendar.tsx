@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 import { DateTime } from "luxon";
 import { start } from "repl";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import {
+  setSelectStartDate,
+  setSelectEndDate,
+} from "~/lib/features/calendarSlice";
 
 interface ReservationItem {
   label?: CalendarLabelEnum;
@@ -11,7 +16,10 @@ interface ReservationItem {
 }
 
 interface CalendarProps {
-  onDateSelect: (selectedDate: Date) => void;
+  onDateSelect: (
+    selectStartDate: Date | null,
+    selectEndDate: Date | null
+  ) => void;
 }
 
 const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
@@ -20,6 +28,24 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
   const [error, setError] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+
+  const handlSetSelectStartDate = (date: string | null) => {
+    dispatch(
+      setSelectStartDate({
+        selectStartDate: date,
+      })
+    );
+  };
+
+  const handlSetSelectEndtartDate = (date: string | null) => {
+    dispatch(
+      setSelectEndDate({
+        selectEndDate: date,
+      })
+    );
+  };
 
   const reserveItemsList: Array<ReservationItem> = [
     {
@@ -50,9 +76,9 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
 
   const handleDateClick = (selectedDate: Date) => {
     if (!selectedStartDate) {
+      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
       setSelectedStartDate(selectedDate);
     } else if (!selectedEndDate && selectedDate > selectedStartDate) {
-      // Check if any dates between the selected start and end dates are unavailable
       let isError = false;
       for (const item of reserveItemsList) {
         if (
@@ -65,29 +91,36 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
 
           if (startDate <= selectedDate && endDate >= selectedStartDate) {
             isError = true;
+            handlSetSelectStartDate(null);
+            handlSetSelectEndtartDate(null);
             break;
           }
         }
       }
 
       if (isError) {
-        setError(true); // Set error state to true if there's an error
-        setSelectedStartDate(null); // Reset start date
+        setError(true);
+        setSelectedStartDate(null);
       } else {
         setError(false);
         if (!selectedStartDate) {
           setSelectedStartDate(selectedDate);
+          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
         } else if (!selectedEndDate && selectedDate > selectedStartDate) {
+          handlSetSelectEndtartDate(selectedDate?.toLocaleDateString() ?? "");
           setSelectedEndDate(selectedDate);
         } else {
           setSelectedStartDate(selectedDate);
+          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
           setSelectedEndDate(null);
         }
       }
     } else {
       setSelectedStartDate(selectedDate);
+      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
       setSelectedEndDate(null);
     }
+    onDateSelect(selectedStartDate ?? null, selectedEndDate ?? null);
   };
 
   const renderCalendarWeeks = (): JSX.Element[] => {
@@ -234,8 +267,8 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
         <tbody>{renderCalendarWeeks()}</tbody>
       </table>
       {error ? (
-        <p className="text-sm text-red-600">
-          Some dates between the selected start and end dates are unavailable.
+        <p className="text-sm text-red-600 flex items-center justify-center pb-3">
+          Invalid date
         </p>
       ) : (
         <></>
