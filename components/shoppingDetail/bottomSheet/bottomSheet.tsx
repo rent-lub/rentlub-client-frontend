@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ForwardRefRenderFunction, useRef, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -13,6 +13,8 @@ import BottomCheckout from "../bottomCheckout";
 import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
 import PaymentContent from "./paymentContent";
 import ShippingContent from "./shippingContent";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const BottomSheet: React.FC = ({ ...props }) => {
   const [bottomSheetStatus, setBottomSheetStatus] =
@@ -35,6 +37,9 @@ const BottomSheet: React.FC = ({ ...props }) => {
         return <ShippingContent />;
     }
   };
+
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [endDate, setEndDate] = useState<Date>();
 
   return (
     <>
@@ -76,7 +81,12 @@ const BottomSheet: React.FC = ({ ...props }) => {
                           <p className="text-sm text-black text-opacity-50 font-semibold">
                             Start date
                           </p>
-                          <p className="font-bold text-md">Mon 10 Feb</p>
+                          <DatePicker
+                            selected={startDate}
+                            onChange={(date) => setStartDate(date!)}
+                            dateFormat="MMMM dd"
+                            className="font-bold text-md w-24 outline-none"
+                          />
                         </div>
                       </div>
                       <div
@@ -94,17 +104,17 @@ const BottomSheet: React.FC = ({ ...props }) => {
                       >
                         <CalendarBlank size={30} />
                         <div className="flex flex-col">
-                          <p
-                            className={`${
-                              bottomSheetStatus ==
-                              BottomSheetShoppingDetailStatus.Payment
-                                ? "text-sm text-black text-opacity-50 font-semibold"
-                                : "font-bold text-md"
-                            }`}
-                          >
+                          <p className="text-sm text-black text-opacity-50 font-semibold">
                             Return date
                           </p>
-                          <p className="font-bold"></p>
+                          <DatePicker
+                            selected={endDate}
+                            onChange={(date) => setEndDate(date!)}
+                            dateFormat="MMMM dd"
+                            placeholderText="Click here"
+                            className="font-bold text-md w-24 outline-none"
+                            minDate={startDate!}
+                          />
                         </div>
                       </div>
                     </div>
