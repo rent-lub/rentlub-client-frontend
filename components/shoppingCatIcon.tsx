@@ -19,25 +19,25 @@ import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 export const buildIcon = (cat: ShoppingCatEnum) => {
   switch (cat) {
     case ShoppingCatEnum.Fashion:
-      return <CustomIcon icon={<Dress />} />;
+      return <CustomIcon icon={<Dress size={17} />} />;
     case ShoppingCatEnum.Book:
-      return <CustomIcon icon={<Books />} />;
+      return <CustomIcon icon={<Books size={17} />} />;
     case ShoppingCatEnum.Sport:
-      return <CustomIcon icon={<Barbell />} />;
+      return <CustomIcon icon={<Barbell size={17} />} />;
     case ShoppingCatEnum.HealthAndBeauty:
-      return <CustomIcon icon={<Heartbeat />} />;
+      return <CustomIcon icon={<Heartbeat size={17} />} />;
     case ShoppingCatEnum.ItGadget:
-      return <CustomIcon icon={<Headphones />} />;
+      return <CustomIcon icon={<Headphones size={17} />} />;
     case ShoppingCatEnum.Travel:
-      return <CustomIcon icon={<SuitcaseRolling />} />;
+      return <CustomIcon icon={<SuitcaseRolling size={17} />} />;
     case ShoppingCatEnum.HomeAndGarden:
-      return <CustomIcon icon={<HouseLine />} />;
+      return <CustomIcon icon={<HouseLine size={17} />} />;
     case ShoppingCatEnum.All:
-      return <CustomIcon icon={<Package />} />;
+      return <CustomIcon icon={<Package size={17} />} />;
     case ShoppingCatEnum.Vehicle:
-      return <CustomIcon icon={<Car />} />;
+      return <CustomIcon icon={<Car size={17} />} />;
     case ShoppingCatEnum.Electric:
-      return <CustomIcon icon={<Television />} />;
+      return <CustomIcon icon={<Television size={17} />} />;
   }
 };
 

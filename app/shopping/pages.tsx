@@ -23,20 +23,20 @@ const Shopping = () => {
 
   return (
     <>
-      <div className="bg-white h-screen min-w-full  relative flex flex-col overflow-y-hidden">
+      <div className="bg-white h-screen min-w-full flex flex-col overflow-y-hidden">
         <div className="px-5 py-3 flex-grow-0">
           <HeaderFilterButton />
         </div>
-        <div className="flex flex-col flex-grow h-64 gap-y-5">
+        <div className="flex flex-col flex-grow h-64 gap-y-2">
           <ShoppingTab />
-          <div className="grid grid-cols-2 gap-x-4 px-4 overflow-y-auto pb-32">
+          <div className="grid grid-cols-2 gap-x-6 px-4 overflow-y-auto">
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
             <ProductCard productCat={ShoppingCatEnum.Fashion} />
           </div>
         </div>
-        <div className="absolute bottom-10 left-8 right-8 flex-grow-0">
+        <div className="flex-grow-0">
           <BottomNavMenu />
         </div>
       </div>
