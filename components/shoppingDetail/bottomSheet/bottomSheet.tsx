@@ -1,4 +1,4 @@
-import React, { ForwardRefRenderFunction, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -15,6 +15,7 @@ import PaymentContent from "./paymentContent";
 import ShippingContent from "./shippingContent";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { clearAllSelectDate } from "~/lib/features/calendarSlice";
 
 const BottomSheet: React.FC = ({ ...props }) => {
   const [bottomSheetStatus, setBottomSheetStatus] =
@@ -24,9 +25,20 @@ const BottomSheet: React.FC = ({ ...props }) => {
   const openBottomSheet: boolean = useAppSelector(
     (selector) => selector.bottomSheet
   );
+
+  const selectDateFromCalendar: {
+    selectStartDate: string | null;
+    selectEndDate: string | null;
+  } = useAppSelector((selector) => selector.customCalendar);
+
   const dispatch = useAppDispatch();
   const handleOnTriggerBottomSheet = () => {
     dispatch(trigger());
+    clearSelectDate();
+  };
+
+  const clearSelectDate = () => {
+    dispatch(clearAllSelectDate());
   };
 
   const buildSheetContent = () => {
@@ -37,9 +49,6 @@ const BottomSheet: React.FC = ({ ...props }) => {
         return <ShippingContent />;
     }
   };
-
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [endDate, setEndDate] = useState<Date>();
 
   return (
     <>
@@ -81,12 +90,9 @@ const BottomSheet: React.FC = ({ ...props }) => {
                           <p className="text-sm text-black text-opacity-50 font-semibold">
                             Start date
                           </p>
-                          <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date!)}
-                            dateFormat="MMMM dd"
-                            className="font-bold text-md w-24 outline-none"
-                          />
+                          <p className="text-base font-bold">
+                            {selectDateFromCalendar.selectStartDate ?? ""}
+                          </p>
                         </div>
                       </div>
                       <div
@@ -107,14 +113,9 @@ const BottomSheet: React.FC = ({ ...props }) => {
                           <p className="text-sm text-black text-opacity-50 font-semibold">
                             Return date
                           </p>
-                          <DatePicker
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date!)}
-                            dateFormat="MMMM dd"
-                            placeholderText="Click here"
-                            className="font-bold text-md w-24 outline-none"
-                            minDate={startDate!}
-                          />
+                          <p className="text-base font-bold">
+                            {selectDateFromCalendar.selectEndDate ?? ""}
+                          </p>
                         </div>
                       </div>
                     </div>
