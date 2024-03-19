@@ -8,6 +8,7 @@ import {
 } from "~/lib/features/calendarSlice";
 import { CustomIcon } from "./shoppingCatIcon";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import CalendarLabel from "./shoppingDetail/calendarLabel";
 
 interface ReservationItem {
   label?: CalendarLabelEnum;
@@ -18,6 +19,8 @@ interface ReservationItem {
 
 interface CalendarProps {
   reserveList: Array<ReservationItem>;
+  disable?: boolean;
+  showLabel?: boolean;
   onDateSelect: (
     selectStartDate: Date | null,
     selectEndDate: Date | null
@@ -26,6 +29,8 @@ interface CalendarProps {
 
 const CustomCalendar: React.FC<CalendarProps> = ({
   onDateSelect,
+  disable,
+  showLabel,
   reserveList,
   ...props
 }) => {
@@ -201,7 +206,11 @@ const CustomCalendar: React.FC<CalendarProps> = ({
               ? "bg-[#40C090]"
               : ""
           }`}`}
-          onClick={() => (isUnavailable ? null : handleDateClick(currentDate))}
+          onClick={
+            disable
+              ? () => {}
+              : () => (isUnavailable ? null : handleDateClick(currentDate))
+          }
         >
           {day}
         </td>
@@ -263,6 +272,11 @@ const CustomCalendar: React.FC<CalendarProps> = ({
         </thead>
         <tbody>{renderCalendarWeeks()}</tbody>
       </table>
+      {showLabel ? (
+        <div className="flex items-center justify-center">
+          <CalendarLabel />
+        </div>
+      ) : null}
       {error ? (
         <p className="text-sm text-red-600 flex items-center justify-center pb-3">
           Invalid date

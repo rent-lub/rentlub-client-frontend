@@ -14,6 +14,8 @@ import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import BottomSheet from "~/components/shoppingDetail/bottomSheet/bottomSheet";
 import { trigger } from "~/lib/features/bottomSheetSlice";
 import TermAndConditionSheet from "~/components/shoppingDetail/bottomSheet/termAndConditionSheet";
+import CustomCalendar from "~/components/customCalendar";
+import Image from "next/image";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -27,7 +29,7 @@ const ShoppingDetailPage = () => {
   };
   return (
     <>
-      <div className="bg-white h-screen min-w-full overflow-x-hidden relative flex flex-col px-5 pb-28">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden relative flex flex-col px-5 pb-9">
         <ImageCarousel
           images={[
             "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg",
@@ -140,6 +142,53 @@ const ShoppingDetailPage = () => {
               กดสั่งซื้อแล้วโอนเงินได้เลยไม่ต้องรอ confirm ได้รับสินค้าวันถัดไป
               หลังจากจัดส่ง
             </p>
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-col py-4">
+              <p className="text-black font-semibold text-lg">Available on</p>
+              <p className="text-black font-normal">เวลาจองล่วงหน้า 5 วัน</p>
+            </div>
+            <div className="px-6">
+              <CustomCalendar
+                reserveList={[]}
+                onDateSelect={(date) => {}}
+                disable
+                showLabel
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col pt-4">
+            <p className="text-black font-semibold text-lg">Pick up location</p>
+            <Image
+              priority
+              src={"/images/full_mock_address.png"}
+              alt="image"
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full h-auto pt-4"
+            />
+          </div>
+
+          <div className="flex flex-col pt-4">
+            <p className="text-black font-semibold text-lg">Term & condition</p>
+            <p>
+              ข้อกำหนดในการให้บริการ เป็น ข้อตกลงทางกฎหมาย ระหว่าง ผู้ให้บริการ
+              กับบุคคลที่ต้องการใช้บริการนั้น
+              บุคคลนั้นต้องตกลงที่จะปฏิบัติตามข้อกำหนดในการให้บริการเพื่อใช้บริการที่นำเสนอ
+              เงื่อนไขการบริการยังสามารถเป็นเพียง ข้อจำกัดความรับผิดชอบ
+              โดยเฉพาะอย่างยิ่งเกี่ยวกับการใช้เว็บไซต์ ภาษาที่คลุมเครือ
+            </p>
+            <div className="pt-2 pl-12">
+              <ul className="list-disc">
+                <li>ค่ามัดจำ 500 บาท</li>
+              </ul>
+              <ul className="list-disc">
+                <li>ค่าของเสียหาย 12,000 บาท</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

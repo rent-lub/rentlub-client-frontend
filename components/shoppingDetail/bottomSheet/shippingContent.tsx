@@ -25,8 +25,8 @@ const ShippingContent = () => {
               },
             ]}
             onDateSelect={(startDate, endDate) => {}}
+            showLabel
           />
-          <CalendarLabel />
         </div>
         <div className="pt-4 w-full flex flex-col justify-center items-center">
           <div className="flex flex-row items-center gap-x-3">
