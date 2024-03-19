@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 import { DateTime } from "luxon";
-import { start } from "repl";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import {
   setSelectStartDate,
   setSelectEndDate,
 } from "~/lib/features/calendarSlice";
+import { CustomIcon } from "./shoppingCatIcon";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 interface ReservationItem {
   label?: CalendarLabelEnum;
@@ -226,7 +227,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
             setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))
           }
         >
-          {"<"}
+          <CustomIcon icon={<CaretLeft size={20} />} />
         </button>
         <div className="flex flex-col items-center">
           <h2 className="text-lg font-bold">
@@ -245,7 +246,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
             setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))
           }
         >
-          {">"}
+          <CustomIcon icon={<CaretRight size={20} />} />
         </button>
       </div>
       <table className="border-separate border-spacing-y-3 text-center">
