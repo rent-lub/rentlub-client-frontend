@@ -16,6 +16,7 @@ import { trigger } from "~/lib/features/bottomSheetSlice";
 import TermAndConditionSheet from "~/components/shoppingDetail/bottomSheet/termAndConditionSheet";
 import CustomCalendar from "~/components/customCalendar";
 import Image from "next/image";
+import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 
 const ShoppingDetailPage = () => {
   const [isFavorited, setIsFavorited] = useState(false);
@@ -151,7 +152,20 @@ const ShoppingDetailPage = () => {
             </div>
             <div className="px-6">
               <CustomCalendar
-                reserveList={[]}
+                reserveList={[
+                  {
+                    item: "first item",
+                    startDate: "3/22/2024",
+                    endDate: "3/24/2024",
+                    label: CalendarLabelEnum.Unavailable,
+                  },
+                  {
+                    item: "second item",
+                    startDate: "3/11/2024",
+                    endDate: "3/13/2024",
+                    label: CalendarLabelEnum.Unavailable,
+                  },
+                ]}
                 onDateSelect={(date) => {}}
                 disable
                 showLabel
