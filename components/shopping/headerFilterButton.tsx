@@ -1,7 +1,7 @@
 "use client";
 import { CalendarBlank, MagnifyingGlass } from "@phosphor-icons/react/dist/ssr";
 import React, { useState } from "react";
-import { ModalFullScreen } from "../modalFullScreen";
+import { SearchDateModal } from "../searchDateModal";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { trigger } from "~/lib/features/searchDateSlice";
 
@@ -17,10 +17,7 @@ const HeaderFilterButton = () => {
     <>
       <div className="w-full bg-white rounded-3xl drop-shadow-md h-11 text-black">
         <div className="grid grid-cols-2 gap-x-3 divide-x content-center">
-          <div
-            className="flex justify-center items-center h-11"
-            onClick={() => handleOnSearchClick()}
-          >
+          <div className="flex justify-center items-center h-11">
             <div className="flex flex-row gap-x-3 items-center">
               <MagnifyingGlass size={18} />
               <div className="flex flex-col">
@@ -32,7 +29,10 @@ const HeaderFilterButton = () => {
             </div>
           </div>
           <div className="flex justify-center items-center h-11">
-            <div className="flex flex-row gap-x-3 items-center">
+            <div
+              className="flex flex-row gap-x-3 items-center"
+              onClick={() => handleOnSearchClick()}
+            >
               <CalendarBlank size={18} />
               <div className="flex flex-col">
                 <p className="text-[12px]">DATE</p>
@@ -41,7 +41,7 @@ const HeaderFilterButton = () => {
             </div>
           </div>
         </div>
-        <ModalFullScreen isOpen={isClickSearchDate} />
+        <SearchDateModal isOpen={isClickSearchDate} />
       </div>
     </>
   );

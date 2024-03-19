@@ -8,6 +8,8 @@ import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import { CustomIcon, buildIcon } from "~/components/shoppingCatIcon";
 import { Dress } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "~/lib/hooks";
+import { clearAllSelectDate } from "~/lib/features/calendarSlice";
 
 interface ProductCard {
   productCat: ShoppingCatEnum;
@@ -18,6 +20,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const router = useRouter();
 
+  const dispatch = useAppDispatch();
   const handleFavClick = () => {
     setIsFavorited(!isFavorited);
   };
@@ -26,6 +29,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
     <div
       className="col-span-1 flex flex-col"
       onClick={(e) => {
+        dispatch(clearAllSelectDate());
         e.preventDefault();
         router.push("/shoppingDetail/");
       }}
