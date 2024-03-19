@@ -8,7 +8,7 @@ import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import { SortAscending } from "@phosphor-icons/react/dist/ssr";
 import ProductCard from "./productCard";
-import { buildIcon } from "~/lib/shoppingCatIcon";
+import { buildIcon } from "~/components/shoppingCatIcon";
 
 interface tabProps {
   onChange?: (selected: ShoppingCatEnum) => void;
@@ -27,14 +27,14 @@ export default function ShoppingTab(props: tabProps) {
         sx={{
           width: "auto",
           bgcolor: "background.paper",
-          paddingTop: "15px",
+          paddingTop: "10px",
           paddingRight: "12px",
         }}
       >
-        <div className="grid grid-cols-5 pl-5 divide-x gap-x-4">
-          <div className="border-solid border-2 rounded-lg flex flex-col text-black items-center justify-center text-sm">
-            <SortAscending size={20} />
-            <p className="text-xs line-clamp-2 text-center px-0 flex items-center justify-center">
+        <div className="grid grid-cols-5 pl-5 divide-x gap-x-4 h-14">
+          <div className="border-solid border-2 rounded-lg flex flex-col text-black items-center justify-center text-sm h-14">
+            <SortAscending size={17} />
+            <p className="text-[9px] line-clamp-2 text-center px-0  flex items-center justify-center">
               SORT
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function ShoppingTab(props: tabProps) {
                     key={value}
                     label={value}
                     icon={buildIcon(value)}
-                    className="text-xs line-clamp-2 text-center px-0 flex items-center justify-center"
+                    className="text-[9px] line-clamp-2 text-center px-0 flex items-center justify-center"
                   />
                 );
               })}

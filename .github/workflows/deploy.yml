@@ -1,0 +1,31 @@
+name: 'Frontend deploy'
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy-frontend:
+    permissions:
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v4
+
+      - name: 'G-Cloud Deploy'
+        uses: 'appleboy/ssh-action@v1.0.3'
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            export NVM_DIR=~/.nvm
+            source ~/.nvm/nvm.sh
+            cd /var/www/rentlub-frontend/
+            git pull origin main
+            pnpm install
+            pnpm build
+            pm2 restart frontend
+
+    

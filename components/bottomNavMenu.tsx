@@ -19,7 +19,7 @@ const BottomNavMenu = () => {
   };
   return (
     <>
-      <div className="w-full bg-white rounded-3xl drop-shadow-md h-20 text-black flex justify-center items-center">
+      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -32,32 +32,32 @@ const BottomNavMenu = () => {
           <Tab
             key={0}
             label={"Shop"}
-            icon={<ShoppingBag size={26} />}
-            sx={{ fontSize: 14 }}
+            icon={<ShoppingBag size={20} />}
+            sx={{ fontSize: 12 }}
           />
           <Tab
             key={1}
             label={"Wishlist"}
-            icon={<Heart size={26} />}
-            sx={{ fontSize: 14 }}
+            icon={<Heart size={20} />}
+            sx={{ fontSize: 12 }}
           />
           <Tab
             key={2}
             label={"Order"}
-            icon={<Package size={26} />}
-            sx={{ fontSize: 14 }}
+            icon={<Package size={20} />}
+            sx={{ fontSize: 12 }}
           />
           <Tab
             key={3}
             label={"Me"}
-            sx={{ fontSize: 14 }}
+            sx={{ fontSize: 12 }}
             icon={
               <Avatar
                 alt="Remy Sharp"
                 src="/static/images/avatar/1.jpg"
                 sx={{
-                  width: 24,
-                  height: 24,
+                  width: 20,
+                  height: 20,
                   fontSize: 14,
                   border: value === 3 ? "2px solid #4CC764" : "",
                 }}

@@ -1,48 +1,55 @@
 "use client";
 
-import { Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import BottomSheet from "./bottomSheet/bottomSheet";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { trigger } from "~/lib/features/bottomSheetSlice";
+import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
 
 interface BottomCheckOutProps {
   price: number;
   className?: string;
+  status: BottomSheetShoppingDetailStatus;
+  onClick: () => void;
 }
 
 const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   price,
   className,
+  status,
+  onClick,
   ...props
 }) => {
+  const openBottomSheet: boolean = useAppSelector(
+    (selector) => selector.bottomSheet
+  );
+
   return (
     <>
       <div
-        className={`w-full bg-white py-4 px-5 grid grid-cols-5 border-2 border-t-[#E5E5E5] ${className}`}
+        className={`w-full bg-white py-4 px-5 flex flex-row border-t-2 border-t-[#E5E5E5] ${className}`}
       >
-        <div className="col-span-2 flex flex-row gap-x-4">
-          <div className="text-black self-center text-2xl">฿</div>
-          <div className="text-black flex flex-col">
-            <div>
-              <span className="text-2xl font-medium">
-                {price.toLocaleString()}{" "}
-              </span>
-              <span>บาท</span>
+        <div className="grow">
+          <div className="flex flex-row gap-x-4">
+            <div className="text-black self-center text-2xl">฿</div>
+            <div className="text-black flex flex-col">
+              <div>
+                <span className="text-2xl font-medium">
+                  {price.toLocaleString()}{" "}
+                </span>
+                <span>บาท</span>
+              </div>
+              <div className="text-black self-start">ต่อวัน</div>
             </div>
-            <div className="text-black self-start">ต่อวัน</div>
           </div>
         </div>
-        <div className="col-span-3 flex justify-end">
+        <div className="w-7/12 justify-center">
           <Button
-            variant="contained"
-            sx={{
-              textTransform: "none",
-              backgroundColor: "#40C090",
-              fontWeight: "bold",
-              paddingX: "3rem",
-              borderRadius: "0.75rem",
-              fontSize: "1rem",
-            }}
+            className="font-bold w-full h-[80%] rounded-xl text-md bg-[#40C090] text-white"
+            onClick={onClick}
           >
-            Select Date
+            {status}
           </Button>
         </div>
       </div>
