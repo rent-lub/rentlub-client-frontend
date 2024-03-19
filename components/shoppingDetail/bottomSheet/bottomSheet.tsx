@@ -84,7 +84,19 @@ const BottomSheet: React.FC = ({ ...props }) => {
                       </div>
                     </div>
                     <div className="pt-4 flex flex-row divide-x divide-[#949494] gap-x-5 justify-center">
-                      <div className="flex flex-row items-center gap-x-3">
+                      <div
+                        className="flex flex-row items-center gap-x-3"
+                        onClick={(e) => {
+                          if (
+                            bottomSheetStatus ==
+                            BottomSheetShoppingDetailStatus.Payment
+                          ) {
+                            setBottomSheetStatus(
+                              BottomSheetShoppingDetailStatus.Shipping
+                            );
+                          }
+                        }}
+                      >
                         <CalendarBlank size={30} />
                         <div className="flex flex-col">
                           <p className="text-sm text-black text-opacity-50 font-semibold">
