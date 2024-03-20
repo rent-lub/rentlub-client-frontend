@@ -34,7 +34,7 @@ const BottomNavMenu = () => {
     setValue(newValue);
   };
 
-  const LIFFProfile: LIFFProfile = useAppSelector(
+  const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
 
@@ -76,8 +76,8 @@ const BottomNavMenu = () => {
             sx={{ fontSize: 12 }}
             icon={
               <Avatar
-                src={LIFFProfile.profileURL ?? ""}
-                name={LIFFProfile.displayName ?? ""}
+                src={liffProfile.profileURL ?? ""}
+                name={liffProfile.displayName ?? ""}
               />
             }
             onClick={(e) => {

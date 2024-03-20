@@ -22,6 +22,7 @@ const LIFFProfileSlice = createSlice({
   reducers: {
     setLIFFProfile: (state, action: PayloadAction<LIFFProfile>) => {
       state = action.payload;
+      return state;
     },
   },
 });
