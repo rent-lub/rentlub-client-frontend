@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: {
-  selectStartDate: string | null;
-  selectEndDate: string | null;
+  selectStartDate: Date | null;
+  selectEndDate: Date | null;
 } = {
   selectStartDate: null,
   selectEndDate: null,
@@ -15,7 +15,7 @@ const calendarSlice = createSlice({
     setSelectStartDate: (
       state,
       action: PayloadAction<{
-        selectStartDate: string | null;
+        selectStartDate: Date | null;
       }>
     ) => {
       state.selectStartDate = action.payload.selectStartDate;
@@ -24,7 +24,7 @@ const calendarSlice = createSlice({
     setSelectEndDate: (
       state,
       action: PayloadAction<{
-        selectEndDate: string | null;
+        selectEndDate: Date | null;
       }>
     ) => {
       state.selectEndDate = action.payload.selectEndDate;

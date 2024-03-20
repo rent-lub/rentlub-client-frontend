@@ -27,8 +27,8 @@ const BottomSheet: React.FC = ({ ...props }) => {
   );
 
   const selectDateFromCalendar: {
-    selectStartDate: string | null;
-    selectEndDate: string | null;
+    selectStartDate: Date | null;
+    selectEndDate: Date | null;
   } = useAppSelector((selector) => selector.customCalendar);
 
   const dispatch = useAppDispatch();
@@ -73,7 +73,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
                   <div className="flex flex-col gap-y-4 divide-y divide-[#DDDDDD]">
                     <div className="flex flex-row gap-x-4">
                       <div className="flex-grow">
-                        <p>
+                        <p className="line-clamp-2">
                           ชุดกี่เพ้าทันสมัย ชุดกี่เพ้าประยุกต์แบบมีแขน
                           เก๋ๆสวยหรูอินเทรนด์แฟชั่น ไม่ซ้ำใคร
                         </p>
@@ -103,7 +103,8 @@ const BottomSheet: React.FC = ({ ...props }) => {
                             Start date
                           </p>
                           <p className="text-base font-bold">
-                            {selectDateFromCalendar.selectStartDate ?? ""}
+                            {selectDateFromCalendar.selectStartDate?.toLocaleDateString() ??
+                              ""}
                           </p>
                         </div>
                       </div>
@@ -126,7 +127,8 @@ const BottomSheet: React.FC = ({ ...props }) => {
                             Return date
                           </p>
                           <p className="text-base font-bold">
-                            {selectDateFromCalendar.selectEndDate ?? ""}
+                            {selectDateFromCalendar.selectEndDate?.toLocaleDateString() ??
+                              ""}
                           </p>
                         </div>
                       </div>

@@ -188,14 +188,14 @@ const ShoppingDetailPage = () => {
 
           <div className="flex flex-col pt-4">
             <p className="text-black font-semibold text-lg">Term & condition</p>
-            <p>
+            <p className="text-black">
               ข้อกำหนดในการให้บริการ เป็น ข้อตกลงทางกฎหมาย ระหว่าง ผู้ให้บริการ
               กับบุคคลที่ต้องการใช้บริการนั้น
               บุคคลนั้นต้องตกลงที่จะปฏิบัติตามข้อกำหนดในการให้บริการเพื่อใช้บริการที่นำเสนอ
               เงื่อนไขการบริการยังสามารถเป็นเพียง ข้อจำกัดความรับผิดชอบ
               โดยเฉพาะอย่างยิ่งเกี่ยวกับการใช้เว็บไซต์ ภาษาที่คลุมเครือ
             </p>
-            <div className="pt-2 pl-12">
+            <div className="pt-2 pl-12 text-black">
               <ul className="list-disc">
                 <li>ค่ามัดจำ 500 บาท</li>
               </ul>

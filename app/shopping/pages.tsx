@@ -52,7 +52,7 @@ const Shopping = () => {
   return (
     <>
       <div className="bg-white h-screen min-w-full flex flex-col overflow-y-hidden">
-        <div className="px-5 py-3 flex-grow-0">
+        <div className="px-5 pt-3 flex-grow-0">
           <HeaderFilterButton />
         </div>
         <div className="flex flex-col flex-grow h-64 gap-y-2">

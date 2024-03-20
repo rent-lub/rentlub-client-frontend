@@ -31,14 +31,14 @@ export default function ShoppingTab(props: tabProps) {
           paddingRight: "12px",
         }}
       >
-        <div className="grid grid-cols-5 pl-5 divide-x gap-x-4 h-14">
-          <div className="border-solid border-2 rounded-lg flex flex-col text-black items-center justify-center text-sm h-14">
-            <SortAscending size={17} />
-            <p className="text-[9px] line-clamp-2 text-center px-0  flex items-center justify-center">
+        <div className="grid grid-cols-6 pl-5 divide-x gap-x-4 h-11">
+          <div className="border-solid border-2 rounded-lg flex flex-col text-black items-center justify-center text-sm h-11 pt-2">
+            <SortAscending size={15} />
+            <p className="text-[7px] line-clamp-2 text-center px-0 self-center">
               SORT
             </p>
           </div>
-          <div className="col-span-4 pl-4 gap-x-6">
+          <div className="col-span-5 pl-4 gap-x-6">
             <Tabs
               value={value}
               onChange={handleChange}

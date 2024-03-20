@@ -14,6 +14,10 @@ export const makeStore = () => {
       customCalendar: calendarReducer,
       LIFFProfile: LIFFProfileSlice,
     },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }),
   });
 };
 

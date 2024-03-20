@@ -42,7 +42,7 @@ const BottomNavMenu = () => {
 
   return (
     <>
-      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center">
+      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center py-2">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -78,6 +78,7 @@ const BottomNavMenu = () => {
               <Avatar
                 src={liffProfile.profileURL ?? ""}
                 name={liffProfile.displayName ?? ""}
+                className=" w-5 h-5"
               />
             }
             onClick={(e) => {

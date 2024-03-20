@@ -25,6 +25,11 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
     (selector) => selector.bottomSheet
   );
 
+  const selectDateFromCalendar: {
+    selectStartDate: Date | null;
+    selectEndDate: Date | null;
+  } = useAppSelector((selector) => selector.customCalendar);
+
   return (
     <>
       <div
@@ -40,7 +45,18 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
                 </span>
                 <span>บาท</span>
               </div>
-              <div className="text-black self-start">ต่อวัน</div>
+              <div className="text-black self-start">
+                {status == BottomSheetShoppingDetailStatus.SelectDate
+                  ? "ต่อวัน"
+                  : `จองรวม ${
+                      selectDateFromCalendar.selectStartDate != null &&
+                      selectDateFromCalendar.selectEndDate != null
+                        ? selectDateFromCalendar.selectEndDate!.getDate() -
+                          selectDateFromCalendar.selectStartDate.getDate() +
+                          1
+                        : ""
+                    } `}
+              </div>
             </div>
           </div>
         </div>

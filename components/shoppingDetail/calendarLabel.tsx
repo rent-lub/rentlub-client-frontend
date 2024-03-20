@@ -28,7 +28,7 @@ const labelComponent = (value: string, color: string) => {
       <div className="flex flex-row items-center justify-center">
         <div className="flex flex-row gap-x-2 items-center justify-center">
           <div className={`rounded-full ${color} w-2 h-2`}></div>
-          <p className=" text-xs">{value}</p>
+          <p className=" text-xs text-black">{value}</p>
         </div>
       </div>
     </React.Fragment>
