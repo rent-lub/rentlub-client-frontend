@@ -17,6 +17,7 @@
     "@mui/material-nextjs": "^5.15.9",
     "@mui/styled-engine": "npm:@mui/styled-engine-sc@latest",
     "@mui/styled-engine-sc": "6.0.0-alpha.16",
+    "@nextui-org/avatar": "^2.0.24",
     "@nextui-org/button": "^2.0.26",
     "@nextui-org/checkbox": "^2.0.25",
     "@nextui-org/chip": "^2.0.25",
