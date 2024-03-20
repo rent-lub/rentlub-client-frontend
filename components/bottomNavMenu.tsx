@@ -17,6 +17,15 @@ import {
   getUserProfileImage,
 } from "~/services/liffService";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "~/lib/hooks";
+
+interface LIFFProfile {
+  id: string | null;
+  profileURL: string | null;
+  userToken: string | null;
+  displayName: string | null;
+  accessToken: string | null;
+}
 
 const BottomNavMenu = () => {
   const [value, setValue] = React.useState(0);
@@ -25,25 +34,11 @@ const BottomNavMenu = () => {
     setValue(newValue);
   };
 
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [displayName, setDisplayName] = useState<string | null>(null);
+  const LIFFProfile: LIFFProfile = useAppSelector(
+    (selector) => selector.LIFFProfile
+  );
 
   const router = useRouter();
-
-  useEffect(() => {
-    async function fetchData() {
-      const image = await getUserProfileImage();
-      const id = await getUserId();
-      const name = await getUserDisplayName();
-
-      setProfileImage(image);
-      setUserId(id);
-      setDisplayName(name);
-    }
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -79,7 +74,12 @@ const BottomNavMenu = () => {
             key={3}
             label={"Me"}
             sx={{ fontSize: 12 }}
-            icon={<Avatar src={profileImage ?? ""} name={displayName ?? ""} />}
+            icon={
+              <Avatar
+                src={LIFFProfile.profileURL ?? ""}
+                name={LIFFProfile.displayName ?? ""}
+              />
+            }
             onClick={(e) => {
               e.preventDefault();
               router.push("/kyc/");

@@ -19,7 +19,6 @@ interface LIFFProfile {
 }
 
 const KYC = () => {
-  const [title, setTitle] = useState("");
   const LIFFProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );

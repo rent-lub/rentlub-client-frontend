@@ -1,17 +1,16 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 
-let initialized = false;
-
 async function initLiff() {
-  if (!initialized) {
-    try {
-      const LIFFID = "2003536696-gwwkQzpx";
-      await liff.init({ liffId: LIFFID });
-      initialized = true;
-    } catch (error) {
-      console.error("Error initializing LIFF:", error);
-    }
+  try {
+    const LIFFID = "2003536696-gwwkQzpx";
+    await liff.init({ liffId: LIFFID! });
+    return liff;
+  } catch (error) {
+    console.error("Error initializing LIFF:", error);
+    return null;
   }
 }
 
@@ -19,7 +18,7 @@ export function useLiff() {
   const [liffInstance, setLiffInstance] = useState<typeof liff | null>(null);
 
   useEffect(() => {
-    initLiff().then(() => {
+    initLiff().then((liff) => {
       setLiffInstance(liff);
     });
   }, []);
@@ -28,21 +27,23 @@ export function useLiff() {
 }
 
 export async function getUserProfileImage(): Promise<string | null> {
-  const liff = useLiff();
+  const liff = await initLiff();
+  if (!liff) return null;
 
-  if (!liff || !liff.isLoggedIn()) {
-    return null;
+  if (!liff.isLoggedIn()) {
+    liff.login();
   }
 
   const profile = await liff.getProfile();
-  return profile.pictureUrl ?? null;
+  return profile.pictureUrl ?? "";
 }
 
 export async function getUserId(): Promise<string | null> {
-  const liff = useLiff();
+  const liff = await initLiff();
+  if (!liff) return null;
 
-  if (!liff || !liff.isLoggedIn()) {
-    return null;
+  if (!liff.isLoggedIn()) {
+    liff.login();
   }
 
   const profile = await liff.getProfile();
@@ -50,10 +51,11 @@ export async function getUserId(): Promise<string | null> {
 }
 
 export async function getUserDisplayName(): Promise<string | null> {
-  const liff = useLiff();
+  const liff = await initLiff();
+  if (!liff) return null;
 
-  if (!liff || !liff.isLoggedIn()) {
-    return null;
+  if (!liff.isLoggedIn()) {
+    liff.login();
   }
 
   const profile = await liff.getProfile();
@@ -61,7 +63,7 @@ export async function getUserDisplayName(): Promise<string | null> {
 }
 
 export async function getUserToken(): Promise<string | null> {
-  const liff = useLiff();
+  const liff = await initLiff();
   if (!liff || !liff.isLoggedIn()) {
     return null;
   }
@@ -70,7 +72,7 @@ export async function getUserToken(): Promise<string | null> {
 }
 
 export async function getAccessToken(): Promise<string | null> {
-  const liff = useLiff();
+  const liff = await initLiff();
   if (!liff || !liff.isLoggedIn()) {
     return null;
   }
