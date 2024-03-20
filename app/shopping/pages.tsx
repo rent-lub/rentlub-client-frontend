@@ -17,29 +17,33 @@ import {
   getUserId,
   getUserProfileImage,
   getUserToken,
+  useLiff,
 } from "~/services/liffService";
 import { setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
 
 const Shopping = () => {
+  const liff = useLiff();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function fetchData() {
-      const image = await getUserProfileImage();
-      const id = await getUserId();
-      const name = await getUserDisplayName();
-      const userToken = await getUserToken();
-      const userAccessToken = await getAccessToken();
+      if (liff) {
+        const image = await getUserProfileImage();
+        const id = await getUserId();
+        const name = await getUserDisplayName();
+        const userToken = await getUserToken();
+        const userAccessToken = await getAccessToken();
 
-      dispatch(
-        setLIFFProfile({
-          id: id,
-          profileURL: image,
-          userToken: userToken,
-          displayName: name,
-          accessToken: userAccessToken,
-        })
-      );
+        dispatch(
+          setLIFFProfile({
+            id: id,
+            profileURL: image,
+            userToken: userToken,
+            displayName: name,
+            accessToken: userAccessToken,
+          })
+        );
+      }
     }
 
     fetchData();

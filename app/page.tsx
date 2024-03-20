@@ -9,8 +9,6 @@ import {
 } from "~/services/liffService";
 
 export default function Home() {
-  const liff = useLiff();
-
   return (
     <main className="flex min-h-screen">
       <Shopping />
