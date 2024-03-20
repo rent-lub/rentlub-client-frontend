@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from "react";
 import Image from "next/image";
 import {Textarea} from "@nextui-org/input";
+import {Button, ButtonGroup} from "@nextui-org/button";
 import { CalendarBlank,Package,Truck,CheckCircle,ArrowsClockwise,Clipboard} from "@phosphor-icons/react/dist/ssr";
 
 const OrderDetail = () => {
@@ -20,8 +21,8 @@ const OrderDetail = () => {
         {/* carousal */}
         <div className='bg-slate-200 w-full h-80 text-black grid place-content-center'>รูป</div>
         {/* detail */}
-        <div className='bg-white h-screen min-w-full text-black px-5'> 
-            <div className='flex flex-col gap-4 pt-5'>
+        <div className='bg-white h-screen min-w-full text-black'> 
+            <div className='flex flex-col gap-4 pt-5 px-5'>
 
                 {/* product name */}
                 <p className="line-clamp-2">ชุดกี่เพ้าทันสมัย ชุดกี่เพ้าประยุกต์แบบมีแขน เก๋ๆ สวยหรูอินเทรนด์แฟชั่น ไม่ซ้ำใคร</p>
@@ -80,13 +81,41 @@ const OrderDetail = () => {
 
                 {/* Paid */}
                 <p className=''>จ่ายเงินแล้ว</p>
-                <div className='flex'>
-                  <div className=''></div>
-                  <div className=''></div>
+                <div className='flex flex-col space-y-2'>
+                  <div className='w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs'>
+                    <div className='justify-self-start'>Subtotal</div>
+                    <div className='justify-self-end'>2,500</div>
+                  </div>
+                  <div className='w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs'>
+                    <div className='justify-self-start'>Shipping fee</div>
+                    <div className='justify-self-end'>32</div>
+                  </div>
+                  <div className='w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs'>
+                    <div className='justify-self-start'>ค่ามัดจำ</div>
+                    <div className='justify-self-end'>1,200</div>
+                  </div>
+                  <div className='w-full grid grid-row-1 grid-flow-col justify-items-stretch'>
+                    <div className='justify-self-start'>Total</div>
+                    <div className='justify-self-end'>3,732</div>
+                  </div>
                 </div>
+                <div className=" rounded-xl w-full border border-slate-200 "></div>
 
+                {/* More Detail */}
+                <div className='py-3 px-5 bg-slate-200 rounded-md'>
+                  <p className='text-base font-bold'>More Detail</p>
+                  <span className='text-sm'>ไปที่หน้า </span>
+                  <span className='text-sm underline underline-offset-2'>รายละเอียดสินค้า</span>
+                </div>
+            </div>
+            <div className="my-5 w-full border border-slate-200 "></div>
+
+            {/* return button */}
+            <div className='px-5 pb-5'>
+              <Button className='w-full bg-lime-500 text-white'>Return</Button>
             </div>
         </div>
+        
         </>
       );
     };
