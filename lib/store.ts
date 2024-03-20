@@ -3,6 +3,7 @@ import postsReducer from "./features/postsSlice";
 import searchDateReducer from "./features/searchDateSlice";
 import bottomSheetReducer from "./features/bottomSheetSlice";
 import calendarReducer from "./features/calendarSlice";
+import LIFFProfileSlice from "./features/LIFFProfileSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -11,6 +12,7 @@ export const makeStore = () => {
       searchDate: searchDateReducer,
       bottomSheet: bottomSheetReducer,
       customCalendar: calendarReducer,
+      LIFFProfile: LIFFProfileSlice,
     },
   });
 };

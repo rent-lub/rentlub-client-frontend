@@ -12,19 +12,38 @@ import BottomNavMenu from "~/components/bottomNavMenu";
 import ProductCard from "~/components/shopping/productCard";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import {
+  getAccessToken,
   getUserDisplayName,
   getUserId,
   getUserProfileImage,
+  getUserToken,
 } from "~/services/liffService";
+import { setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
 
 const Shopping = () => {
-  const [title, setTitle] = useState("");
-  const posts: Array<{ id: number; title: string; description: string }> =
-    useAppSelector((selector) => selector.posts);
   const dispatch = useAppDispatch();
-  const handleRemovePost = (postId: number) => {
-    dispatch(deletePost(postId));
-  };
+
+  useEffect(() => {
+    async function fetchData() {
+      const image = await getUserProfileImage();
+      const id = await getUserId();
+      const name = await getUserDisplayName();
+      const userToken = await getUserToken();
+      const userAccessToken = await getAccessToken();
+
+      dispatch(
+        setLIFFProfile({
+          id: id,
+          profileURL: image,
+          userToken: userToken,
+          displayName: name,
+          accessToken: userAccessToken,
+        })
+      );
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
