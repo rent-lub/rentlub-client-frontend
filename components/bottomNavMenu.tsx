@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { BottomNavMenuStyles } from "~/styles/bottomNavMenuStyles";
-import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
+import { Avatar } from "@nextui-org/avatar";
 import {
   getUserDisplayName,
   getUserId,
@@ -40,8 +40,6 @@ const BottomNavMenu = () => {
     }
 
     fetchData();
-
-    console.log(profileImage);
   }, []);
 
   return (
