@@ -26,32 +26,9 @@ const Shopping = () => {
     dispatch(deletePost(postId));
   };
 
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [userId, setUserId] = useState<string | null>(null);
-  const [displayName, setDisplayName] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      const image = await getUserProfileImage();
-      const id = await getUserId();
-      const name = await getUserDisplayName();
-
-      setProfileImage(image);
-      setUserId(id);
-      setDisplayName(name);
-    }
-
-    fetchData();
-
-    console.log(profileImage);
-  }, []);
-
   return (
     <>
       <div className="bg-white h-screen min-w-full flex flex-col overflow-y-hidden">
-        <p>{profileImage}</p>
-        <p>{displayName}</p>
-        <p>{userId}</p>
         <div className="px-5 py-3 flex-grow-0">
           <HeaderFilterButton />
         </div>

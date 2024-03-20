@@ -1,15 +1,21 @@
 "use client";
 
-import { Avatar, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import {
   Dress,
   ShoppingBag,
   Heart,
   Package,
 } from "@phosphor-icons/react/dist/ssr";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { BottomNavMenuStyles } from "~/styles/bottomNavMenuStyles";
+import { Avatar, AvatarGroup, AvatarIcon } from "@nextui-org/avatar";
+import {
+  getUserDisplayName,
+  getUserId,
+  getUserProfileImage,
+} from "~/services/liffService";
 
 const BottomNavMenu = () => {
   const [value, setValue] = React.useState(0);
@@ -17,6 +23,27 @@ const BottomNavMenu = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const image = await getUserProfileImage();
+      const id = await getUserId();
+      const name = await getUserDisplayName();
+
+      setProfileImage(image);
+      setUserId(id);
+      setDisplayName(name);
+    }
+
+    fetchData();
+
+    console.log(profileImage);
+  }, []);
+
   return (
     <>
       <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center">
@@ -51,18 +78,7 @@ const BottomNavMenu = () => {
             key={3}
             label={"Me"}
             sx={{ fontSize: 12 }}
-            icon={
-              <Avatar
-                alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
-                sx={{
-                  width: 20,
-                  height: 20,
-                  fontSize: 14,
-                  border: value === 3 ? "2px solid #4CC764" : "",
-                }}
-              />
-            }
+            icon={<Avatar src={profileImage ?? ""} name={displayName ?? ""} />}
           />
         </Tabs>
       </div>
