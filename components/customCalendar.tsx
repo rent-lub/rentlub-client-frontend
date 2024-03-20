@@ -132,6 +132,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
 
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDate = new Date(date.getFullYear(), date.getMonth(), day);
+      const today = new Date(Date.now());
 
       let isUnavailableStart = false;
       let isUnavailableEnd = false;
@@ -173,12 +174,11 @@ const CustomCalendar: React.FC<CalendarProps> = ({
                     ? "rounded-r-xl"
                     : ""
                 } `
-              : currentDate.toLocaleDateString() ==
-                DateTime.now().toFormat("M/d/yyyy")
+              : today.toLocaleDateString() == currentDate.toLocaleDateString()
               ? `bg-[#ABDCFF] ${
                   currentDate <= selectedEndDate! &&
                   currentDate >= selectedStartDate!
-                    ? ""
+                    ? null
                     : "rounded-full"
                 }   w-4 h-2`
               : null

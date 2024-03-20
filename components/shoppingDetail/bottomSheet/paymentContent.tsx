@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useForm, SubmitHandler, set } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import CustomInput from "~/components/customInput";
 import Image from "next/image";
 
