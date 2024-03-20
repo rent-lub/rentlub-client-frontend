@@ -5,7 +5,7 @@ import liff from "@line/liff";
 
 async function initLiff() {
   try {
-    const liffID = process.env.NEXT_PUBLIC_LIFF_ID;
+    const liffID = "2003536696-gwwkQzpx";
     await liff.init({ liffId: liffID! });
     return liff;
   } catch (error) {
