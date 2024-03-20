@@ -47,7 +47,7 @@ const Shopping = () => {
     }
 
     fetchData();
-  }, []);
+  }, [liff]);
 
   return (
     <>
