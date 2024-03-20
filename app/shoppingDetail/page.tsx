@@ -30,7 +30,7 @@ const ShoppingDetailPage = () => {
   };
   return (
     <>
-      <div className="bg-white h-screen min-w-full overflow-x-hidden relative flex flex-col px-5 pb-9">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden relative flex flex-col px-5 pb-20">
         <ImageCarousel
           images={[
             "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg",
