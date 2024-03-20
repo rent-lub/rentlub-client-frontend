@@ -161,7 +161,8 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           key={day}
           className={`calendar-day text-center h-7 
           ${
-            currentDate.getDate() < today.getDate()
+            currentDate.getDate() < today.getDate() &&
+            currentDate.getMonth() == today.getMonth()
               ? " text-gray-400"
               : "text-black"
           }
@@ -218,7 +219,8 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           onClick={
             disable
               ? () => {}
-              : currentDate.getDate() < today.getDate()
+              : currentDate.getDate() < today.getDate() &&
+                currentDate.getMonth() == today.getMonth()
               ? () => {}
               : () => (isUnavailable ? null : handleDateClick(currentDate))
           }

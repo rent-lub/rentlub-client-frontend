@@ -6,6 +6,8 @@ import BottomSheet from "./bottomSheet/bottomSheet";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { trigger } from "~/lib/features/bottomSheetSlice";
 import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
+import { DateTime } from "luxon";
+import { setSelectStartDate } from "~/lib/features/calendarSlice";
 
 interface BottomCheckOutProps {
   price: number;
@@ -33,34 +35,45 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   return (
     <>
       <div
-        className={`w-full bg-white py-4 px-5 flex flex-row border-t-2 border-t-[#E5E5E5] ${className}`}
+        className={`w-full bg-white py-2.5 px-5 flex flex-row border-t-2 border-t-[#E5E5E5] ${className}`}
       >
         <div className="grow">
           <div className="flex flex-row gap-x-4">
             <div className="text-black self-center text-2xl">฿</div>
             <div className="text-black flex flex-col">
               <div>
-                <span className="text-2xl font-medium">
+                <span className="text-xl font-medium">
                   {price.toLocaleString()}{" "}
                 </span>
                 <span>บาท</span>
               </div>
-              <div className="text-black self-start">
-                {status == BottomSheetShoppingDetailStatus.SelectDate
-                  ? "ต่อวัน"
-                  : `จองรวม ${
-                      selectDateFromCalendar.selectStartDate != null &&
-                      selectDateFromCalendar.selectEndDate != null
-                        ? selectDateFromCalendar.selectEndDate!.getDate() -
-                          selectDateFromCalendar.selectStartDate.getDate() +
-                          1
-                        : ""
-                    } `}
+              <div className="text-black self-start text-sm">
+                <p className="text-sm">
+                  {status == BottomSheetShoppingDetailStatus.SelectDate
+                    ? "ต่อวัน"
+                    : `จองรวม ${
+                        selectDateFromCalendar.selectStartDate != null &&
+                        selectDateFromCalendar.selectEndDate != null
+                          ? Math.abs(
+                              DateTime.fromJSDate(
+                                selectDateFromCalendar.selectStartDate
+                              )
+                                .diff(
+                                  DateTime.fromJSDate(
+                                    selectDateFromCalendar.selectEndDate
+                                  ),
+                                  "days"
+                                )
+                                .get("days")
+                            ) + 1
+                          : "0"
+                      } วัน`}
+                </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="w-7/12 justify-center">
+        <div className="w-7/12  pl-2 items-center">
           <Button
             className="font-bold w-full h-[80%] rounded-xl text-md bg-[#40C090] text-white"
             onClick={onClick}
