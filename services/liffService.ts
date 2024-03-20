@@ -29,6 +29,7 @@ async function initLiff(): Promise<typeof liff> {
   try {
     const LIFFID = "2003536696-gwwkQzpx";
     await liff.init({ liffId: LIFFID });
+    console.log("init liff suceess");
     return liff;
   } catch (error) {
     console.error("Error initializing LIFF:", error);
@@ -37,29 +38,31 @@ async function initLiff(): Promise<typeof liff> {
 }
 
 export async function getUserProfileImage(): Promise<string | null> {
-  const liff = liffInstance || (await useLiff());
+  const liff = liffInstance || useLiff();
 
   if (!liff || !liff.isLoggedIn()) {
     return null;
   }
 
   const profile = await liff.getProfile();
+  console.log(profile.pictureUrl);
   return profile.pictureUrl ?? "";
 }
 
 export async function getUserId(): Promise<string | null> {
-  const liff = liffInstance || (await useLiff());
+  const liff = liffInstance || useLiff();
 
   if (!liff || !liff.isLoggedIn()) {
     return null;
   }
 
   const profile = await liff.getProfile();
+  console.log(profile);
   return profile.userId;
 }
 
 export async function getUserDisplayName(): Promise<string | null> {
-  const liff = liffInstance || (await useLiff());
+  const liff = liffInstance || useLiff();
 
   if (!liff || !liff.isLoggedIn()) {
     return null;
