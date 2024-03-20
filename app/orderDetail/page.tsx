@@ -78,7 +78,12 @@ const OrderDetail = () => {
                 <Textarea minRows={1} label="ADDRESS" placeholder="" className=""/>
                 <div className=" rounded-xl w-full border border-slate-200 "></div>
 
-                {/*  */}
+                {/* Paid */}
+                <p className=''>จ่ายเงินแล้ว</p>
+                <div className='flex'>
+                  <div className=''></div>
+                  <div className=''></div>
+                </div>
 
             </div>
         </div>
