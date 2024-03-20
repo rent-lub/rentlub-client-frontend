@@ -32,11 +32,14 @@ const KYC = () => {
     <>
       <div className="bg-white h-screen min-w-full flex flex-col items-center py-5">
         <h2 className="font-bold text-xl">VERIFICATION</h2>
-        <Avatar
-          src={profileImage ?? ""}
-          name={displayName ?? ""}
-          className="w-40 h-40 text-large"
-        />
+        <div className="flex flex-col gap-y-5">
+          <Avatar
+            src={profileImage ?? ""}
+            name={displayName ?? ""}
+            className="w-40 h-40 text-large"
+          />
+          <p className="font-bold">{displayName}</p>
+        </div>
         <div className="pt-6 px-10">
           <KYCForm />
         </div>

@@ -16,6 +16,7 @@ import {
   getUserId,
   getUserProfileImage,
 } from "~/services/liffService";
+import { useRouter } from "next/navigation";
 
 const BottomNavMenu = () => {
   const [value, setValue] = React.useState(0);
@@ -27,6 +28,8 @@ const BottomNavMenu = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [userId, setUserId] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string | null>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
@@ -77,6 +80,10 @@ const BottomNavMenu = () => {
             label={"Me"}
             sx={{ fontSize: 12 }}
             icon={<Avatar src={profileImage ?? ""} name={displayName ?? ""} />}
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/kyc/");
+            }}
           />
         </Tabs>
       </div>
