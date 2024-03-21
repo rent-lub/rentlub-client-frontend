@@ -32,7 +32,7 @@ export default function ShoppingTab(props: tabProps) {
         }}
       >
         <div className="grid grid-cols-6 pl-5 divide-x gap-x-4 h-11">
-          <div className="border-solid border-2 rounded-lg flex flex-col text-black items-center justify-center text-sm h-11 pt-2">
+          <div className="border-solid border-1 rounded-lg flex flex-col text-black items-center justify-center text-sm h-11 pt-2">
             <SortAscending size={15} />
             <p className="text-[7px] line-clamp-2 text-center px-0 self-center">
               SORT
