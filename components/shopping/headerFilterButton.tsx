@@ -15,7 +15,7 @@ const HeaderFilterButton = () => {
   };
   return (
     <>
-      <div className="w-full bg-white rounded-3xl drop-shadow-md h-11 text-black">
+      <div className="w-full bg-white rounded-3xl drop-shadow-sm border-solid border-1 border-[#E5E5E5] h-11 text-black">
         <div className="grid grid-cols-2 gap-x-3 divide-x content-center">
           <div className="flex justify-center items-center h-11">
             <div className="flex flex-row gap-x-3 items-center">

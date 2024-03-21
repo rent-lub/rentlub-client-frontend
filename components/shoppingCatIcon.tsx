@@ -12,32 +12,31 @@ import {
   IconContext,
   Icon,
   IconProps,
+  Confetti,
+  ShirtFolded,
+  Heart,
+  Snowflake,
+  Sneaker,
 } from "@phosphor-icons/react";
 import React from "react";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 
 export const buildIcon = (cat: ShoppingCatEnum) => {
   switch (cat) {
-    case ShoppingCatEnum.Fashion:
-      return <CustomIcon icon={<Dress size={17} />} />;
-    case ShoppingCatEnum.Book:
-      return <CustomIcon icon={<Books size={17} />} />;
+    case ShoppingCatEnum.Party:
+      return <CustomIcon icon={<Confetti size={32} weight="light" />} />;
+    case ShoppingCatEnum.Suit:
+      return <CustomIcon icon={<ShirtFolded size={32} weight="light" />} />;
     case ShoppingCatEnum.Sport:
-      return <CustomIcon icon={<Barbell size={17} />} />;
-    case ShoppingCatEnum.HealthAndBeauty:
-      return <CustomIcon icon={<Heartbeat size={17} />} />;
-    case ShoppingCatEnum.ItGadget:
-      return <CustomIcon icon={<Headphones size={17} />} />;
-    case ShoppingCatEnum.Travel:
-      return <CustomIcon icon={<SuitcaseRolling size={17} />} />;
-    case ShoppingCatEnum.HomeAndGarden:
-      return <CustomIcon icon={<HouseLine size={17} />} />;
+      return <CustomIcon icon={<Barbell size={32} weight="light" />} />;
+    case ShoppingCatEnum.Wedding:
+      return <CustomIcon icon={<Heart size={32} weight="light" />} />;
     case ShoppingCatEnum.All:
-      return <CustomIcon icon={<Package size={17} />} />;
-    case ShoppingCatEnum.Vehicle:
-      return <CustomIcon icon={<Car size={17} />} />;
-    case ShoppingCatEnum.Electric:
-      return <CustomIcon icon={<Television size={17} />} />;
+      return <CustomIcon icon={<Package size={32} weight="light" />} />;
+    case ShoppingCatEnum.Jacket:
+      return <CustomIcon icon={<Snowflake size={32} weight="light" />} />;
+    case ShoppingCatEnum.Sneaker:
+      return <CustomIcon icon={<Sneaker size={32} weight="light" />} />;
   }
 };
 

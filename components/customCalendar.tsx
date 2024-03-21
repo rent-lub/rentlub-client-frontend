@@ -42,7 +42,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
 
   const dispatch = useAppDispatch();
 
-  const handlSetSelectStartDate = (date: string | null) => {
+  const handlSetSelectStartDate = (date: Date | null) => {
     dispatch(
       setSelectStartDate({
         selectStartDate: date,
@@ -50,7 +50,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
     );
   };
 
-  const handlSetSelectEndDate = (date: string | null) => {
+  const handlSetSelectEndDate = (date: Date | null) => {
     dispatch(
       setSelectEndDate({
         selectEndDate: date,
@@ -72,7 +72,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
 
   const handleDateClick = (selectedDate: Date) => {
     if (!selectedStartDate) {
-      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+      handlSetSelectStartDate(selectedDate ?? "");
       setSelectedStartDate(selectedDate);
     } else if (!selectedEndDate && selectedDate > selectedStartDate) {
       let isError = false;
@@ -101,19 +101,19 @@ const CustomCalendar: React.FC<CalendarProps> = ({
         setError(false);
         if (!selectedStartDate) {
           setSelectedStartDate(selectedDate);
-          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectStartDate(selectedDate ?? "");
         } else if (!selectedEndDate && selectedDate > selectedStartDate) {
-          handlSetSelectEndDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectEndDate(selectedDate ?? "");
           setSelectedEndDate(selectedDate);
         } else {
           setSelectedStartDate(selectedDate);
-          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectStartDate(selectedDate ?? "");
           setSelectedEndDate(null);
         }
       }
     } else {
       setSelectedStartDate(selectedDate);
-      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+      handlSetSelectStartDate(selectedDate ?? "");
       setSelectedEndDate(null);
       handlSetSelectEndDate(null);
     }
@@ -161,6 +161,12 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           key={day}
           className={`calendar-day text-center h-7 
           ${
+            currentDate.getDate() < today.getDate() &&
+            currentDate.getMonth() == today.getMonth()
+              ? " text-gray-400"
+              : "text-black"
+          }
+          ${
             isUnavailable
               ? `${
                   currentDate.toLocaleDateString() ==
@@ -191,11 +197,15 @@ const CustomCalendar: React.FC<CalendarProps> = ({
               : selectedEndDate &&
                 selectedEndDate.toLocaleDateString() ==
                   currentDate.toLocaleDateString()
-              ? "bg-[#40C090] rounded-r-xl"
+              ? `bg-[#40C090] ${
+                  selectedEndDate == selectedStartDate
+                    ? "rounded-full"
+                    : "rounded-r-xl"
+                }`
               : selectedStartDate &&
                 selectedStartDate.toLocaleDateString() ==
                   currentDate.toLocaleDateString()
-              ? "bg-[#40C090] rounded-l-xl"
+              ? `bg-[#40C090] rounded-l-xl`
               : ""
           }
           ${
@@ -208,6 +218,9 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           }`}`}
           onClick={
             disable
+              ? () => {}
+              : currentDate.getDate() < today.getDate() &&
+                currentDate.getMonth() == today.getMonth()
               ? () => {}
               : () => (isUnavailable ? null : handleDateClick(currentDate))
           }
@@ -236,9 +249,9 @@ const CustomCalendar: React.FC<CalendarProps> = ({
             setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))
           }
         >
-          <CustomIcon icon={<CaretLeft size={20} />} />
+          <CustomIcon icon={<CaretLeft size={20} color="black" />} />
         </button>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-black">
           <h2 className="text-lg font-bold">
             {date.toLocaleDateString("default", {
               month: "long",
@@ -255,12 +268,12 @@ const CustomCalendar: React.FC<CalendarProps> = ({
             setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))
           }
         >
-          <CustomIcon icon={<CaretRight size={20} />} />
+          <CustomIcon icon={<CaretRight size={20} color="black" />} />
         </button>
       </div>
-      <table className="border-separate border-spacing-y-3 text-center">
+      <table className="border-separate border-spacing-y-2 text-center">
         <thead>
-          <tr>
+          <tr className="text-black">
             <td className="w-12">Sun</td>
             <td className="w-12">Mon</td>
             <td className="w-12">Tue</td>
@@ -277,13 +290,6 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           <CalendarLabel />
         </div>
       ) : null}
-      {error ? (
-        <p className="text-sm text-red-600 flex items-center justify-center pb-3">
-          Invalid date
-        </p>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };
