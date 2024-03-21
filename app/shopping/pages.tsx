@@ -20,6 +20,7 @@ import {
   useLiff,
 } from "~/services/liffService";
 import { setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
+import { checkUserExist, createUser } from "~/services/userService";
 
 const Shopping = () => {
   const liff = useLiff();
@@ -43,6 +44,11 @@ const Shopping = () => {
             accessToken: userAccessToken,
           })
         );
+
+        var isUserExist = await checkUserExist(id ?? "");
+        if (!isUserExist) {
+          await createUser({ name: name ?? id ?? "", lineId: id ?? "" });
+        }
       }
     }
 
