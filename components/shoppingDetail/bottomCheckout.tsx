@@ -43,7 +43,25 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
             <div className="text-black flex flex-col">
               <div>
                 <span className="text-xl font-medium">
-                  {price.toLocaleString()}{" "}
+                  {selectDateFromCalendar.selectStartDate != null &&
+                  selectDateFromCalendar.selectEndDate != null
+                    ? (
+                        price *
+                        (Math.abs(
+                          DateTime.fromJSDate(
+                            selectDateFromCalendar.selectStartDate
+                          )
+                            .diff(
+                              DateTime.fromJSDate(
+                                selectDateFromCalendar.selectEndDate
+                              ),
+                              "days"
+                            )
+                            .get("days")
+                        ) +
+                          1)
+                      ).toLocaleString()
+                    : price.toLocaleString()}
                 </span>
                 <span>บาท</span>
               </div>

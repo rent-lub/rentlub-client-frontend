@@ -58,10 +58,10 @@ const Shopping = () => {
         <div className="flex flex-col flex-grow h-64 gap-y-2">
           <ShoppingTab />
           <div className="grid grid-cols-2 gap-x-6 px-4 overflow-y-auto">
-            <ProductCard productCat={ShoppingCatEnum.Fashion} />
-            <ProductCard productCat={ShoppingCatEnum.Fashion} />
-            <ProductCard productCat={ShoppingCatEnum.Fashion} />
-            <ProductCard productCat={ShoppingCatEnum.Fashion} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
           </div>
         </div>
         <div className="flex-grow-0">

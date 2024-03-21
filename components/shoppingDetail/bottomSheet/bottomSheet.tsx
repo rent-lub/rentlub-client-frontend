@@ -144,7 +144,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
                   <ModalFooter className="px-0 py-0">
                     <BottomCheckout
                       className="sticky bottom-0"
-                      price={3200}
+                      price={900}
                       status={bottomSheetStatus}
                       onClick={() => {
                         if (

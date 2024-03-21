@@ -7,7 +7,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 interface ImageCarouselProps {
-  images: String[];
+  images: string[];
 }
 
 const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
@@ -30,9 +30,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
                 width={500}
                 height={500}
                 className="m-auto"
-                src={
-                  "https://st.bigc-cs.com/cdn-cgi/image/format=webp,quality=90/public/media/catalog/product/30/20/2000007885530/2000007885530_1-20231226164926-.jpg"
-                }
+                src={images[index]}
                 alt="image"
               />
             </div>

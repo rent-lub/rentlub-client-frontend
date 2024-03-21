@@ -4,17 +4,19 @@ import { SxProps, Theme } from "@mui/material";
 export const ShoppingTabStyle: Record<string, SxProps<Theme> | undefined> = {
   tabStyle: {
     "& .MuiButtonBase-root.MuiTab-root": {
-      minWidth: 40,
-      width: 40,
+      minWidth: 45,
+      width: 45,
       height: 45,
       minHeight: 45,
       color: "black",
       transition: "color 0.2s ease-in-out",
       fontSize: "8px",
       opacity: "70%",
+      padding: "4px",
+      marginRight: 2,
       "&.Mui-selected": {
-        minWidth: 40,
-        width: 40,
+        minWidth: 45,
+        width: 45,
         height: 45,
         minHeight: 45,
         color: "white",

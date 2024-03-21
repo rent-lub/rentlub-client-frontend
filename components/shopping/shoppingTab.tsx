@@ -55,7 +55,7 @@ export default function ShoppingTab(props: tabProps) {
                     key={value}
                     label={value}
                     icon={buildIcon(value)}
-                    className="text-[9px] line-clamp-2 text-center px-0 flex items-center justify-center"
+                    className="text-[9px] line-clamp-2 text-center px-0 flex items-center justify-center gap-y-1"
                   />
                 );
               })}
