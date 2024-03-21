@@ -3,7 +3,7 @@ import axios from "axios";
 export interface createUserPayload {
   name: string;
   lineId: string;
-  type?: "CUSTOMER";
+  type: string;
 }
 
 export async function createUser(payload: createUserPayload) {
