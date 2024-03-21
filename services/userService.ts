@@ -7,6 +7,7 @@ export interface createUserPayload {
 }
 
 export async function createUser(payload: createUserPayload) {
+  console.log(payload);
   await axios
     .post("https://api.rentlub.iamgraph.live" + "/api/v1/users", payload)
     .then(function (response) {
@@ -26,6 +27,7 @@ export async function checkUserExist(id: string): Promise<boolean> {
       }
     })
     .catch(function (error) {
+      console.log(error);
       return false;
     });
   return false;
