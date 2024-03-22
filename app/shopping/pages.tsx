@@ -46,8 +46,14 @@ const Shopping = () => {
         );
 
         var isUserExist = await checkUserExist(id ?? "");
+        console.log(isUserExist);
         if (!isUserExist) {
-          await createUser({ name: name ?? id ?? "", lineId: id ?? "" });
+          console.log("creating user");
+          await createUser({
+            name: name ?? id ?? "",
+            lineId: id ?? "",
+            type: "CUSTOMER",
+          });
         }
       }
     }

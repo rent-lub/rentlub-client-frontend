@@ -169,8 +169,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           ${
             isUnavailable
               ? `${
-                  currentDate.toLocaleDateString() ==
-                  DateTime.now().toFormat("M/d/yyyy")
+                  today.toLocaleDateString() == currentDate.toLocaleDateString()
                     ? "bg-[#ABDCFF]"
                     : "bg-[#C5D6E3]"
                 }  ${
