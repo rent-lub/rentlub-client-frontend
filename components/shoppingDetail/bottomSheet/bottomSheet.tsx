@@ -65,6 +65,8 @@ const BottomSheet: React.FC = ({ ...props }) => {
             setBottomSheetStatus(BottomSheetShoppingDetailStatus.Shipping);
           }}
           scrollBehavior="inside"
+          hideCloseButton
+          style={{ maxHeight: "100px", minHeight: "88%" }}
         >
           {bottomSheetStatus ==
           BottomSheetShoppingDetailStatus.TermNCondition ? (
@@ -73,18 +75,16 @@ const BottomSheet: React.FC = ({ ...props }) => {
             <ModalContent>
               {(onClose) => (
                 <>
-                  <ModalHeader className="flex flex-col gap-1"></ModalHeader>
                   <ModalBody>
                     <div className="flex flex-col gap-y-3 divide-y divide-[#DDDDDD]">
-                      <div className="flex flex-row gap-x-4">
+                      <div className="flex flex-row justify-between pt-2">
                         <div className="flex-grow">
                           <p className="line-clamp-2">
-                            ชุดกี่เพ้าทันสมัย ชุดกี่เพ้าประยุกต์แบบมีแขน
-                            เก๋ๆสวยหรูอินเทรนด์แฟชั่น ไม่ซ้ำใคร
+                            Fluffy Full-Zip Long Sleeve Jacket
                           </p>
                         </div>
-                        <div className="flex-col w-36">
-                          <p className="text-xl font-bold">500</p>
+                        <div className="flex-col w-36 pl-12">
+                          <p className="text-xl font-bold">900</p>
                           <p className="">บาทต่อวัน</p>
                         </div>
                       </div>

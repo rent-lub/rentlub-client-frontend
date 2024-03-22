@@ -7,7 +7,7 @@ import "rsuite/dist/rsuite-no-reset.min.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rentlub",
+  title: "RentLub",
 };
 
 export default function RootLayout({
