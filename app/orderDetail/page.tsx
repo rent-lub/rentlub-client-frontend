@@ -5,21 +5,28 @@ import Image from "next/image";
 import {Textarea} from "@nextui-org/input";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { CalendarBlank,Package,Truck,CheckCircle,ArrowsClockwise,Clipboard} from "@phosphor-icons/react/dist/ssr";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import Carousal from '~/components/orderDetail/carousal';
+import ImageCarousel from '~/components/shoppingDetail/imageCarousel';
 
 const OrderDetail = () => {
     
       return (
         <>
-        {/* <div className='w-full h-80 '>
-            <Image
-                    src="https://www.thaidro.com/cdn/shop/products/13_957454a5-871d-469a-9cbc-481dcc478a81.jpg?v=1644470765"
-                    alt={""}
-                    className="w-100% h-100% object-cover h-auto"
-            />
-        </div> */}
-
         {/* carousal */}
-        <div className='bg-slate-200 w-full h-80 text-black grid place-content-center'>รูป</div>
+        <div className='bg-white h-screen min-w-full text-black'>
+          <ImageCarousel
+            images={[
+              "https://www.thaidro.com/cdn/shop/products/13_957454a5-871d-469a-9cbc-481dcc478a81.jpg?v=1644470765",
+              "https://www.thaidro.com/cdn/shop/products/18_b48b55fb-1028-4981-a280-b805e648d3d9.jpg?v=1644470765",
+              "https://www.thaidro.com/cdn/shop/products/02_5ed79819-933f-47c9-890a-0b1f665fd9d4.jpg?v=1644470765",
+              "https://www.thaidro.com/cdn/shop/products/04_a946c7c8-a585-490c-9766-1417d8619b9b.jpg?v=1644470765",
+              "https://www.thaidro.com/cdn/shop/products/05_da681541-e3e8-4b91-bffe-6966f0f14c0b.jpg?v=1644470765",
+            ]}
+          />
+        </div>
         {/* detail */}
         <div className='bg-white h-screen min-w-full text-black'> 
             <div className='flex flex-col gap-4 pt-5 px-5'>
@@ -115,7 +122,6 @@ const OrderDetail = () => {
               <Button className='w-full bg-lime-500 text-white'>Return</Button>
             </div>
         </div>
-        
         </>
       );
     };
