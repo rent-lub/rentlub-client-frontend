@@ -17,18 +17,26 @@ export async function createUser(payload: createUserPayload) {
     });
 }
 
-export async function checkUserExist(id: string): Promise<boolean> {
+export async function checkUserExist(id: string): Promise<{
+  _id: string;
+  name: string;
+  lineId: string;
+  isVerified: boolean;
+  type: string;
+  shops: [];
+  createdAt: string;
+  updatedAt: string;
+} | null> {
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users/" + id
     );
-    console.log(response.status);
     if (response.status === 200) {
-      return true;
+      return response.data;
     } else {
-      return false;
+      return null;
     }
   } catch (error) {
-    return false;
+    return null;
   }
 }

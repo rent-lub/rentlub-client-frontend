@@ -8,8 +8,17 @@ import {
 } from "@nextui-org/modal";
 import { Checkbox } from "@nextui-org/checkbox";
 import { Button } from "@nextui-org/button";
+import { useAppSelector } from "~/lib/hooks";
+import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
+import { useRouter } from "next/navigation";
 
 const TermAndConditionSheet = () => {
+  const liffProfile: LIFFProfile = useAppSelector(
+    (selector) => selector.LIFFProfile
+  );
+
+  const router = useRouter();
+  const [isAgree, setIsAgree] = useState<boolean>(false);
   return (
     <ModalContent>
       {(onClose) => (
@@ -53,12 +62,20 @@ const TermAndConditionSheet = () => {
             <div
               className={`w-full bg-white py-4 px-5 flex flex-col border-t-2 border-t-[#E5E5E5] sticky bottom-0 items-center justify-center gap-y-6`}
             >
-              <Checkbox color="success">
+              <Checkbox color="success" onValueChange={setIsAgree}>
                 I have read & agree to the Terms
               </Checkbox>
+
               <Button
+                isDisabled={!isAgree}
                 className="font-bold w-full h-12 rounded-xl text-md bg-[#40C090] text-white"
-                onClick={() => {}}
+                onClick={() => {
+                  isAgree
+                    ? liffProfile.isVerify
+                      ? () => {}
+                      : router.push("/kyc")
+                    : () => {};
+                }}
               >
                 Continue
               </Button>

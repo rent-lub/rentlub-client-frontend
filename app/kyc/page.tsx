@@ -9,16 +9,8 @@ import {
   getUserDisplayName,
 } from "~/services/liffService";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
-import { setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
+import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { Button, ButtonGroup } from "@nextui-org/button";
-
-interface LIFFProfile {
-  id: string | null;
-  profileURL: string | null;
-  userToken: string | null;
-  displayName: string | null;
-  accessToken: string | null;
-}
 
 const KYC = () => {
   const liffProfile: LIFFProfile = useAppSelector(
@@ -38,7 +30,9 @@ const KYC = () => {
             name={liffProfile.displayName ?? ""}
             className="w-40 h-40 text-large"
           />
-          <p className="font-bold text-2xl">{liffProfile.displayName}</p>
+          <p className="font-bold text-2xl text-black">
+            {liffProfile.displayName}
+          </p>
         </div>
         <div className="pt-6 px-10">
           <KYCForm />

@@ -19,7 +19,7 @@ import {
   getUserToken,
   useLiff,
 } from "~/services/liffService";
-import { setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
+import { setIsVerify, setLIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { checkUserExist, createUser } from "~/services/userService";
 
 const Shopping = () => {
@@ -42,13 +42,12 @@ const Shopping = () => {
             userToken: userToken,
             displayName: name,
             accessToken: userAccessToken,
+            isVerify: null,
           })
         );
-
-        var isUserExist = await checkUserExist(id ?? "");
-        console.log(isUserExist);
-        if (!isUserExist) {
-          console.log("creating user");
+        var userData = await checkUserExist(id ?? "");
+        dispatch(setIsVerify(userData?.isVerified ?? false));
+        if (!userData) {
           await createUser({
             name: name ?? id ?? "",
             lineId: id ?? "",
@@ -70,6 +69,9 @@ const Shopping = () => {
         <div className="flex flex-col flex-grow h-64 gap-y-2">
           <ShoppingTab />
           <div className="grid grid-cols-2 gap-x-6 px-4 overflow-y-auto">
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
+            <ProductCard productCat={ShoppingCatEnum.Jacket} />
             <ProductCard productCat={ShoppingCatEnum.Jacket} />
             <ProductCard productCat={ShoppingCatEnum.Jacket} />
             <ProductCard productCat={ShoppingCatEnum.Jacket} />

@@ -90,7 +90,7 @@ const BuildShippingMethod = () => {
               priority
               width={50}
               height={50}
-              className="m-auto"
+              className="m-auto w-12 h-12"
               src={"/images/thailand_post.png"}
               alt="image"
               sizes="small"

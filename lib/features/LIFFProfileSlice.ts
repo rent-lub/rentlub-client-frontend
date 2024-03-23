@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { stat } from "fs";
 
-interface LIFFProfile {
+export interface LIFFProfile {
   id: string | null;
   profileURL: string | null;
   userToken: string | null;
   displayName: string | null;
   accessToken: string | null;
+  isVerify: boolean | null;
 }
 
 const initialState: LIFFProfile = {
@@ -14,6 +16,7 @@ const initialState: LIFFProfile = {
   userToken: null,
   displayName: null,
   accessToken: null,
+  isVerify: null,
 };
 
 const LIFFProfileSlice = createSlice({
@@ -24,8 +27,11 @@ const LIFFProfileSlice = createSlice({
       state = action.payload;
       return state;
     },
+    setIsVerify: (state, action: PayloadAction<boolean>) => {
+      state.isVerify = action.payload;
+    },
   },
 });
 
-export const { setLIFFProfile } = LIFFProfileSlice.actions;
+export const { setLIFFProfile, setIsVerify } = LIFFProfileSlice.actions;
 export default LIFFProfileSlice.reducer;

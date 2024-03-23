@@ -36,11 +36,7 @@ const KYCForm = () => {
             </p>
             <div className="grid grid-cols-2 gap-x-3">
               <CustomInput
-                placeHolder={"Name"}
-                onTextChange={(value) => console.log(value)}
-              />
-              <CustomInput
-                placeHolder={"Last name"}
+                placeHolder={"First name and last name"}
                 onTextChange={(value) => console.log(value)}
               />
             </div>
