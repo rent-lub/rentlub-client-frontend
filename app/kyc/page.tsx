@@ -34,7 +34,7 @@ const KYC = () => {
             {liffProfile.displayName}
           </p>
         </div>
-        <div className="pt-6 px-10">
+        <div className="pt-6 px-8 w-full">
           <KYCForm />
         </div>
       </div>

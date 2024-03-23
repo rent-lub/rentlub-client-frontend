@@ -6,6 +6,13 @@ export interface createUserPayload {
   type: string;
 }
 
+export interface verifyUserPayload {
+  lineId: string;
+  email: string;
+  idCard: string;
+  dateOfBirth: string;
+}
+
 export async function createUser(payload: createUserPayload) {
   await axios
     .post(process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users", payload)
@@ -30,6 +37,22 @@ export async function checkUserExist(id: string): Promise<{
   try {
     const response = await axios.get(
       process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users/" + id
+    );
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    return null;
+  }
+}
+
+export async function verifyUser(id: string, payload: verifyUserPayload) {
+  try {
+    const response = await axios.post(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users/verify",
+      payload
     );
     if (response.status === 200) {
       return response.data;
