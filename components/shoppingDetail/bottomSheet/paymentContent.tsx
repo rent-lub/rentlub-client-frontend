@@ -3,20 +3,24 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import CustomInput from "~/components/customInput";
 import Image from "next/image";
 
-type Inputs = {
-  example: string;
-  exampleRequired: string;
+type FormValues = {
+  name: string;
+  birthDate: string;
+  nationalID: string;
+  email: string;
+  phoneNumber: string;
+  address: string;
+  postCode: string;
 };
-
 const PaymentContent = () => {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
   return (
     <>
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">

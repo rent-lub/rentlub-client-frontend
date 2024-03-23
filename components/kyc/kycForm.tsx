@@ -22,6 +22,8 @@ type FormValues = {
   nationalID: string;
   email: string;
   phoneNumber: string;
+  address: string;
+  postCode: string;
 };
 
 const KYCForm = () => {
@@ -154,7 +156,7 @@ const KYCForm = () => {
         </div>
 
         <Button
-          className="font-bold w-full h-12 rounded-xl text-sm bg-[#40C090] text-white p-5 mb-12 mt-5"
+          className="font-bold w-full h-12 rounded-xl text-sm bg-[#40C090] text-white p-5 mb-6 mt-5"
           type="submit"
         >
           VERIFY
