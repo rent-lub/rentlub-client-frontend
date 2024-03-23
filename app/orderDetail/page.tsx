@@ -5,10 +5,6 @@ import Image from "next/image";
 import {Textarea} from "@nextui-org/input";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { CalendarBlank,Package,Truck,CheckCircle,ArrowsClockwise,Clipboard} from "@phosphor-icons/react/dist/ssr";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import Carousal from '~/components/orderDetail/carousal';
 import ImageCarousel from '~/components/shoppingDetail/imageCarousel';
 
 const OrderDetail = () => {
@@ -16,15 +12,17 @@ const OrderDetail = () => {
       return (
         <>
         {/* carousal */}
-        <div className='bg-white h-screen min-w-full text-black'>
+        <div className='bg-white h-80 min-w-full'>
           <ImageCarousel
             images={[
-              "https://www.thaidro.com/cdn/shop/products/13_957454a5-871d-469a-9cbc-481dcc478a81.jpg?v=1644470765",
-              "https://www.thaidro.com/cdn/shop/products/18_b48b55fb-1028-4981-a280-b805e648d3d9.jpg?v=1644470765",
-              "https://www.thaidro.com/cdn/shop/products/02_5ed79819-933f-47c9-890a-0b1f665fd9d4.jpg?v=1644470765",
-              "https://www.thaidro.com/cdn/shop/products/04_a946c7c8-a585-490c-9766-1417d8619b9b.jpg?v=1644470765",
-              "https://www.thaidro.com/cdn/shop/products/05_da681541-e3e8-4b91-bffe-6966f0f14c0b.jpg?v=1644470765",
+              "https://cdn.discordapp.com/attachments/1175812632440229951/1221125295159902288/1.png?ex=6611708d&is=65fefb8d&hm=889b779daab2c4c74c3eb67e3feb94d14d4764da3b06fa61bd04d93be0ae1960&",
+              "https://cdn.discordapp.com/attachments/1175812632440229951/1221125295428468826/2.png?ex=6611708d&is=65fefb8d&hm=acb6805223b5b9a99b64044198ce0c00de5d57d3d441f72a5c4cbabb0abd2ef3&",
+              "https://cdn.discordapp.com/attachments/1175812632440229951/1221125295759822848/3.png?ex=6611708d&is=65fefb8d&hm=4cf169b0bde0997f3980d6b396428411d1dfe93afd1f12f009a3a97e0f1baf50&",
+              "https://cdn.discordapp.com/attachments/1175812632440229951/1221125296137175244/4.png?ex=6611708e&is=65fefb8e&hm=09deb493b50be7f380c6f50fc9486433bd6cadb07448f5abea26b77fec38b1cc&",
+              "https://cdn.discordapp.com/attachments/1175812632440229951/1221125296451878962/5.png?ex=6611708e&is=65fefb8e&hm=c7a9b8807bfffeff5b58b4c93d26527939e8772bcf37291bbefb923820c8ece7&",
             ]}
+            width={320}
+            height={320}
           />
         </div>
         {/* detail */}
@@ -40,11 +38,11 @@ const OrderDetail = () => {
                   <p className="mb-2">สถานะสินค้า</p>
                   <p className="text-sm">ได้รับสินค้าแล้ว</p>
                   <div className="bg-slate-100 rounded-md flex px-6 py-2 gap-2 justify-center items-center">
-                    <Package className="fill-lime-500" size={27} />
-                    <div className="rounded-xl border-1 w-1/12 h-0 border-lime-500 justify-center "></div>
-                    <Truck className="fill-lime-500" size={27} />
-                    <div className="rounded-xl border-1 w-1/12 h-0 border-lime-500 justify-center "></div>
-                    <CheckCircle className="fill-lime-500" size={27} />
+                    <Package className="fill-green" size={27} />
+                    <div className="rounded-xl border-1 w-1/12 h-0 border-green justify-center "></div>
+                    <Truck className="fill-green" size={27} />
+                    <div className="rounded-xl border-1 w-1/12 h-0 border-green justify-center "></div>
+                    <CheckCircle className="fill-green" size={27} />
                     <div className="rounded-xl border-1 w-1/12 h-0 border-slate-400 justify-center "></div>
                     <ArrowsClockwise className="fill-slate-400" size={27} />
                     <div className="rounded-xl border-1 w-1/12 h-0 border-slate-400 justify-center "></div>
@@ -119,7 +117,7 @@ const OrderDetail = () => {
 
             {/* return button */}
             <div className='px-5 pb-5'>
-              <Button className='w-full bg-lime-500 text-white'>Return</Button>
+              <Button className='w-full bg-green text-white'>Return</Button>
             </div>
         </div>
         </>
