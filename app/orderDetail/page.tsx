@@ -6,9 +6,10 @@ import {Textarea} from "@nextui-org/input";
 import {Button, ButtonGroup} from "@nextui-org/button";
 import { CalendarBlank,Package,Truck,CheckCircle,ArrowsClockwise,Clipboard} from "@phosphor-icons/react/dist/ssr";
 import ImageCarousel from '~/components/shoppingDetail/imageCarousel';
+import Overlay from '~/components/orderDetail/overlay';
 
 const OrderDetail = () => {
-    
+
       return (
         <>
         {/* carousal */}
@@ -119,6 +120,9 @@ const OrderDetail = () => {
             <div className='px-5 pb-5'>
               <Button className='w-full bg-green text-white'>Return</Button>
             </div>
+
+            {/* test overlay */}
+            <Overlay/>
         </div>
         </>
       );
