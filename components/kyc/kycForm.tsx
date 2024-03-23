@@ -156,7 +156,7 @@ const KYCForm = () => {
         </div>
 
         <Button
-          className="font-bold w-full h-12 rounded-xl text-sm bg-[#40C090] text-white p-5 mb-6 mt-5"
+          className="font-bold w-full h-12 rounded-xl text-sm bg-[#40C090] text-white p-5 mt-16 mb-4"
           type="submit"
         >
           VERIFY

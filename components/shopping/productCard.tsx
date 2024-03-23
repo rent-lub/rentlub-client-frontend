@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
             router.push("/shoppingDetail/");
           }}
         >
-          ฿ {Number(3200).toLocaleString()}
+          ฿ {Number(900).toLocaleString()}
           <span className="inline-flex items-baseline">
             <span className="font-normal text-sm text-gray-500"> / DAY</span>
           </span>

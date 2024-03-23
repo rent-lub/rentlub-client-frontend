@@ -69,7 +69,7 @@ const PaymentContent = () => {
                   type="number"
                   placeHolder={"Postcode"}
                   onTextChange={(value) => console.log(value)}
-                  className="w-12"
+                  className="w-20"
                   required
                 />
               </div>
