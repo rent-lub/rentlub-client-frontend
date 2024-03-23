@@ -14,6 +14,8 @@ type FormValues = {
   nationalID: string;
   email: string;
   phoneNumber: string;
+  address: string;
+  postCode: string;
 };
 
 interface CustomInputProps {
@@ -21,7 +23,14 @@ interface CustomInputProps {
   onTextChange?: (value: string) => void;
   type?: "number" | "text" | "date";
   className?: string;
-  name: "name" | "birthDate" | "nationalID" | "email" | "phoneNumber";
+  name:
+    | "name"
+    | "birthDate"
+    | "nationalID"
+    | "email"
+    | "phoneNumber"
+    | "address"
+    | "postCode";
   required: boolean;
 }
 

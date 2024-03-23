@@ -38,24 +38,32 @@ const PaymentContent = () => {
               />
             </div>
             <CustomInput
+              name="name"
               placeHolder={"Name"}
               onTextChange={(value) => console.log(value)}
+              required
             />
             <CustomInput
+              name="address"
               placeHolder={"Address"}
               onTextChange={(value) => console.log(value)}
+              required
             />
             <div className="grid grid-cols-3 gap-x-2">
               <CustomInput
+                name="postCode"
                 type="number"
                 placeHolder={"Postcode"}
                 onTextChange={(value) => console.log(value)}
+                required
               />
               <CustomInput
+                name="phoneNumber"
                 type="number"
                 placeHolder={"Number"}
                 onTextChange={(value) => console.log(value)}
                 className="col-span-2 w-full"
+                required
               />
             </div>
           </form>
