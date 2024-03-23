@@ -7,9 +7,8 @@ export interface createUserPayload {
 }
 
 export async function createUser(payload: createUserPayload) {
-  console.log(payload);
   await axios
-    .post("https://api.rentlub.iamgraph.live" + "/api/v1/users", payload)
+    .post(process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users", payload)
     .then(function (response) {
       console.log(response);
     })
@@ -19,16 +18,17 @@ export async function createUser(payload: createUserPayload) {
 }
 
 export async function checkUserExist(id: string): Promise<boolean> {
-  await axios
-    .get("https://api.rentlub.iamgraph.live" + "/api/v1/users/" + id)
-    .then(function (response) {
-      if (response.status == 200) {
-        return true;
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users/" + id
+    );
+    console.log(response.status);
+    if (response.status === 200) {
+      return true;
+    } else {
       return false;
-    });
-  return false;
+    }
+  } catch (error) {
+    return false;
+  }
 }
