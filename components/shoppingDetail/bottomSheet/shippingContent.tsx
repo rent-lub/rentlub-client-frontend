@@ -2,6 +2,7 @@ import React from "react";
 import CalendarLabel from "../calendarLabel";
 import { Vault } from "@phosphor-icons/react/dist/ssr";
 import CustomCalendar from "~/components/customCalendar";
+import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 
 const ShippingContent = () => {
   return (
@@ -9,13 +10,23 @@ const ShippingContent = () => {
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
         <div className="flex flex-col items-center ">
           <CustomCalendar
-            onDateSelect={(startDate, endDate) => {
-              console.log(
-                `${startDate?.toLocaleDateString()} ${endDate?.toLocaleDateString()}`
-              );
-            }}
+            reserveList={[
+              {
+                item: "first item",
+                startDate: "3/22/2024",
+                endDate: "3/24/2024",
+                label: CalendarLabelEnum.Unavailable,
+              },
+              {
+                item: "second item",
+                startDate: "3/11/2024",
+                endDate: "3/13/2024",
+                label: CalendarLabelEnum.Unavailable,
+              },
+            ]}
+            onDateSelect={(startDate, endDate) => {}}
+            showLabel
           />
-          <CalendarLabel />
         </div>
         <div className="pt-4 w-full flex flex-col justify-center items-center">
           <div className="flex flex-row items-center gap-x-3">

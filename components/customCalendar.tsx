@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 import { DateTime } from "luxon";
-import { start } from "repl";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import {
   setSelectStartDate,
   setSelectEndDate,
 } from "~/lib/features/calendarSlice";
+import { CustomIcon } from "./shoppingCatIcon";
+import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import CalendarLabel from "./shoppingDetail/calendarLabel";
 
 interface ReservationItem {
   label?: CalendarLabelEnum;
@@ -16,13 +18,22 @@ interface ReservationItem {
 }
 
 interface CalendarProps {
+  reserveList: Array<ReservationItem>;
+  disable?: boolean;
+  showLabel?: boolean;
   onDateSelect: (
     selectStartDate: Date | null,
     selectEndDate: Date | null
   ) => void;
 }
 
-const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
+const CustomCalendar: React.FC<CalendarProps> = ({
+  onDateSelect,
+  disable,
+  showLabel,
+  reserveList,
+  ...props
+}) => {
   const currentDate: Date = new Date();
   const [date, setDate] = useState<Date>(currentDate);
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
@@ -31,7 +42,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
 
   const dispatch = useAppDispatch();
 
-  const handlSetSelectStartDate = (date: string | null) => {
+  const handlSetSelectStartDate = (date: Date | null) => {
     dispatch(
       setSelectStartDate({
         selectStartDate: date,
@@ -39,28 +50,13 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
     );
   };
 
-  const handlSetSelectEndtartDate = (date: string | null) => {
+  const handlSetSelectEndDate = (date: Date | null) => {
     dispatch(
       setSelectEndDate({
         selectEndDate: date,
       })
     );
   };
-
-  const reserveItemsList: Array<ReservationItem> = [
-    {
-      item: "first item",
-      startDate: "3/22/2024",
-      endDate: "3/24/2024",
-      label: CalendarLabelEnum.Unavailable,
-    },
-    {
-      item: "second item",
-      startDate: "3/11/2024",
-      endDate: "3/13/2024",
-      label: CalendarLabelEnum.Unavailable,
-    },
-  ];
 
   const getDaysInMonth = (date: Date): number => {
     const year: number = date.getFullYear();
@@ -76,11 +72,11 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
 
   const handleDateClick = (selectedDate: Date) => {
     if (!selectedStartDate) {
-      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+      handlSetSelectStartDate(selectedDate ?? "");
       setSelectedStartDate(selectedDate);
     } else if (!selectedEndDate && selectedDate > selectedStartDate) {
       let isError = false;
-      for (const item of reserveItemsList) {
+      for (const item of reserveList) {
         if (
           item.label === CalendarLabelEnum.Unavailable &&
           selectedStartDate &&
@@ -92,7 +88,7 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
           if (startDate <= selectedDate && endDate >= selectedStartDate) {
             isError = true;
             handlSetSelectStartDate(null);
-            handlSetSelectEndtartDate(null);
+            handlSetSelectEndDate(null);
             break;
           }
         }
@@ -105,20 +101,21 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
         setError(false);
         if (!selectedStartDate) {
           setSelectedStartDate(selectedDate);
-          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectStartDate(selectedDate ?? "");
         } else if (!selectedEndDate && selectedDate > selectedStartDate) {
-          handlSetSelectEndtartDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectEndDate(selectedDate ?? "");
           setSelectedEndDate(selectedDate);
         } else {
           setSelectedStartDate(selectedDate);
-          handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+          handlSetSelectStartDate(selectedDate ?? "");
           setSelectedEndDate(null);
         }
       }
     } else {
       setSelectedStartDate(selectedDate);
-      handlSetSelectStartDate(selectedDate?.toLocaleDateString() ?? "");
+      handlSetSelectStartDate(selectedDate ?? "");
       setSelectedEndDate(null);
+      handlSetSelectEndDate(null);
     }
     onDateSelect(selectedStartDate ?? null, selectedEndDate ?? null);
   };
@@ -135,12 +132,13 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
 
     for (let day = 1; day <= daysInMonth; day++) {
       const currentDate = new Date(date.getFullYear(), date.getMonth(), day);
+      const today = new Date(Date.now());
 
       let isUnavailableStart = false;
       let isUnavailableEnd = false;
       let isUnavailable = false;
 
-      for (const item of reserveItemsList) {
+      for (const item of reserveList) {
         if (item.label == CalendarLabelEnum.Unavailable) {
           const startDate = new Date(item.startDate);
           const endDate = new Date(item.endDate);
@@ -163,10 +161,15 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
           key={day}
           className={`calendar-day text-center h-7 
           ${
+            currentDate.getDate() < today.getDate() &&
+            currentDate.getMonth() == today.getMonth()
+              ? " text-gray-400"
+              : "text-black"
+          }
+          ${
             isUnavailable
               ? `${
-                  currentDate.toLocaleDateString() ==
-                  DateTime.now().toFormat("M/d/yyyy")
+                  today.toLocaleDateString() == currentDate.toLocaleDateString()
                     ? "bg-[#ABDCFF]"
                     : "bg-[#C5D6E3]"
                 }  ${
@@ -176,9 +179,13 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
                     ? "rounded-r-xl"
                     : ""
                 } `
-              : currentDate.toLocaleDateString() ==
-                DateTime.now().toFormat("M/d/yyyy")
-              ? "bg-[#ABDCFF] rounded-full w-4 h-2"
+              : today.toLocaleDateString() == currentDate.toLocaleDateString()
+              ? `bg-[#ABDCFF] ${
+                  currentDate <= selectedEndDate! &&
+                  currentDate >= selectedStartDate!
+                    ? null
+                    : "rounded-full"
+                }   w-4 h-2`
               : null
           } ${` ${
             selectedStartDate &&
@@ -189,11 +196,15 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
               : selectedEndDate &&
                 selectedEndDate.toLocaleDateString() ==
                   currentDate.toLocaleDateString()
-              ? "bg-[#40C090] rounded-r-xl"
+              ? `bg-[#40C090] ${
+                  selectedEndDate == selectedStartDate
+                    ? "rounded-full"
+                    : "rounded-r-xl"
+                }`
               : selectedStartDate &&
                 selectedStartDate.toLocaleDateString() ==
                   currentDate.toLocaleDateString()
-              ? "bg-[#40C090] rounded-l-xl"
+              ? `bg-[#40C090] rounded-l-xl`
               : ""
           }
           ${
@@ -204,7 +215,14 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
               ? "bg-[#40C090]"
               : ""
           }`}`}
-          onClick={() => (isUnavailable ? null : handleDateClick(currentDate))}
+          onClick={
+            disable
+              ? () => {}
+              : currentDate.getDate() < today.getDate() &&
+                currentDate.getMonth() == today.getMonth()
+              ? () => {}
+              : () => (isUnavailable ? null : handleDateClick(currentDate))
+          }
         >
           {day}
         </td>
@@ -230,9 +248,9 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
             setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1))
           }
         >
-          {"<"}
+          <CustomIcon icon={<CaretLeft size={20} color="black" />} />
         </button>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-black">
           <h2 className="text-lg font-bold">
             {date.toLocaleDateString("default", {
               month: "long",
@@ -249,12 +267,12 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
             setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1))
           }
         >
-          {">"}
+          <CustomIcon icon={<CaretRight size={20} color="black" />} />
         </button>
       </div>
-      <table className="border-separate border-spacing-y-3 text-center">
+      <table className="border-separate border-spacing-y-2 text-center">
         <thead>
-          <tr>
+          <tr className="text-black">
             <td className="w-12">Sun</td>
             <td className="w-12">Mon</td>
             <td className="w-12">Tue</td>
@@ -266,13 +284,11 @@ const CustomCalendar: React.FC<CalendarProps> = ({ onDateSelect }) => {
         </thead>
         <tbody>{renderCalendarWeeks()}</tbody>
       </table>
-      {error ? (
-        <p className="text-sm text-red-600 flex items-center justify-center pb-3">
-          Invalid date
-        </p>
-      ) : (
-        <></>
-      )}
+      {showLabel ? (
+        <div className="flex items-center justify-center">
+          <CalendarLabel />
+        </div>
+      ) : null}
     </div>
   );
 };

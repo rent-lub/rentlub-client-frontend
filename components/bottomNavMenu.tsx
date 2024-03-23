@@ -1,15 +1,31 @@
 "use client";
 
-import { Avatar, Tab, Tabs } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import {
   Dress,
   ShoppingBag,
   Heart,
   Package,
 } from "@phosphor-icons/react/dist/ssr";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { BottomNavMenuStyles } from "~/styles/bottomNavMenuStyles";
+import { Avatar } from "@nextui-org/avatar";
+import {
+  getUserDisplayName,
+  getUserId,
+  getUserProfileImage,
+} from "~/services/liffService";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "~/lib/hooks";
+
+interface LIFFProfile {
+  id: string | null;
+  profileURL: string | null;
+  userToken: string | null;
+  displayName: string | null;
+  accessToken: string | null;
+}
 
 const BottomNavMenu = () => {
   const [value, setValue] = React.useState(0);
@@ -17,9 +33,16 @@ const BottomNavMenu = () => {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const liffProfile: LIFFProfile = useAppSelector(
+    (selector) => selector.LIFFProfile
+  );
+
+  const router = useRouter();
+
   return (
     <>
-      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center">
+      <div className="w-full bg-white  drop-shadow-md h-16 text-black flex justify-center items-center pt-2 pb-6">
         <Tabs
           value={value}
           onChange={handleChange}
@@ -53,16 +76,15 @@ const BottomNavMenu = () => {
             sx={{ fontSize: 12 }}
             icon={
               <Avatar
-                alt="Remy Sharp"
-                src="/static/images/avatar/1.jpg"
-                sx={{
-                  width: 20,
-                  height: 20,
-                  fontSize: 14,
-                  border: value === 3 ? "2px solid #4CC764" : "",
-                }}
+                src={liffProfile.profileURL ?? ""}
+                name={liffProfile.displayName ?? ""}
+                className=" w-5 h-5"
               />
             }
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/kyc/");
+            }}
           />
         </Tabs>
       </div>

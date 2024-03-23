@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { trigger } from "~/lib/features/searchDateSlice";
 import CloseIcon from "@mui/icons-material/Close";
+import CustomCalendar from "./customCalendar";
 
 interface modalProps {
   isOpen: boolean;
@@ -25,7 +26,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export const ModalFullScreen: React.FC<modalProps> = ({ isOpen, ...props }) => {
+export const SearchDateModal: React.FC<modalProps> = ({ isOpen, ...props }) => {
   {
     const isClickSearchDate: boolean = useAppSelector(
       (selector) => selector.searchDate
@@ -34,6 +35,7 @@ export const ModalFullScreen: React.FC<modalProps> = ({ isOpen, ...props }) => {
     const handleOnSearchClick = () => {
       dispatch(trigger(!isClickSearchDate));
     };
+
     return (
       <React.Fragment>
         <BootstrapDialog
@@ -44,20 +46,22 @@ export const ModalFullScreen: React.FC<modalProps> = ({ isOpen, ...props }) => {
           open={isOpen}
         >
           <DialogContent>
-            <div className="grid grid-cols-2">
-              <Typography gutterBottom>Calendar</Typography>
-              <IconButton
-                aria-label="close"
-                onClick={() => handleOnSearchClick()}
-                sx={{
-                  position: "absolute",
-                  right: 8,
-                  top: 8,
-                  color: (theme) => theme.palette.grey[500],
-                }}
-              >
-                <CloseIcon />
-              </IconButton>
+            <div className="flex flex-col">
+              <div className="py-3">
+                <IconButton
+                  aria-label="close"
+                  onClick={() => handleOnSearchClick()}
+                  sx={{
+                    position: "absolute",
+                    right: 8,
+                    top: 8,
+                    color: (theme) => theme.palette.grey[500],
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+              </div>
+              <CustomCalendar reserveList={[]} onDateSelect={(date) => {}} />
             </div>
           </DialogContent>
         </BootstrapDialog>
