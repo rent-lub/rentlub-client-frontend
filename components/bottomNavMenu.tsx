@@ -42,7 +42,7 @@ const BottomNavMenu = () => {
 
   return (
     <>
-      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center py-2">
+      <div className="w-full bg-white  drop-shadow-md h-12 text-black flex justify-center items-center py-2 pb-11">
         <Tabs
           value={value}
           onChange={handleChange}
