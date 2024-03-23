@@ -1,5 +1,12 @@
+"use client";
+
 import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import {
+  useForm,
+  SubmitHandler,
+  FormProvider,
+  FieldValues,
+} from "react-hook-form";
 import CustomInput from "~/components/customInput";
 import Image from "next/image";
 
@@ -13,64 +20,61 @@ type FormValues = {
   postCode: string;
 };
 const PaymentContent = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<FormValues>();
+  const methods = useForm();
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
   return (
     <>
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
         <div>
           <p className="text-md font-semibold">Address</p>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="pt-4 flex flex-col gap-y-4"
-          >
-            <div className="rounded-xl">
-              <Image
-                priority
-                src={"/images/mock_address.png"}
-                alt="image"
-                width="0"
-                height="0"
-                sizes="100vw"
-                className="w-full h-auto"
-              />
-            </div>
-            <CustomInput
-              name="name"
-              placeHolder={"Name"}
-              onTextChange={(value) => console.log(value)}
-              required
-            />
-            <CustomInput
-              name="address"
-              placeHolder={"Address"}
-              onTextChange={(value) => console.log(value)}
-              required
-            />
-            <div className="grid grid-cols-3 gap-x-2">
+          <FormProvider {...methods}>
+            <form
+              onSubmit={methods.handleSubmit(onSubmit)}
+              className="pt-4 flex flex-col gap-y-4"
+            >
+              <div className="rounded-xl">
+                <Image
+                  priority
+                  src={"/images/mock_address.png"}
+                  alt="image"
+                  width="0"
+                  height="0"
+                  sizes="100vw"
+                  className="w-full h-auto"
+                />
+              </div>
               <CustomInput
-                name="postCode"
-                type="number"
-                placeHolder={"Postcode"}
+                name="name"
+                placeHolder={"Name"}
                 onTextChange={(value) => console.log(value)}
                 required
               />
               <CustomInput
-                name="phoneNumber"
-                type="number"
-                placeHolder={"Number"}
+                name="address"
+                placeHolder={"Address"}
                 onTextChange={(value) => console.log(value)}
-                className="col-span-2 w-full"
                 required
               />
-            </div>
-          </form>
+              <div className="flex gap-x-2">
+                <CustomInput
+                  name="phoneNumber"
+                  type="number"
+                  placeHolder={"Number"}
+                  onTextChange={(value) => console.log(value)}
+                  required
+                />
+                <CustomInput
+                  name="postCode"
+                  type="number"
+                  placeHolder={"Postcode"}
+                  onTextChange={(value) => console.log(value)}
+                  className="w-12"
+                  required
+                />
+              </div>
+            </form>
+          </FormProvider>
         </div>
         <div className="w-full pt-4 grid grid-cols-2 gap-2">
           {BuildShippingMethod()}
