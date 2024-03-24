@@ -101,7 +101,7 @@ const ShoppingDetailPage = () => {
                 </IconButton>
               </div>
               <div className="col-span-4 ">
-                <p className="text-black opacity-60 text-sm">เวลาจองล้วงหน้า</p>
+                <p className="text-black opacity-60 text-sm">เวลาจองล่วงหน้า</p>
                 <p className="text-black ">4 Days</p>
               </div>
             </div>
@@ -201,6 +201,7 @@ const ShoppingDetailPage = () => {
       </div>
       <BottomCheckout
         className="sticky bottom-0"
+        depositFee={1200}
         price={900}
         status={BottomSheetShoppingDetailStatus.SelectDate}
         onClick={handleOnTriggerBottomSheet}

@@ -8,9 +8,11 @@ import { trigger } from "~/lib/features/bottomSheetSlice";
 import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailStatus";
 import { DateTime } from "luxon";
 import { setSelectStartDate } from "~/lib/features/calendarSlice";
+import { ShippingState } from "~/lib/features/shippingMethodSlice";
 
 interface BottomCheckOutProps {
   price: number;
+  depositFee: number;
   className?: string;
   status: BottomSheetShoppingDetailStatus;
   onClick: () => void;
@@ -20,6 +22,7 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   price,
   className,
   status,
+  depositFee,
   onClick,
   ...props
 }) => {
@@ -32,6 +35,37 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
     selectEndDate: Date | null;
   } = useAppSelector((selector) => selector.customCalendar);
 
+  const shippingState: ShippingState = useAppSelector(
+    (selector) => selector.shippingMethod
+  );
+
+  const deliveryFee = shippingState.selectedShipping?.fee ?? 0;
+
+  const calculateFee = (): string => {
+    if (status != BottomSheetShoppingDetailStatus.SelectDate) {
+      if (
+        selectDateFromCalendar.selectStartDate != null &&
+        selectDateFromCalendar.selectEndDate != null
+      ) {
+        return (
+          price *
+            (Math.abs(
+              DateTime.fromJSDate(selectDateFromCalendar.selectStartDate)
+                .diff(
+                  DateTime.fromJSDate(selectDateFromCalendar.selectEndDate),
+                  "days"
+                )
+                .get("days")
+            ) +
+              1) +
+          deliveryFee +
+          depositFee
+        ).toLocaleString();
+      }
+    }
+    return price.toLocaleString();
+  };
+
   return (
     <>
       <div
@@ -42,27 +76,7 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
             <div className="text-black self-center text-2xl">฿</div>
             <div className="text-black flex flex-col">
               <div>
-                <span className="text-xl font-medium">
-                  {selectDateFromCalendar.selectStartDate != null &&
-                  selectDateFromCalendar.selectEndDate != null
-                    ? (
-                        price *
-                        (Math.abs(
-                          DateTime.fromJSDate(
-                            selectDateFromCalendar.selectStartDate
-                          )
-                            .diff(
-                              DateTime.fromJSDate(
-                                selectDateFromCalendar.selectEndDate
-                              ),
-                              "days"
-                            )
-                            .get("days")
-                        ) +
-                          1)
-                      ).toLocaleString()
-                    : price.toLocaleString()}
-                </span>
+                <span className="text-xl font-medium">{calculateFee()}</span>
                 <span>บาท</span>
               </div>
               <div className="text-black self-start text-sm">
