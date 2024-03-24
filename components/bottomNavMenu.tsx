@@ -19,7 +19,7 @@ import {
   getUserToken,
   useLiff,
 } from "~/services/liffService";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { setLIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
 import { checkUserExist, createUser } from "~/services/userService";
@@ -33,7 +33,13 @@ interface LIFFProfile {
 }
 
 const BottomNavMenu = () => {
-  const [value, setValue] = React.useState(0);
+  const pathname = usePathname();
+
+  const [value, setValue] = React.useState(() => {
+    if (pathname === "/shopping") return 0;
+    if (pathname === "/myOrder") return 2;
+    return 0;
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -49,8 +55,15 @@ const BottomNavMenu = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    const handleRouteChange = () => {
+      if (pathname === "/") setValue(0);
+      else if (pathname === "/myOrder") setValue(2);
+    };
+
+    handleRouteChange();
+
     async function fetchData() {
-      if (liff && liffProfile != undefined) {
+      if (liff && liffProfile.id == null) {
         const image = await getUserProfileImage();
         const id = await getUserId();
         const name = await getUserDisplayName();
@@ -80,7 +93,7 @@ const BottomNavMenu = () => {
     }
 
     fetchData();
-  });
+  }, [pathname, liff]);
 
   return (
     <>
@@ -101,7 +114,7 @@ const BottomNavMenu = () => {
             sx={{ fontSize: 12 }}
             onClick={(e) => {
               e.preventDefault();
-              router.push("/shopping/");
+              router.push("/");
             }}
           />
           <Tab
