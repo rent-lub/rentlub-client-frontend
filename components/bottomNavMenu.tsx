@@ -12,12 +12,17 @@ import { ShoppingTabStyle } from "~/styles/shopping/shoppingTabStyles";
 import { BottomNavMenuStyles } from "~/styles/bottomNavMenuStyles";
 import { Avatar } from "@nextui-org/avatar";
 import {
+  getAccessToken,
   getUserDisplayName,
   getUserId,
   getUserProfileImage,
+  getUserToken,
+  useLiff,
 } from "~/services/liffService";
 import { useRouter } from "next/navigation";
-import { useAppSelector } from "~/lib/hooks";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
+import { setLIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
+import { checkUserExist, createUser } from "~/services/userService";
 
 interface LIFFProfile {
   id: string | null;
@@ -39,6 +44,43 @@ const BottomNavMenu = () => {
   );
 
   const router = useRouter();
+
+  const liff = useLiff();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    async function fetchData() {
+      if (liff) {
+        const image = await getUserProfileImage();
+        const id = await getUserId();
+        const name = await getUserDisplayName();
+        const userToken = await getUserToken();
+        const userAccessToken = await getAccessToken();
+
+        dispatch(
+          setLIFFProfile({
+            id: id,
+            profileURL: image,
+            userToken: userToken,
+            displayName: name,
+            accessToken: userAccessToken,
+            isVerify: null,
+          })
+        );
+        var userData = await checkUserExist(id ?? "");
+        dispatch(setIsVerify(userData?.isVerified ?? false));
+        if (!userData) {
+          await createUser({
+            name: name ?? id ?? "",
+            lineId: id ?? "",
+            type: "CUSTOMER",
+          });
+        }
+      }
+    }
+
+    fetchData();
+  });
 
   return (
     <>
@@ -69,6 +111,10 @@ const BottomNavMenu = () => {
             label={"Order"}
             icon={<Package size={20} />}
             sx={{ fontSize: 12 }}
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/myOrder/");
+            }}
           />
           <Tab
             key={3}
