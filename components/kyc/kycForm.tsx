@@ -46,16 +46,16 @@ const KYCForm = () => {
   const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
-  useEffect(() => {
-    async function checkUser() {
-      console.log("check");
-      if (liffProfile.id == null) {
-        await liff?.login();
-      }
-    }
+  // useEffect(() => {
+  //   async function checkUser() {
+  //     console.log("check");
+  //     if (liffProfile.id == null) {
+  //       await liff?.login();
+  //     }
+  //   }
 
-    checkUser();
-  });
+  //   checkUser();
+  // });
 
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -86,7 +86,7 @@ const KYCForm = () => {
     var result = await verifyUser(payload);
 
     if (result == true) {
-      router.push("/shopping/");
+      router.push("/");
     } else {
       methods.reset();
       onOpen();
