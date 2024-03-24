@@ -71,14 +71,14 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   return (
     <>
       <div
-        className={`w-full bg-white py-2.5 px-5 flex flex-row border-t-2 border-t-[#E5E5E5] ${className}`}
+        className={`w-full bg-white py-4 px-5 flex flex-row border-t-2 border-t-[#E5E5E5] ${className}`}
       >
         <div className="grow">
           <div className="flex flex-row gap-x-4">
             <div className="text-black self-center text-2xl">฿</div>
             <div className="text-black flex flex-col">
               <div>
-                <span className="text-xl font-medium">{calculateFee()}</span>
+                <span className="text-xl font-medium">{calculateFee()} </span>
                 <span>บาท</span>
               </div>
               <div className="text-black self-start text-sm">
@@ -107,9 +107,9 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
             </div>
           </div>
         </div>
-        <div className="w-7/12  pl-2 items-center">
+        <div className="w-7/12  pl-2 items-center self-center">
           <Button
-            className="font-bold w-full h-[80%] rounded-xl text-md bg-[#40C090] text-white"
+            className="font-bold w-full h-10 rounded-xl text-md bg-[#40C090] text-white"
             onClick={onClick}
           >
             {status}
