@@ -14,7 +14,7 @@ const MyOrder = () => {
       <>
       <div className='bg-white h-screen min-w-full mt-5'>
         <div className="flex flex-col gap-4">
-          <Tabs className='justify-center' key={"underlined"} variant={"underlined"} aria-label="Tabs variants" selectedKey={selected} onSelectionChange={setSelected}>
+          <Tabs className='justify-center' key={"underlined"} variant={"underlined"} aria-label="Tabs variants">
             <Tab key="deliver" title="Deliver" className='flex flex-col text-black'>
               <Deliver/>
             </Tab>

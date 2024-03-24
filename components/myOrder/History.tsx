@@ -8,7 +8,7 @@ const History= ({}) => {
           <div className="mx-5">
               <h1 className="font-medium text-xl mb-3">History</h1>
               <p className="mb-2">ประวัติ</p>
-              <MyOrderCard />
+              <p className="text-slate-400 text-sm">ไม่มี</p>
           </div>
       </>
     );

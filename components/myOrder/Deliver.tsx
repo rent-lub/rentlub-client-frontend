@@ -11,7 +11,7 @@ const Deliver= ({}) => {
               <MyOrderCard />
               <div className="mb-2 rounded-xl w-full border border-slate-200 "></div>
               <p className="mb-2">สินค้ากำลังส่ง</p>
-              <MyOrderCard />
+              <p className="text-slate-400 text-sm">ไม่มี</p>
           </div>
       </>
     );
