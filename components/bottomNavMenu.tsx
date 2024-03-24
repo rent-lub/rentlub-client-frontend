@@ -23,6 +23,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { setLIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
 import { checkUserExist, createUser } from "~/services/userService";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface LIFFProfile {
   id: string | null;
@@ -53,8 +54,6 @@ const BottomNavMenu = () => {
 
   const liff = useLiff();
   const dispatch = useAppDispatch();
-
-  const [avatarSrc, setAvatarSrc] = useState(liffProfile.profileURL ?? "");
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -99,10 +98,6 @@ const BottomNavMenu = () => {
     }
   }, [liff, liffProfile.id]);
 
-  useEffect(() => {
-    setAvatarSrc(liffProfile.profileURL ?? "");
-  }, [liffProfile.profileURL]);
-
   return (
     <>
       <div className="w-full bg-white  drop-shadow-md h-16 text-black flex justify-center items-center pt-2 pb-6">
@@ -146,10 +141,12 @@ const BottomNavMenu = () => {
             label={"Me"}
             sx={{ fontSize: 12 }}
             icon={
-              <Avatar
-                src={avatarSrc}
-                name={liffProfile.displayName ?? ""}
-                className=" w-5 h-5"
+              <LazyLoadImage
+                src={liffProfile.profileURL ?? ""}
+                alt={liffProfile.displayName ?? ""}
+                className="w-5 h-5 rounded-full"
+                effect="blur"
+                placeholderSrc="/placeholder.png"
               />
             }
           />
