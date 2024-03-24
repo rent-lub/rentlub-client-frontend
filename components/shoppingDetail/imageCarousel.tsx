@@ -8,9 +8,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 interface ImageCarouselProps {
   images: string[];
+  width: number;
+  height: number;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, width, height, ...props }) => {
   const [currentImage, setCurrentImage] = useState<number>(0);
   var settings = {
     infinite: true,
@@ -22,13 +24,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, ...props }) => {
   return (
     <>
       <div className="relative">
-        <Slider {...settings} adaptiveHeight arrows>
+        <Slider {...settings} adaptiveHeight={false} arrows>
           {images.map((item, index) => (
-            <div key={item[index]}>
+            <div key={item[index]} >
               <Image
                 priority
-                width={500}
-                height={500}
+                width={width}
+                height={height}
                 className="m-auto"
                 src={images[index]}
                 alt="image"
