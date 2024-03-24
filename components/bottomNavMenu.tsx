@@ -50,7 +50,7 @@ const BottomNavMenu = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if (liff) {
+      if (liff && liffProfile != undefined) {
         const image = await getUserProfileImage();
         const id = await getUserId();
         const name = await getUserDisplayName();
@@ -99,6 +99,10 @@ const BottomNavMenu = () => {
             label={"Shop"}
             icon={<ShoppingBag size={20} />}
             sx={{ fontSize: 12 }}
+            onClick={(e) => {
+              e.preventDefault();
+              router.push("/shopping/");
+            }}
           />
           <Tab
             key={1}
@@ -127,10 +131,6 @@ const BottomNavMenu = () => {
                 className=" w-5 h-5"
               />
             }
-            onClick={(e) => {
-              e.preventDefault();
-              router.push("/kyc/");
-            }}
           />
         </Tabs>
       </div>
