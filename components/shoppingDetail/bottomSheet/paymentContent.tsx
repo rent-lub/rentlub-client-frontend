@@ -9,6 +9,12 @@ import {
 } from "react-hook-form";
 import CustomInput from "~/components/customInput";
 import Image from "next/image";
+import {
+  selectShippingMethod,
+  ShippingMethod,
+  ShippingState,
+} from "~/lib/features/shippingMethodSlice";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 
 type FormValues = {
   name: string;
@@ -23,6 +29,7 @@ const PaymentContent = () => {
   const methods = useForm();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+
   return (
     <>
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
@@ -60,6 +67,7 @@ const PaymentContent = () => {
                 <CustomInput
                   name="phoneNumber"
                   type="number"
+                  className="w-52"
                   placeHolder={"Number"}
                   onTextChange={(value) => console.log(value)}
                   required
@@ -85,10 +93,15 @@ const PaymentContent = () => {
 };
 
 const BuildShippingMethod = () => {
+  const shippingMethodList: ShippingState = useAppSelector(
+    (selector) => selector.shippingMethod
+  );
+  const dispatch = useAppDispatch();
   const [selectMethod, setSelectMethod] = useState<number>();
+
   return (
     <>
-      {Array.from(Array(4)).map((_, i) => {
+      {shippingMethodList!.shippingMethods!.map((_, i) => {
         return (
           <div
             key={i}
@@ -99,19 +112,22 @@ const BuildShippingMethod = () => {
             } w-full h-14 border-2 flex flex-row px-5 items-center justify-center gap-x-2`}
             onClick={(e) => {
               e.preventDefault();
+              dispatch(selectShippingMethod(i));
               setSelectMethod(i);
             }}
           >
             <Image
               priority
-              width={50}
-              height={50}
-              className="m-auto w-12 h-12"
-              src={"/images/thailand_post.png"}
+              width={30}
+              height={30}
+              className="m-auto w-9 h-9 object-cover"
+              src={shippingMethodList!.shippingMethods![i].image}
               alt="image"
               sizes="small"
             />
-            <p className="font-semibold text-sm">+ 32 บาท</p>
+            <p className="font-semibold text-sm">
+              + {Number(shippingMethodList!.shippingMethods![i].fee)} บาท
+            </p>
           </div>
         );
       })}

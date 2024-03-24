@@ -19,6 +19,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { clearAllSelectDate } from "~/lib/features/calendarSlice";
 import TermAndConditionSheet from "./termAndConditionSheet";
+import { clearSelectShippingMethod } from "~/lib/features/shippingMethodSlice";
 
 const BottomSheet: React.FC = ({ ...props }) => {
   const [bottomSheetStatus, setBottomSheetStatus] =
@@ -37,11 +38,12 @@ const BottomSheet: React.FC = ({ ...props }) => {
   const dispatch = useAppDispatch();
   const handleOnTriggerBottomSheet = () => {
     dispatch(trigger());
-    clearSelectDate();
+    clearData();
   };
 
-  const clearSelectDate = () => {
+  const clearData = () => {
     dispatch(clearAllSelectDate());
+    dispatch(clearSelectShippingMethod());
   };
 
   const buildSheetContent = () => {
@@ -61,7 +63,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
           isDismissable={true}
           isKeyboardDismissDisabled={true}
           placement="bottom-center"
-          className="rounded-t-xl rounded-b-none mx-0 text-black"
+          className="rounded-t-xl rounded-b-none mx-0 text-black my-0"
           onClose={() => {
             handleOnTriggerBottomSheet();
             setBottomSheetStatus(BottomSheetShoppingDetailStatus.Shipping);
@@ -145,7 +147,8 @@ const BottomSheet: React.FC = ({ ...props }) => {
                   </ModalBody>
                   <ModalFooter className="px-0 py-0">
                     <BottomCheckout
-                      className="sticky bottom-0"
+                      depositFee={1200}
+                      className="sticky"
                       price={900}
                       status={bottomSheetStatus}
                       onClick={() => {

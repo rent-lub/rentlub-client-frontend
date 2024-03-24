@@ -48,18 +48,18 @@ export async function checkUserExist(id: string): Promise<{
   }
 }
 
-export async function verifyUser(id: string, payload: verifyUserPayload) {
+export async function verifyUser(payload: verifyUserPayload): Promise<boolean> {
   try {
     const response = await axios.post(
       process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/users/verify",
       payload
     );
     if (response.status === 200) {
-      return response.data;
+      return true;
     } else {
-      return null;
+      return false;
     }
   } catch (error) {
-    return null;
+    return false;
   }
 }

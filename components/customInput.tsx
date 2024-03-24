@@ -57,10 +57,28 @@ const CustomInput: React.FC<CustomInputProps> = ({
           placeholder={placeHolder ?? ""}
           {...register(name, {
             required: "This field is required",
+            pattern:
+              name == "phoneNumber"
+                ? {
+                    value: /^\d{10}$/,
+                    message: "Invalid phone number (must be 10 digits)",
+                  }
+                : name == "nationalID"
+                ? {
+                    value: /^\d{13}$/,
+                    message: "Invalid national ID (must be 13 digits)",
+                  }
+                : name == "email"
+                ? {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  }
+                : undefined,
           })}
           onChange={(value) => {
             onTextChange!(value.target.value);
           }}
+          autoComplete="off"
         />
         {error && <p className="text-red-400 text-xs pt-1">{error.message}</p>}
       </div>

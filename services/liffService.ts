@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
 
-async function initLiff() {
+export async function initLiff() {
   try {
     const LIFFID = process.env.NEXT_PUBLIC_LIFF_IF;
     await liff.init({ liffId: LIFFID! });
