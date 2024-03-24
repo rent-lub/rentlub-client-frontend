@@ -61,6 +61,8 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
           deliveryFee +
           depositFee
         ).toLocaleString();
+      } else {
+        return "0";
       }
     }
     return price.toLocaleString();
