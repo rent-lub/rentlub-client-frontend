@@ -61,41 +61,41 @@ const BottomNavMenu = () => {
     };
 
     handleRouteChange();
+  }, [pathname]);
 
-    async function fetchData() {
-      if (liffProfile.id == null) {
-        if (liff) {
-          const image = await getUserProfileImage();
-          const id = await getUserId();
-          const name = await getUserDisplayName();
-          const userToken = await getUserToken();
-          const userAccessToken = await getAccessToken();
+  useEffect(() => {
+    if (liff && liffProfile.id === null) {
+      const fetchData = async () => {
+        const image = await getUserProfileImage();
+        const id = await getUserId();
+        const name = await getUserDisplayName();
+        const userToken = await getUserToken();
+        const userAccessToken = await getAccessToken();
 
-          dispatch(
-            setLIFFProfile({
-              id: id,
-              profileURL: image,
-              userToken: userToken,
-              displayName: name,
-              accessToken: userAccessToken,
-              isVerify: null,
-            })
-          );
-          var userData = await checkUserExist(id ?? "");
-          dispatch(setIsVerify(userData?.isVerified ?? false));
-          if (!userData) {
-            await createUser({
-              name: name ?? id ?? "",
-              lineId: id ?? "",
-              type: "CUSTOMER",
-            });
-          }
+        dispatch(
+          setLIFFProfile({
+            id: id,
+            profileURL: image,
+            userToken: userToken,
+            displayName: name,
+            accessToken: userAccessToken,
+            isVerify: null,
+          })
+        );
+        var userData = await checkUserExist(id ?? "");
+        dispatch(setIsVerify(userData?.isVerified ?? false));
+        if (!userData) {
+          await createUser({
+            name: name ?? id ?? "",
+            lineId: id ?? "",
+            type: "CUSTOMER",
+          });
         }
-      }
-    }
+      };
 
-    fetchData();
-  }, [pathname, liff]);
+      fetchData();
+    }
+  }, [liff, liffProfile.id]);
 
   return (
     <>
