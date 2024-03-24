@@ -54,6 +54,8 @@ const BottomNavMenu = () => {
   const liff = useLiff();
   const dispatch = useAppDispatch();
 
+  const [avatarSrc, setAvatarSrc] = useState(liffProfile.profileURL ?? "");
+
   useEffect(() => {
     const handleRouteChange = () => {
       if (pathname === "/") setValue(0);
@@ -96,6 +98,10 @@ const BottomNavMenu = () => {
       fetchData();
     }
   }, [liff, liffProfile.id]);
+
+  useEffect(() => {
+    setAvatarSrc(liffProfile.profileURL ?? "");
+  }, [liffProfile.profileURL]);
 
   return (
     <>
@@ -141,7 +147,7 @@ const BottomNavMenu = () => {
             sx={{ fontSize: 12 }}
             icon={
               <Avatar
-                src={liffProfile.profileURL ?? ""}
+                src={avatarSrc}
                 name={liffProfile.displayName ?? ""}
                 className=" w-5 h-5"
               />
