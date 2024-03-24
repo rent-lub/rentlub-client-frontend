@@ -23,7 +23,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { setLIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
 import { checkUserExist, createUser } from "~/services/userService";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 interface LIFFProfile {
   id: string | null;
@@ -55,6 +54,8 @@ const BottomNavMenu = () => {
   const liff = useLiff();
   const dispatch = useAppDispatch();
 
+  const [avatarSrc, setAvatarSrc] = useState(liffProfile.profileURL ?? "");
+
   useEffect(() => {
     const handleRouteChange = () => {
       if (pathname === "/") setValue(0);
@@ -65,38 +66,42 @@ const BottomNavMenu = () => {
   }, [pathname]);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const image = await getUserProfileImage();
+      const id = await getUserId();
+      const name = await getUserDisplayName();
+      const userToken = await getUserToken();
+      const userAccessToken = await getAccessToken();
+
+      dispatch(
+        setLIFFProfile({
+          id: id,
+          profileURL: image,
+          userToken: userToken,
+          displayName: name,
+          accessToken: userAccessToken,
+          isVerify: null,
+        })
+      );
+      var userData = await checkUserExist(id ?? "");
+      dispatch(setIsVerify(userData?.isVerified ?? false));
+      if (!userData) {
+        await createUser({
+          name: name ?? id ?? "",
+          lineId: id ?? "",
+          type: "CUSTOMER",
+        });
+      }
+    };
+
     if (liff && liffProfile.id === null) {
-      const fetchData = async () => {
-        const image = await getUserProfileImage();
-        const id = await getUserId();
-        const name = await getUserDisplayName();
-        const userToken = await getUserToken();
-        const userAccessToken = await getAccessToken();
-
-        dispatch(
-          setLIFFProfile({
-            id: id,
-            profileURL: image,
-            userToken: userToken,
-            displayName: name,
-            accessToken: userAccessToken,
-            isVerify: null,
-          })
-        );
-        var userData = await checkUserExist(id ?? "");
-        dispatch(setIsVerify(userData?.isVerified ?? false));
-        if (!userData) {
-          await createUser({
-            name: name ?? id ?? "",
-            lineId: id ?? "",
-            type: "CUSTOMER",
-          });
-        }
-      };
-
       fetchData();
     }
   }, [liff, liffProfile.id]);
+
+  useEffect(() => {
+    setAvatarSrc(liffProfile.profileURL ?? "");
+  }, [liffProfile.profileURL]);
 
   return (
     <>
@@ -141,12 +146,10 @@ const BottomNavMenu = () => {
             label={"Me"}
             sx={{ fontSize: 12 }}
             icon={
-              <LazyLoadImage
-                src={liffProfile.profileURL ?? ""}
-                alt={liffProfile.displayName ?? ""}
-                className="w-5 h-5 rounded-full"
-                effect="blur"
-                placeholderSrc="/placeholder.png"
+              <Avatar
+                src={avatarSrc}
+                name={liffProfile.displayName ?? ""}
+                className=" w-5 h-5"
               />
             }
           />
