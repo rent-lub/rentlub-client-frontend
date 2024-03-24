@@ -37,6 +37,8 @@ const ShoppingDetailPage = () => {
             "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/sub/goods_449753_sub17.jpg?width=750",
             "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/sub/goods_449753_sub13.jpg?width=750",
           ]}
+          width={320}
+          height={320}
         />
         <div className="grid grid-cols-1 gap-y-2 divide-y  px-5 ">
           <div className="pt-3 pb-2 text-black text-lg ">

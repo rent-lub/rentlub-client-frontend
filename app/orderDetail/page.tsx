@@ -3,10 +3,11 @@ import React from 'react';
 import { useState } from "react";
 import Image from "next/image";
 import {Textarea} from "@nextui-org/input";
-import {Button, ButtonGroup} from "@nextui-org/button";
 import { CalendarBlank,Package,Truck,CheckCircle,ArrowsClockwise,Clipboard} from "@phosphor-icons/react/dist/ssr";
 import ImageCarousel from '~/components/shoppingDetail/imageCarousel';
 import Overlay from '~/components/orderDetail/overlay';
+import ReturnButton from '~/components/orderDetail/ReturnSheet';
+import ReturnSheet from '~/components/orderDetail/ReturnSheet';
 
 const OrderDetail = () => {
 
@@ -108,21 +109,17 @@ const OrderDetail = () => {
                 <div className=" rounded-xl w-full border border-slate-200 "></div>
 
                 {/* More Detail */}
-                <div className='py-3 px-5 bg-slate-200 rounded-md'>
+                <div className='py-3 px-5 bg-slate-200 rounded-md mb-3'>
                   <p className='text-base font-bold'>More Detail</p>
                   <span className='text-sm'>ไปที่หน้า </span>
                   <span className='text-sm underline underline-offset-2'>รายละเอียดสินค้า</span>
                 </div>
             </div>
-            <div className="my-5 w-full border border-slate-200 "></div>
 
             {/* return button */}
-            <div className='px-5 pb-5'>
-              <Button className='w-full bg-green text-white'>Return</Button>
+            <div className='bg-white py-5 border-t-2 border-slate-200 sticky bottom-0'>
+              <ReturnSheet/>
             </div>
-
-            {/* test overlay */}
-            <Overlay/>
         </div>
         </>
       );
