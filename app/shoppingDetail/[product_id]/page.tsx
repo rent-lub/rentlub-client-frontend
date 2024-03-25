@@ -1,9 +1,10 @@
 "use client";
 
-import { Button, Chip, Icon, IconButton } from "@mui/material";
+import { Chip } from "@nextui-org/chip";
+import { Button, Icon, IconButton } from "@mui/material";
 import { Export, Share, Snowflake } from "@phosphor-icons/react";
 import { Car, Dress, Timer } from "@phosphor-icons/react/dist/ssr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FavIcon } from "~/components/favIcon";
 import BottomCheckout from "~/components/shoppingDetail/bottomCheckout";
 import ImageCarousel from "~/components/shoppingDetail/imageCarousel";
@@ -12,13 +13,23 @@ import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailSta
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 
 import BottomSheet from "~/components/shoppingDetail/bottomSheet/bottomSheet";
-import { trigger } from "~/lib/features/bottomSheetSlice";
+import {
+  setCurrentProductBottomSheet,
+  trigger,
+} from "~/lib/features/bottomSheetSlice";
 import TermAndConditionSheet from "~/components/shoppingDetail/bottomSheet/termAndConditionSheet";
 import CustomCalendar from "~/components/customCalendar";
 import Image from "next/image";
 import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
+import { useSelector } from "react-redux";
+import { RootState } from "~/lib/store";
+import { DateTime } from "luxon";
+import { fetchSampleShop } from "~/lib/features/shopSlice";
+import { useParams } from "next/navigation";
+import { Product } from "~/types/productModel";
+import { getProductByID } from "~/services/productService";
 
-const ShoppingDetailPage = () => {
+const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const handleFavClick = () => {
     setIsFavorited(!isFavorited);
@@ -28,58 +39,74 @@ const ShoppingDetailPage = () => {
   const handleOnTriggerBottomSheet = () => {
     dispatch(trigger());
   };
+
+  const { shop, product, error, loading } = useSelector(
+    (state: RootState) => state.shop
+  );
+
+  const [currentProduct, setCurrentProduct] = useState<Product>();
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      dispatch(fetchSampleShop());
+      const productFromID = await getProductByID(params.product_id);
+      setCurrentProduct(productFromID!);
+      dispatch(setCurrentProductBottomSheet(productFromID));
+    };
+
+    if (!product) {
+      fetchProduct();
+    } else {
+      const foundProduct = product.find(
+        (item) => item._id === params.product_id
+      );
+      if (foundProduct) {
+        setCurrentProduct(foundProduct);
+        dispatch(setCurrentProductBottomSheet(foundProduct));
+      } else {
+        fetchProduct();
+      }
+    }
+  }, [dispatch, params.product_id, product]);
+
+  useEffect(() => {
+    if (currentProduct) {
+      getLeadTime();
+    }
+  }, [currentProduct]);
+
+  const getLeadTime = (): DateTime => {
+    return DateTime.now().plus({
+      days: currentProduct?.preparation.value ?? 0,
+    });
+  };
+
   return (
     <>
       <div className="bg-white h-screen min-w-full overflow-x-hidden relative pb-20">
         <ImageCarousel
-          images={[
-            "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/item/goods_12_449753.jpg?width=750",
-            "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/sub/goods_449753_sub17.jpg?width=750",
-            "https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/sub/goods_449753_sub13.jpg?width=750",
-          ]}
-          width={320}
-          height={320}
+          images={currentProduct?.images ?? []}
+          width={500}
+          height={500}
         />
         <div className="grid grid-cols-1 gap-y-2 divide-y  px-5 ">
           <div className="pt-3 pb-2 text-black text-lg ">
-            Fluffy Full-Zip Long Sleeve Jacket
-            <div className="flex justify-between pt-3">
-              <div className="flex flex-wrap gap-1 text-ellipsis max-w-[fit-content] overflow-hidden">
-                <Chip
-                  label="Jacket"
-                  icon={
-                    <CustomIcon
-                      icon={<Snowflake />}
-                      style={{ weight: "regular" }}
-                    />
-                  }
-                  sx={{
-                    backgroundColor: "black",
-                    color: "white",
-                    width: "fit-content",
-                    height: "height-content",
-                    padding: 1,
-                  }}
-                  size="small"
-                />
-                <Chip
-                  label="Jacket"
-                  icon={
-                    <CustomIcon
-                      icon={<Snowflake />}
-                      style={{ weight: "regular" }}
-                    />
-                  }
-                  sx={{
-                    backgroundColor: "black",
-                    color: "white",
-                    width: "fit-content",
-                    height: "height-content",
-                    padding: 1,
-                  }}
-                  size="small"
-                />
-              </div>
+            {currentProduct?.name}
+            <div className="flex justify-between pt-3 items-center">
+              <Chip
+                className={`${
+                  currentProduct?.stock.available != undefined &&
+                  currentProduct?.stock.available > 0
+                    ? "bg-green"
+                    : "bg-black opacity-50"
+                } text-medium text-white `}
+              >
+                {currentProduct?.stock.available != undefined &&
+                currentProduct?.stock.available > 0
+                  ? "Available"
+                  : "Unavailable"}
+              </Chip>
+
               <div>
                 <IconButton araia-aria-label="fav" onClick={handleFavClick}>
                   <FavIcon
@@ -104,7 +131,11 @@ const ShoppingDetailPage = () => {
               </div>
               <div className="col-span-4 ">
                 <p className="text-black opacity-60 text-sm">เวลาจองล่วงหน้า</p>
-                <p className="text-black ">4 Days</p>
+                <p className="text-black ">
+                  {currentProduct?.preparation.value ??
+                    shop?.setting.preparationTime}{" "}
+                  วัน
+                </p>
               </div>
             </div>
 
@@ -125,18 +156,7 @@ const ShoppingDetailPage = () => {
           <div className="pt-4">
             <p className="text-black font-semibold">More Detail</p>
             <p className="text-black">
-              Product ID 459794 Please note that this product may have different
-              product ID, even if it is the same item. FABRIC DETAILS Body:
-              Pocket Lining: 100% Polyester ( 100% Uses Recycled Polyester Fiber
-              ) WASHING INSTRUCTIONS Machine wash cold, gentle cycle, Do not Dry
-              Clean Wash dark colors separately. Use cleaning net. No optical
-              brighteners. Do not soak. Reshape while damp. Color may rub off.
-              Shedding of fluff may occur. Use a fabric brush to gently comb and
-              remove excess hairs. To prevent excess pilling, follow these
-              precautions: Avoid rubbing from bags or belts. Excessive friction
-              can exacerbate pilling. Remove pilling with a fabric shaver, or
-              carefully trim with scissors. - The images shown may include
-              colors that are not available.
+              {currentProduct?.description ?? "No description"}
             </p>
           </div>
 
@@ -149,15 +169,8 @@ const ShoppingDetailPage = () => {
               <CustomCalendar
                 reserveList={[
                   {
-                    item: "first item",
-                    startDate: "3/22/2024",
-                    endDate: "3/24/2024",
-                    label: CalendarLabelEnum.Unavailable,
-                  },
-                  {
-                    item: "second item",
-                    startDate: "3/11/2024",
-                    endDate: "3/13/2024",
+                    startDate: DateTime.now().toFormat("M/dd/yyyy"),
+                    endDate: getLeadTime().toFormat("M/dd/yyyy"),
                     label: CalendarLabelEnum.Unavailable,
                   },
                 ]}

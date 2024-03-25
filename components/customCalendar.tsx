@@ -9,12 +9,14 @@ import {
 import { CustomIcon } from "./shoppingCatIcon";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 import CalendarLabel from "./shoppingDetail/calendarLabel";
+import { useSelector } from "react-redux";
+import { RootState } from "~/lib/store";
+import { Product } from "~/types/productModel";
 
 interface ReservationItem {
   label?: CalendarLabelEnum;
   startDate: string;
   endDate: string;
-  item: string;
 }
 
 interface CalendarProps {
@@ -38,9 +40,31 @@ const CustomCalendar: React.FC<CalendarProps> = ({
   const [date, setDate] = useState<Date>(currentDate);
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<Date | null>(null);
-  const [error, setError] = useState<boolean>(false);
-
+  const [invalidSelect, setInvalidSelect] = useState<boolean>(false);
+  const { shop, product, error, loading } = useSelector(
+    (state: RootState) => state.shop
+  );
+  const openBottomSheet: { isOpen: boolean; currentProduct: Product | null } =
+    useAppSelector((selector) => selector.bottomSheet);
   const dispatch = useAppDispatch();
+
+  const getLeadTime = (): DateTime => {
+    return DateTime.now().plus({
+      days:
+        openBottomSheet.currentProduct?.preparation.value ??
+        shop?.setting.preparationTime ??
+        0,
+    });
+  };
+
+  reserveList = [
+    ...reserveList,
+    {
+      startDate: DateTime.now().toFormat("M/dd/yyyy"),
+      endDate: getLeadTime().toFormat("M/dd/yyyy"),
+      label: CalendarLabelEnum.Unavailable,
+    },
+  ];
 
   const handlSetSelectStartDate = (date: Date | null) => {
     dispatch(
@@ -95,10 +119,10 @@ const CustomCalendar: React.FC<CalendarProps> = ({
       }
 
       if (isError) {
-        setError(true);
+        setInvalidSelect(true);
         setSelectedStartDate(null);
       } else {
-        setError(false);
+        setInvalidSelect(false);
         if (!selectedStartDate) {
           setSelectedStartDate(selectedDate);
           handlSetSelectStartDate(selectedDate ?? "");

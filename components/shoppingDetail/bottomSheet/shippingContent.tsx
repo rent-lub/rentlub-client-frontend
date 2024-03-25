@@ -3,27 +3,18 @@ import CalendarLabel from "../calendarLabel";
 import { Vault } from "@phosphor-icons/react/dist/ssr";
 import CustomCalendar from "~/components/customCalendar";
 import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
+import { Product } from "~/types/productModel";
+import { useAppSelector } from "~/lib/hooks";
 
 const ShippingContent = () => {
+  const openBottomSheet: { isOpen: boolean; currentProduct: Product | null } =
+    useAppSelector((selector) => selector.bottomSheet);
   return (
     <>
       <div className="pt-4 h-full w-full flex flex-col justify-center items-center gap-y-4 divide-y divide-[#DDDDDD]">
         <div className="flex flex-col items-center ">
           <CustomCalendar
-            reserveList={[
-              {
-                item: "first item",
-                startDate: "3/22/2024",
-                endDate: "3/24/2024",
-                label: CalendarLabelEnum.Unavailable,
-              },
-              {
-                item: "second item",
-                startDate: "3/11/2024",
-                endDate: "3/13/2024",
-                label: CalendarLabelEnum.Unavailable,
-              },
-            ]}
+            reserveList={[]}
             onDateSelect={(startDate, endDate) => {}}
             showLabel
           />
@@ -36,7 +27,10 @@ const ShippingContent = () => {
                 ค่ามัดจำ
               </p>
               <p className="font-bold text-md">
-                {Number(1200).toLocaleString()} บาท
+                {Number(
+                  openBottomSheet.currentProduct?.deposit.value
+                ).toLocaleString()}{" "}
+                บาท
               </p>
             </div>
           </div>

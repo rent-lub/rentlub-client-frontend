@@ -7,16 +7,18 @@ import { Chip, IconButton } from "@mui/material";
 import { ShoppingCatEnum } from "~/types/shoppingCatEnum";
 import { CustomIcon, buildIcon } from "~/components/shoppingCatIcon";
 import { Dress } from "@phosphor-icons/react/dist/ssr";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useAppDispatch } from "~/lib/hooks";
 import { clearAllSelectDate } from "~/lib/features/calendarSlice";
+import { Product } from "~/types/productModel";
+import { Images } from "@phosphor-icons/react";
 
 interface ProductCard {
-  productCat: ShoppingCatEnum;
+  product: Product;
   onSelect?: (product: number) => void;
 }
 
-const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
+const ProductCard: React.FC<ProductCard> = ({ product, ...props }) => {
   const [isFavorited, setIsFavorited] = useState(false);
   const router = useRouter();
 
@@ -28,15 +30,16 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
   return (
     <div className="col-span-1 flex flex-col">
       <Image
-        src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/449753/item/goods_12_449753.jpg?width=750"
+        src={product.images[product.images.length - 1]}
         width={500}
         height={500}
         alt="Product"
+        priority
         className="rounded-xl object-cover h-auto aspect-square"
         onClick={(e) => {
           dispatch(clearAllSelectDate());
           e.preventDefault();
-          router.push("/shoppingDetail/");
+          router.push(`/shoppingDetail/${product._id}`);
         }}
       />
       <div className="grid grid-rows-2">
@@ -49,7 +52,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
               router.push("/shoppingDetail/");
             }}
           >
-            Fluffy Full-Zip Long Sleeve Jacket
+            {product.name}
           </p>
           <IconButton araia-aria-label="fav" onClick={handleFavClick}>
             <FavIcon
@@ -68,7 +71,7 @@ const ProductCard: React.FC<ProductCard> = ({ productCat, ...props }) => {
             router.push("/shoppingDetail/");
           }}
         >
-          ฿ {Number(900).toLocaleString()}
+          ฿ {Number(product.pricePerDay).toLocaleString()}
           <span className="inline-flex items-baseline">
             <span className="font-normal text-sm text-gray-500"> / DAY</span>
           </span>

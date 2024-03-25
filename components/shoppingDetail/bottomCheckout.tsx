@@ -9,6 +9,7 @@ import { BottomSheetShoppingDetailStatus } from "~/types/bottomShoppingDetailSta
 import { DateTime } from "luxon";
 import { setSelectStartDate } from "~/lib/features/calendarSlice";
 import { ShippingState } from "~/lib/features/shippingMethodSlice";
+import { Product } from "~/types/productModel";
 
 interface BottomCheckOutProps {
   price: number;
@@ -26,9 +27,8 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
   onClick,
   ...props
 }) => {
-  const openBottomSheet: boolean = useAppSelector(
-    (selector) => selector.bottomSheet
-  );
+  const openBottomSheet: { isOpen: boolean; currentProduct: Product | null } =
+    useAppSelector((selector) => selector.bottomSheet);
 
   const selectDateFromCalendar: {
     selectStartDate: Date | null;
@@ -48,7 +48,7 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
         selectDateFromCalendar.selectEndDate != null
       ) {
         return (
-          price *
+          openBottomSheet.currentProduct?.pricePerDay! *
             (Math.abs(
               DateTime.fromJSDate(selectDateFromCalendar.selectStartDate)
                 .diff(
@@ -58,14 +58,13 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
                 .get("days")
             ) +
               1) +
-          deliveryFee +
-          depositFee
+          openBottomSheet.currentProduct?.deposit.value!
         ).toLocaleString();
       } else {
         return "0";
       }
     }
-    return price.toLocaleString();
+    return openBottomSheet.currentProduct?.pricePerDay.toLocaleString() ?? "0";
   };
 
   return (

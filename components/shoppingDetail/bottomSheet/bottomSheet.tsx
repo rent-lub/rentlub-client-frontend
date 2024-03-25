@@ -20,15 +20,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import { clearAllSelectDate } from "~/lib/features/calendarSlice";
 import TermAndConditionSheet from "./termAndConditionSheet";
 import { clearSelectShippingMethod } from "~/lib/features/shippingMethodSlice";
+import { Product } from "~/types/productModel";
 
 const BottomSheet: React.FC = ({ ...props }) => {
   const [bottomSheetStatus, setBottomSheetStatus] =
     useState<BottomSheetShoppingDetailStatus>(
       BottomSheetShoppingDetailStatus.Shipping
     );
-  const openBottomSheet: boolean = useAppSelector(
-    (selector) => selector.bottomSheet
-  );
+  const openBottomSheet: { isOpen: boolean; currentProduct: Product | null } =
+    useAppSelector((selector) => selector.bottomSheet);
 
   const selectDateFromCalendar: {
     selectStartDate: Date | null;
@@ -59,7 +59,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
     <>
       <div>
         <Modal
-          isOpen={openBottomSheet}
+          isOpen={openBottomSheet.isOpen}
           isDismissable={true}
           isKeyboardDismissDisabled={true}
           placement="bottom-center"
@@ -84,11 +84,13 @@ const BottomSheet: React.FC = ({ ...props }) => {
                       <div className="flex flex-row justify-between pt-2">
                         <div className="flex-grow">
                           <p className="line-clamp-2">
-                            Fluffy Full-Zip Long Sleeve Jacket
+                            {openBottomSheet.currentProduct?.name ?? ""}
                           </p>
                         </div>
                         <div className="flex-col w-36 pl-12">
-                          <p className="text-xl font-bold">900</p>
+                          <p className="text-xl font-bold">
+                            {openBottomSheet.currentProduct?.pricePerDay ?? ""}
+                          </p>
                           <p className="">บาทต่อวัน</p>
                         </div>
                       </div>
@@ -157,7 +159,7 @@ const BottomSheet: React.FC = ({ ...props }) => {
                           BottomSheetShoppingDetailStatus.Shipping
                         ) {
                           setBottomSheetStatus(
-                            BottomSheetShoppingDetailStatus.Payment
+                            BottomSheetShoppingDetailStatus.TermNCondition
                           );
                         }
                         if (

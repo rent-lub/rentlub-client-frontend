@@ -12,7 +12,12 @@ interface ImageCarouselProps {
   height: number;
 }
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, width, height, ...props }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({
+  images,
+  width,
+  height,
+  ...props
+}) => {
   const [currentImage, setCurrentImage] = useState<number>(0);
   var settings = {
     infinite: true,
@@ -26,7 +31,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, width, height, ..
       <div className="relative">
         <Slider {...settings} adaptiveHeight={false} arrows>
           {images.map((item, index) => (
-            <div key={item[index]} >
+            <div key={item[index]}>
               <Image
                 priority
                 width={width}

@@ -3,8 +3,9 @@ import postsReducer from "./features/postsSlice";
 import searchDateReducer from "./features/searchDateSlice";
 import bottomSheetReducer from "./features/bottomSheetSlice";
 import calendarReducer from "./features/calendarSlice";
-import LIFFProfileSlice from "./features/LIFFProfileSlice";
-import shippingMethodSlice from "./features/shippingMethodSlice";
+import LIFFProfileReducer from "./features/LIFFProfileSlice";
+import shippingMethodReducer from "./features/shippingMethodSlice";
+import shopReducer from "./features/shopSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -13,8 +14,9 @@ export const makeStore = () => {
       searchDate: searchDateReducer,
       bottomSheet: bottomSheetReducer,
       customCalendar: calendarReducer,
-      LIFFProfile: LIFFProfileSlice,
-      shippingMethod: shippingMethodSlice,
+      LIFFProfile: LIFFProfileReducer,
+      shippingMethod: shippingMethodReducer,
+      shop: shopReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
