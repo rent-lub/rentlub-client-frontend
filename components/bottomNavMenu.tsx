@@ -99,7 +99,7 @@ const BottomNavMenu = () => {
     if (liff && liffProfile.id === null) {
       fetchData();
     }
-  }, [liff, liffProfile.id]);
+  }, [liff, liffProfile.id, dispatch]);
 
   useEffect(() => {
     setAvatarSrc(liffProfile.profileURL ?? "");
@@ -110,6 +110,7 @@ const BottomNavMenu = () => {
       <Avatar src={src || ""} name={name} className={className} />
     )
   );
+  MemoizedAvatar.displayName = "MemoizedAvatar";
 
   return (
     <>
