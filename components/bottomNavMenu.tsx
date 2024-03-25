@@ -21,15 +21,17 @@ import {
 } from "~/services/liffService";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
-import { setLIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
+import {
+  setLIFFProfile,
+  setIsVerify,
+  LIFFProfile,
+} from "~/lib/features/LIFFProfileSlice";
 import { checkUserExist, createUser } from "~/services/userService";
 
-interface LIFFProfile {
-  id: string | null;
-  profileURL: string | null;
-  userToken: string | null;
-  displayName: string | null;
-  accessToken: string | null;
+interface MemoizedAvatarProps {
+  src: string | null;
+  name: string;
+  className: string;
 }
 
 const BottomNavMenu = () => {
@@ -103,6 +105,12 @@ const BottomNavMenu = () => {
     setAvatarSrc(liffProfile.profileURL ?? "");
   }, [liffProfile.profileURL]);
 
+  const MemoizedAvatar = React.memo<MemoizedAvatarProps>(
+    ({ src, name, className, ...props }) => (
+      <Avatar src={src || ""} name={name} className={className} />
+    )
+  );
+
   return (
     <>
       <div className="w-full bg-white  drop-shadow-md h-16 text-black flex justify-center items-center pt-2 pb-6">
@@ -146,7 +154,7 @@ const BottomNavMenu = () => {
             label={"Me"}
             sx={{ fontSize: 12 }}
             icon={
-              <Avatar
+              <MemoizedAvatar
                 src={avatarSrc}
                 name={liffProfile.displayName ?? ""}
                 className=" w-5 h-5"
