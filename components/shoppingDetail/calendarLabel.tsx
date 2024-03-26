@@ -3,10 +3,13 @@ import { CalendarLabelEnum } from "~/types/calendarLabelEnum";
 
 const CalendarLabel = () => {
   return (
-    <div className="flex flex-row gap-x-5">
-      {Object.values(CalendarLabelEnum).map((e) => {
-        return buildLabel(e);
-      })}
+    <div className="flex flex-col items-center">
+      <div className="flex flex-row gap-x-5">
+        {Object.values(CalendarLabelEnum).map((e) => {
+          return buildLabel(e);
+        })}
+      </div>
+      <div className="pt-4 text-xs text-black">ระยะเวลาการจอง 2-14 วัน</div>
     </div>
   );
 };
