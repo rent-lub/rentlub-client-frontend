@@ -83,7 +83,7 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
 
   return (
     <>
-      <div className="bg-white h-screen min-w-full overflow-x-hidden relative pb-20">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative pb-20">
         <ImageCarousel
           images={currentProduct?.images ?? []}
           width={500}
@@ -196,7 +196,7 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
 
           <div className="flex flex-col pt-4">
             <p className="text-black font-semibold text-lg">Term & condition</p>
-            <p className="text-black">
+            <p className="font-medium text-md leading-5 text-black">
               ข้อกำหนดในการให้บริการ เป็น ข้อตกลงทางกฎหมาย ระหว่าง ผู้ให้บริการ
               กับบุคคลที่ต้องการใช้บริการนั้น
               บุคคลนั้นต้องตกลงที่จะปฏิบัติตามข้อกำหนดในการให้บริการเพื่อใช้บริการที่นำเสนอ
@@ -204,11 +204,30 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
               โดยเฉพาะอย่างยิ่งเกี่ยวกับการใช้เว็บไซต์ ภาษาที่คลุมเครือ
             </p>
             <div className="pt-2 pl-12 text-black">
-              <ul className="list-disc">
-                <li>ค่ามัดจำ 500 บาท</li>
+              <ul className="list-disc text-md ">
+                <li>ค่ามัดจำ {currentProduct?.deposit.value} บาท</li>
               </ul>
-              <ul className="list-disc">
-                <li>ค่าของเสียหาย 12,000 บาท</li>
+              <ul className="list-disc text-md ">
+                <li>ค่าของเสียหาย 2,000 บาท</li>
+              </ul>
+              <ul className="list-disc text-md ">
+                <li>
+                  เมื่อทางร้านได้รับชุดและตรวจสอบเรียบร้อยแล้ว
+                  ทางร้านจะโอนเงินมัดจำ (ยึดตามใบจองสินค้า) คืนให้ลูกค้าภายใน
+                  1-2 วัน หากมีรอยหรือตำหนิ อันเกิดจากการใช้งานของลูกค้า
+                  ตามรายละเอียดข้อ 3 ที่แจ้งไว้ ทางร้านจะแจ้งยอดปรับแก่ลูกค้า
+                  เพื่อให้ลูกค้ารับทราบก่อน
+                  หลังจากนั้นทางร้านจึงจะโอนคืนเงินมัดจำที่เหลือให้ลูกค้า
+                </li>
+              </ul>
+              <ul className="list-disc text-md ">
+                <li>
+                  ลูกค้าสามารถส่งคืนได้จากวันที่แจ้งกลับได้ไม่เกิน 1 วัน
+                  ซึ่งสามารถส่งคืนได้ทางหน้าร้าน
+                  หรือในกรณีไม่สามารถมาคืนได้ด้วยตนเอง
+                  สามารถส่งคืนทางผู้ให้บริการขนส่ง
+                  โดยยึดจากวันที่ประทับตราไปรษณีย์
+                </li>
               </ul>
             </div>
           </div>

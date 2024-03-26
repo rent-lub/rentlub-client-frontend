@@ -11,11 +11,15 @@ import { Button } from "@nextui-org/button";
 import { useAppSelector } from "~/lib/hooks";
 import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { useRouter } from "next/navigation";
+import { Product } from "~/types/productModel";
 
 const TermAndConditionSheet = () => {
   const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
+
+  const openBottomSheet: { isOpen: boolean; currentProduct: Product | null } =
+    useAppSelector((selector) => selector.bottomSheet);
 
   const router = useRouter();
   const [isAgree, setIsAgree] = useState<boolean>(false);
@@ -30,31 +34,43 @@ const TermAndConditionSheet = () => {
                 Term & Condition
               </p>
               <div className="pt-4 flex flex-col gap-y-2">
-                <p className="font-medium text-sm leading-5">
-                  PLEASE READ THESE TERMS OF SERVICE CAREFULLY AS THEY CONTAIN
-                  IMPORTANT INFORMATION REGARDING YOUR LEGAL RIGHTS, REMEDIES
-                  AND OBLIGATIONS. THESE INCLUDE VARIOUS LIMITATIONS AND
-                  EXCLUSIONS, A CLAUSE THAT GOVERNS THE JURISDICTION AND VENUE
-                  OF DISPUTES, AND OBLIGATIONS TO COMPLY WITH APPLICABLE LAWS
-                  AND REGULATIONS.
+                <p className="font-medium text-md leading-5 text-black">
+                  ข้อกำหนดในการให้บริการ เป็น ข้อตกลงทางกฎหมาย ระหว่าง
+                  ผู้ให้บริการ กับบุคคลที่ต้องการใช้บริการนั้น
+                  บุคคลนั้นต้องตกลงที่จะปฏิบัติตามข้อกำหนดในการให้บริการเพื่อใช้บริการที่นำเสนอ
+                  เงื่อนไขการบริการยังสามารถเป็นเพียง ข้อจำกัดความรับผิดชอบ
+                  โดยเฉพาะอย่างยิ่งเกี่ยวกับการใช้เว็บไซต์ ภาษาที่คลุมเครือ
                 </p>
-                <p className="font-medium text-sm leading-5">
-                  1. In order to secure the reservation, the tenant must
-                  complete a deposit of 50% of the monthly rental rate at the
-                  time of room reservation. The balance amount can be paid by
-                  Thai Baht cash or credit card VISA /MASTER upon arrival.
-                  Processing fee is charged per transaction. All rates are
-                  calculated in Thai Baht.
-                </p>
-                <p className="font-medium text-sm leading-5">
-                  2. Rental for the Holidays will charge service fee to the
-                  tenant in consideration for the use of platform
-                </p>
-                <p className="font-medium text-sm leading-5">
-                  3. Service fee range between 3% -10% of total rental amount,
-                  including applicable Taxes. Rental for the Holidays reserve
-                  the rights to change a service fee at any time.
-                </p>
+                <div className="pt-2 pl-12 text-black">
+                  <ul className="list-disc text-md ">
+                    <li>
+                      ค่ามัดจำ {openBottomSheet.currentProduct?.deposit.value}{" "}
+                      บาท
+                    </li>
+                  </ul>
+                  <ul className="list-disc text-md ">
+                    <li>ค่าของเสียหาย 2,000 บาท</li>
+                  </ul>
+                  <ul className="list-disc text-md ">
+                    <li>
+                      เมื่อทางร้านได้รับชุดและตรวจสอบเรียบร้อยแล้ว
+                      ทางร้านจะโอนเงินมัดจำ (ยึดตามใบจองสินค้า)
+                      คืนให้ลูกค้าภายใน 1-2 วัน หากมีรอยหรือตำหนิ
+                      อันเกิดจากการใช้งานของลูกค้า ตามรายละเอียดข้อ 3 ที่แจ้งไว้
+                      ทางร้านจะแจ้งยอดปรับแก่ลูกค้า เพื่อให้ลูกค้ารับทราบก่อน
+                      หลังจากนั้นทางร้านจึงจะโอนคืนเงินมัดจำที่เหลือให้ลูกค้า
+                    </li>
+                  </ul>
+                  <ul className="list-disc text-md ">
+                    <li>
+                      ลูกค้าสามารถส่งคืนได้จากวันที่แจ้งกลับได้ไม่เกิน 1 วัน
+                      ซึ่งสามารถส่งคืนได้ทางหน้าร้าน
+                      หรือในกรณีไม่สามารถมาคืนได้ด้วยตนเอง
+                      สามารถส่งคืนทางผู้ให้บริการขนส่ง
+                      โดยยึดจากวันที่ประทับตราไปรษณีย์
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </ModalBody>

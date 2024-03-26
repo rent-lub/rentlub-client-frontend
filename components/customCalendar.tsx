@@ -127,8 +127,22 @@ const CustomCalendar: React.FC<CalendarProps> = ({
           setSelectedStartDate(selectedDate);
           handlSetSelectStartDate(selectedDate ?? "");
         } else if (!selectedEndDate && selectedDate > selectedStartDate) {
-          handlSetSelectEndDate(selectedDate ?? "");
-          setSelectedEndDate(selectedDate);
+          var startDate = DateTime.fromJSDate(selectedStartDate);
+          var endDate = DateTime.fromJSDate(selectedDate);
+          var diffDate = endDate
+            .diff(startDate, ["years", "months", "days", "hours"])
+            .toObject().days;
+          diffDate! + 1;
+          handlSetSelectEndDate(
+            diffDate! > 13
+              ? startDate.plus({ days: 13 }).toJSDate()
+              : selectedDate ?? ""
+          );
+          setSelectedEndDate(
+            diffDate! > 13
+              ? startDate.plus({ days: 13 }).toJSDate()
+              : selectedDate ?? ""
+          );
         } else {
           setSelectedStartDate(selectedDate);
           handlSetSelectStartDate(selectedDate ?? "");

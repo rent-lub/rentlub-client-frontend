@@ -21,6 +21,7 @@ import { clearAllSelectDate } from "~/lib/features/calendarSlice";
 import TermAndConditionSheet from "./termAndConditionSheet";
 import { clearSelectShippingMethod } from "~/lib/features/shippingMethodSlice";
 import { Product } from "~/types/productModel";
+import { DateTime } from "luxon";
 
 const BottomSheet: React.FC = ({ ...props }) => {
   const [bottomSheetStatus, setBottomSheetStatus] =
@@ -158,9 +159,31 @@ const BottomSheet: React.FC = ({ ...props }) => {
                           bottomSheetStatus ==
                           BottomSheetShoppingDetailStatus.Shipping
                         ) {
-                          setBottomSheetStatus(
-                            BottomSheetShoppingDetailStatus.TermNCondition
+                          var startDate = DateTime.fromJSDate(
+                            selectDateFromCalendar.selectStartDate!
                           );
+                          var endDate = DateTime.fromJSDate(
+                            selectDateFromCalendar.selectEndDate!
+                          );
+                          var diffDate = endDate
+                            .diff(startDate, [
+                              "years",
+                              "months",
+                              "days",
+                              "hours",
+                            ])
+                            .toObject().days;
+                          diffDate! + 1;
+                          if (
+                            selectDateFromCalendar.selectStartDate != null &&
+                            selectDateFromCalendar.selectEndDate != null &&
+                            diffDate! <= 13 &&
+                            diffDate! >= 1
+                          ) {
+                            setBottomSheetStatus(
+                              BottomSheetShoppingDetailStatus.TermNCondition
+                            );
+                          }
                         }
                         if (
                           bottomSheetStatus ==
