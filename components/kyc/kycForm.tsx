@@ -17,8 +17,8 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { verifyUser, verifyUserPayload } from "~/services/userService";
-import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
-import { useAppSelector } from "~/lib/hooks";
+import { LIFFProfile, setIsVerify } from "~/lib/features/LIFFProfileSlice";
+import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { initLiff, useLiff } from "~/services/liffService";
 import { useRouter } from "next/navigation";
 import {
@@ -46,16 +46,7 @@ const KYCForm = () => {
   const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
-  // useEffect(() => {
-  //   async function checkUser() {
-  //     console.log("check");
-  //     if (liffProfile.id == null) {
-  //       await liff?.login();
-  //     }
-  //   }
-
-  //   checkUser();
-  // });
+  const dispatch = useAppDispatch();
 
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -84,9 +75,9 @@ const KYCForm = () => {
       dateOfBirth: convertDateFormat(data["birthDate"]),
     };
     var result = await verifyUser(payload);
-
     if (result == true) {
-      router.push("/");
+      dispatch(setIsVerify(true));
+      router.back();
     } else {
       methods.reset();
       onOpen();
