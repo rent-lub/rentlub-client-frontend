@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCard> = ({ product, ...props }) => {
   return (
     <div className="col-span-1 flex flex-col">
       <Image
-        src={product.images[product.images.length - 1]}
+        src={product.images[0]}
         width={500}
         height={500}
         alt="Product"

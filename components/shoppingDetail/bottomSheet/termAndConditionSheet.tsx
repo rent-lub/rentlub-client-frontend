@@ -113,11 +113,13 @@ const TermAndConditionSheet = () => {
                   isDisabled={!isAgree}
                   className="font-bold w-full h-12 rounded-xl text-md bg-[#40C090] text-white"
                   onClick={() => {
-                    isAgree ? handleOnCreateRenting() : () => {};
-                    // ? liffProfile.isVerify
-                    //   ? () => {}
-                    //   : router.push("/kyc")
-                    // : () => {};
+                    isAgree
+                      ? liffProfile.isVerify
+                        ? () => {
+                            handleOnCreateRenting();
+                          }
+                        : router.push("/kyc")
+                      : () => {};
                   }}
                 >
                   Continue
