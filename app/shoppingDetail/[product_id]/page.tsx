@@ -85,7 +85,11 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
     <>
       <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative pb-20">
         <ImageCarousel
-          images={currentProduct?.images ?? []}
+          images={
+            currentProduct?.images ?? [
+              "https://media.istockphoto.com/id/1367855191/fr/vectoriel/galerie-dimages-ic%C3%B4ne-solide.jpg?s=612x612&w=0&k=20&c=6YcYJhK-H6i2wto10SJvSa-Y06TvzpM6aVOvBgUSWdo=",
+            ]
+          }
           width={500}
           height={500}
         />
