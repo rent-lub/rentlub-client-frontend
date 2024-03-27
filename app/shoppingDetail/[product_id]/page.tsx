@@ -83,7 +83,7 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
 
   return (
     <>
-      <div className="bg-white h-screen min-w-full overflow-auto relative pb-20">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative pb-20">
         <ImageCarousel
           images={
             currentProduct?.images ?? [
