@@ -95,13 +95,13 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
             <div className="flex justify-between pt-3 items-center">
               <Chip
                 className={`${
-                  currentProduct?.stock.available != undefined &&
+                  currentProduct?.stock != null &&
                   currentProduct?.stock.available > 0
                     ? "bg-green"
                     : "bg-black opacity-50"
                 } text-medium text-white `}
               >
-                {currentProduct?.stock.available != undefined &&
+                {currentProduct?.stock != null &&
                 currentProduct?.stock.available > 0
                   ? "Available"
                   : "Unavailable"}
@@ -167,13 +167,7 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
             </div>
             <div className="px-6">
               <CustomCalendar
-                reserveList={[
-                  {
-                    startDate: DateTime.now().toFormat("M/dd/yyyy"),
-                    endDate: getLeadTime().toFormat("M/dd/yyyy"),
-                    label: CalendarLabelEnum.Unavailable,
-                  },
-                ]}
+                reserveList={[]}
                 onDateSelect={(date) => {}}
                 disable
                 showLabel
