@@ -110,11 +110,10 @@ const BottomCheckout: React.FC<BottomCheckOutProps> = ({
           <Button
             className="font-bold w-full h-10 rounded-xl text-md bg-[#40C090] text-white"
             onClick={onClick}
-            // isDisabled={
-            //   openBottomSheet.currentProduct?.stock == null ||
-            //   (openBottomSheet.currentProduct?.stock != null &&
-            //     openBottomSheet.currentProduct?.stock.available <= 0)
-            // }
+            isDisabled={
+              openBottomSheet.currentProduct != null &&
+              openBottomSheet.currentProduct.stock <= 0
+            }
           >
             {status}
           </Button>
