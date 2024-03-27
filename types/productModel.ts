@@ -1,5 +1,5 @@
 export interface Product {
-  stock: Stock;
+  stock: number;
   deposit: Deposit;
   preparation: Preparation;
   _id: string;

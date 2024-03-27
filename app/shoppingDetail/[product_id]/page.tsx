@@ -99,14 +99,12 @@ const ShoppingDetailPage = ({ params }: { params: { product_id: string } }) => {
             <div className="flex justify-between pt-3 items-center">
               <Chip
                 className={`${
-                  currentProduct?.stock != null &&
-                  currentProduct?.stock.available > 0
+                  currentProduct?.stock != null && currentProduct?.stock! > 0
                     ? "bg-green"
                     : "bg-black opacity-50"
                 } text-medium text-white `}
               >
-                {currentProduct?.stock != null &&
-                currentProduct?.stock.available > 0
+                {currentProduct?.stock != null && currentProduct?.stock! > 0
                   ? "Available"
                   : "Unavailable"}
               </Chip>
