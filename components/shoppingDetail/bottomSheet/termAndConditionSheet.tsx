@@ -44,7 +44,7 @@ const TermAndConditionSheet = () => {
     };
     var result = await createRenting(rentingPayload);
     if (result?.checkoutLink != null) {
-      window.open(result?.checkoutLink, "_blank");
+      window.open(result?.checkoutLink, "_self");
     }
   };
 
