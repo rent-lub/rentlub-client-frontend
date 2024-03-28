@@ -36,7 +36,7 @@ const lineSeed = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "RentLub",
+  title: "Tang Wang Jeng",
 };
 
 export default function RootLayout({

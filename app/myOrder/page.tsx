@@ -1,14 +1,36 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Deliver from "~/components/myOrder/Deliver";
 import { Tabs, Tab } from "@nextui-org/tabs";
 import BottomNavMenu from "~/components/bottomNavMenu";
 import Return from "~/components/myOrder/Return";
 import History from "~/components/myOrder/History";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "~/lib/store";
+import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
+import { useAppSelector } from "~/lib/hooks";
+import { getAllMyOrder } from "~/services/rentService";
+import { setAllMyOrder } from "~/lib/features/myOrderSlice";
 
 const MyOrder = () => {
   const [selected, setSelected] = useState("deliver");
+
+  const dispatch = useDispatch<AppDispatch>();
+  const liffProfile: LIFFProfile = useAppSelector(
+    (selector) => selector.LIFFProfile
+  );
+
+  const allOrder = useAppSelector((selector) => selector.myOrder);
+
+  useEffect(() => {
+    const fetchMyOrder = async () => {
+      const result = await getAllMyOrder("Ud46915db52ea9075f81e214910a38e01");
+      dispatch(setAllMyOrder(result ?? []));
+    };
+
+    fetchMyOrder();
+  }, [dispatch]);
 
   return (
     <>

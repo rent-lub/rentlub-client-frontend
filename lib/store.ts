@@ -6,6 +6,7 @@ import calendarReducer from "./features/calendarSlice";
 import LIFFProfileReducer from "./features/LIFFProfileSlice";
 import shippingMethodReducer from "./features/shippingMethodSlice";
 import shopReducer from "./features/shopSlice";
+import MyOrderReducer from "./features/myOrderSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -17,6 +18,7 @@ export const makeStore = () => {
       LIFFProfile: LIFFProfileReducer,
       shippingMethod: shippingMethodReducer,
       shop: shopReducer,
+      myOrder: MyOrderReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
