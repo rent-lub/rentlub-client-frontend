@@ -3,6 +3,8 @@
 import { CalendarX, Flask } from "@phosphor-icons/react/dist/ssr";
 import { useEffect } from "react";
 import { CustomIcon } from "~/components/shoppingCatIcon";
+import Image from "next/image";
+
 
 export default function Error({
   error,
@@ -16,7 +18,7 @@ export default function Error({
   }, [error]);
   return (
     <div className="h-screen min-w-full bg-white flex flex-col items-center justify-center font-medium">
-      <CustomIcon icon={<CalendarX size={62} color="black" />} />
+      <Image src="/Noconnection.svg" alt="" width={200} height={200}/>
       <span className="text-lg text-black pt-3">
         Sorry, something went wrong.
       </span>

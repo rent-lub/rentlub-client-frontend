@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Deliver from "~/components/myOrder/Deliver";
+import Shipping from "~/components/myOrder/Shipping";
 import { Tabs, Tab } from "@nextui-org/tabs";
 import BottomNavMenu from "~/components/bottomNavMenu";
 import Return from "~/components/myOrder/Return";
@@ -12,7 +12,10 @@ import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { useAppSelector } from "~/lib/hooks";
 import { getAllMyOrder } from "~/services/rentService";
 import { setAllMyOrder } from "~/lib/features/myOrderSlice";
-import Waiting from "~/components/myOrder/Waiting";
+import Due from "~/components/myOrder/Due";
+import Prepare from "~/components/myOrder/Prepare";
+import Delivered from "~/components/myOrder/Delivered";
+import Checking from "~/components/myOrder/Checking";
 
 const MyOrder = ({ params }: { params: { tab_index: string } }) => {
   const [selected, setSelected] = useState("deliver");
@@ -26,7 +29,8 @@ const MyOrder = ({ params }: { params: { tab_index: string } }) => {
 
   useEffect(() => {
     const fetchMyOrder = async () => {
-      const result = await getAllMyOrder("Udf51e744c9b01d4d97490ac292333683");
+      const result = await getAllMyOrder("U8671829b5de919d3498935d76132405d");
+      console.log(result)
       dispatch(setAllMyOrder(result ?? []));
     };
 
@@ -46,46 +50,46 @@ const MyOrder = ({ params }: { params: { tab_index: string } }) => {
             aria-label="Tabs variants"
           >
             <Tab
-              key="waiting"
-              title="Waiting"
-              className="flex flex-col text-black"
-            >
-              <Waiting />
-            </Tab>
-            <Tab
               key="prepare"
               title="Prepare"
               className="flex flex-col text-black"
             >
-              <Deliver />
+              <Prepare />
             </Tab>
             <Tab
               key="shipping"
               title="Shipping"
               className="flex flex-col text-black"
             >
-              <Return />
+              <Shipping />
             </Tab>
             <Tab
               key="delivered"
               title="Delivered"
               className="flex flex-col text-black"
             >
-              <Deliver />
+              <Delivered />
             </Tab>
             <Tab
-              key="retured"
-              title="Retured"
+              key="due"
+              title="Due"
               className="flex flex-col text-black"
             >
-              <Deliver />
+              <Due />
+            </Tab>
+            <Tab
+              key="returned"
+              title="Returned"
+              className="flex flex-col text-black"
+            >
+              <Return />
             </Tab>
             <Tab
               key="checking"
               title="Checking"
               className="flex flex-col text-black"
             >
-              <Deliver />
+              <Checking />
             </Tab>
             <Tab
               key="history"
