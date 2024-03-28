@@ -27,21 +27,19 @@ const Deliver = ({}) => {
 
         <div className="mb-2 rounded-xl w-full border border-slate-200 "></div>
         <p className="mb-2">สินค้ากำลังส่ง</p>
-        <p className="text-slate-400 text-sm">
-          {myOrder.allOrder?.length > 0 ? (
-            myOrder.allOrder
-              .filter((item) => item.renting.status === RentingStatus.SHIPPING)
-              .map((item) => (
-                <React.Fragment key={item.renting._id}>
-                  <a href="/orderDetail/">
-                    <MyOrderCard rentItem={item} />
-                  </a>
-                </React.Fragment>
-              ))
-          ) : (
-            <div>ไม่พบสินค้าที่กำลังจัดส่ง</div>
-          )}
-        </p>
+        {myOrder.allOrder?.length > 0 ? (
+          myOrder.allOrder
+            .filter((item) => item.renting.status === RentingStatus.SHIPPING)
+            .map((item) => (
+              <React.Fragment key={item.renting._id}>
+                <a href="/orderDetail/">
+                  <MyOrderCard rentItem={item} />
+                </a>
+              </React.Fragment>
+            ))
+        ) : (
+          <p className="text-slate-400 text-sm">ไม่พบสินค้าที่กำลังจัดส่ง</p>
+        )}
       </div>
     </>
   );

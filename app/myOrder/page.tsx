@@ -21,15 +21,18 @@ const MyOrder = () => {
     (selector) => selector.LIFFProfile
   );
 
-
   useEffect(() => {
     const fetchMyOrder = async () => {
-      const result = await getAllMyOrder(liffProfile.id ?? "");
-      dispatch(setAllMyOrder(result ?? []));
+      if (liffProfile.id) {
+        const result = await getAllMyOrder(liffProfile.id);
+        dispatch(setAllMyOrder(result ?? []));
+      }
     };
 
-    fetchMyOrder();
-  }, [dispatch]);
+    if (liffProfile.id) {
+      fetchMyOrder();
+    }
+  }, [dispatch, liffProfile.id]);
 
   return (
     <>
