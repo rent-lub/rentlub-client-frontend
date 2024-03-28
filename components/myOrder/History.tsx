@@ -23,9 +23,9 @@ const History = ({}) => {
                       var index = myOrder.allOrder.indexOf(item);
                       rounter.push(`/orderDetail/${index}`);
                     }}
-                  ></div>
-                  <a href="/orderDetail/">
-                  </a>
+                  >
+                    <MyOrderCard rentItem={item} />
+                  </div>
                 </React.Fragment>
               ))
           :  (

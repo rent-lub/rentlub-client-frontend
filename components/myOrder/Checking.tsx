@@ -24,9 +24,9 @@ const Checking = ({}) => {
                       var index = myOrder.allOrder.indexOf(item);
                       rounter.push(`/orderDetail/${index}`);
                     }}
-                  ></div>
-                  <a href="/orderDetail/">
-                  </a>
+                  >
+                    <MyOrderCard rentItem={item} />
+                  </div>
                 </React.Fragment>
               ))
           : (<div className="text-slate-400 text-sm">ไม่พบสินค้าที่อยู่ระหว่างการยืนยันจากร้านค้า</div>)}
