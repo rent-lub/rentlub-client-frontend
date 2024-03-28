@@ -50,8 +50,17 @@ const Due = () => {
               </React.Fragment>
             ))
         ) : (
-          <div className="text-slate-400 text-sm">
-            ไม่พบสินค้าที่ครบกำหนดคืน
+          <div className="flex flex-col items-center gap-2 pt-20">
+            <Image
+              src="/checking.svg"
+              alt=""
+              width={175}
+              height={175}
+              className="ml-2 opacity-75"
+            />
+            <div className="text-slate-400 text-sm">
+              ไม่พบสินค้าที่อยู่ระหว่างการยืนยันจากร้านค้า
+            </div>
           </div>
         )}
       </div>
