@@ -82,7 +82,7 @@ const KYCForm: React.FC<KYFProps> = ({ checkoutLink, ...props }) => {
     if (result == true) {
       dispatch(setIsVerify(true));
       router.push("/myOrder/");
-      window.open(result?.checkoutLink, "_self");
+      window.open(checkoutLink, "_self");
     } else {
       methods.reset();
       onOpen();

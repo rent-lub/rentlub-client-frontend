@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import KYCForm from "~/components/kyc/kycForm";
 import { Avatar } from "@nextui-org/avatar";
 import {
@@ -13,12 +13,16 @@ import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { Button, ButtonGroup } from "@nextui-org/button";
 import { useSearchParams } from "next/navigation";
 
+const KYCCheckoutLink = () => {
+  const searchParams = useSearchParams();
+  const checkoutLink = searchParams.get("url");
+
+  return <KYCForm checkoutLink={checkoutLink ?? ""} />;
+};
 const KYC = () => {
   const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
-  const searchParams = useSearchParams();
-  const checkoutLink = searchParams.get("url");
 
   const dispatch = useAppDispatch();
 
@@ -38,7 +42,9 @@ const KYC = () => {
           </p>
         </div>
         <div className="pt-6 px-8 w-full">
-          <KYCForm checkoutLink={checkoutLink ?? ""} />
+          <Suspense>
+            <KYCCheckoutLink />
+          </Suspense>
         </div>
       </div>
     </>
