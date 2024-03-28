@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Product } from "~/types/productModel";
 import { getProductByID } from "./productService";
-import { RentingStatus } from "~/types/rentineEnum";
+import { RentingStatus } from "~/types/rentingEnum";
 
 export interface CreateRentingPayload {
   userLineId: string;
