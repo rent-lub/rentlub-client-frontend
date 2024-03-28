@@ -22,6 +22,9 @@ export interface Renting {
   createdAt: string;
   updatedAt: string;
   lineOrderId: string;
+  verify: {
+    images: string[];
+  };
 }
 
 export const createRenting = async (
@@ -59,6 +62,7 @@ export const getAllMyOrder = async (
           }
         })
       );
+      console.log(rentProductList);
       return rentProductList;
     } else {
       return null;
