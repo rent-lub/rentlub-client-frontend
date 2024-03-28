@@ -25,18 +25,15 @@ const MyOrder = ({ params }: { params: { tab_index: string } }) => {
     (selector) => selector.LIFFProfile
   );
 
-  const [initialTab, setInitialTab] = useState<string>("Deliver");
-
   useEffect(() => {
     const fetchMyOrder = async () => {
-      const result = await getAllMyOrder("U8671829b5de919d3498935d76132405d");
-      console.log(result)
+      const result = await getAllMyOrder(liffProfile.id!);
       dispatch(setAllMyOrder(result ?? []));
     };
 
-    // if (liffProfile.id) {
-    fetchMyOrder();
-    // }
+    if (liffProfile.id) {
+      fetchMyOrder();
+    }
   }, [dispatch, liffProfile.id]);
 
   return (
