@@ -86,7 +86,8 @@ const ReturnSheet: React.FC<ReturnSheetProps> = ({ order, ...props }) => {
                             <p className="text-sm">
                               {Number(
                                 order.renting.price.deposit
-                              ).toLocaleString()}
+                              ).toLocaleString()}{" "}
+                              บาท
                             </p>
                           </div>
                         </div>
