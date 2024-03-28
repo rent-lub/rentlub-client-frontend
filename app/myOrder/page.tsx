@@ -21,11 +21,10 @@ const MyOrder = () => {
     (selector) => selector.LIFFProfile
   );
 
-  const allOrder = useAppSelector((selector) => selector.myOrder);
 
   useEffect(() => {
     const fetchMyOrder = async () => {
-      const result = await getAllMyOrder("Ud46915db52ea9075f81e214910a38e01");
+      const result = await getAllMyOrder(liffProfile.id ?? "");
       dispatch(setAllMyOrder(result ?? []));
     };
 
