@@ -18,7 +18,7 @@ const Return = ({}) => {
             );
           })}
         </a>
-        <div className="mb-2 rounded-xl w-full border border-slate-200 "></div>
+        <div className="my-5 rounded-xl w-full border border-slate-200 "></div>
         <p className="mb-2">กำลังส่งคืนและรอยืนยัน</p>
         <p className="text-slate-400 text-sm">ไม่มี</p>
       </div>

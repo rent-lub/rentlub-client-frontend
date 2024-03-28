@@ -22,10 +22,10 @@ const Deliver = ({}) => {
               </React.Fragment>
             ))
         ) : (
-          <div>ไม่พบสินค้าที่ได้รับแล้ว</div>
+          <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ได้รับแล้ว</div>
         )}
 
-        <div className="mb-2 rounded-xl w-full border border-slate-200 "></div>
+        <div className="my-5 rounded-xl w-full border border-slate-200 "></div>
         <p className="mb-2">สินค้ากำลังส่ง</p>
         {myOrder.allOrder?.length > 0 ? (
           myOrder.allOrder

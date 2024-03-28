@@ -12,6 +12,7 @@ import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { useAppSelector } from "~/lib/hooks";
 import { getAllMyOrder } from "~/services/rentService";
 import { setAllMyOrder } from "~/lib/features/myOrderSlice";
+import Waiting from "~/components/myOrder/Waiting";
 
 const MyOrder = () => {
   const [selected, setSelected] = useState("deliver");
@@ -39,24 +40,52 @@ const MyOrder = () => {
       <div className="bg-white h-screen min-w-full flex flex-col overflow-y-hidden">
         <div className="flex flex-col gap-4 flex-grow">
           <Tabs
-            className="justify-center"
+            className="justify-center mt-5 ml-5"
             key={"underlined"}
             variant={"underlined"}
             aria-label="Tabs variants"
           >
             <Tab
-              key="deliver"
-              title="Deliver"
+              key="waiting"
+              title="Waiting"
+              className="flex flex-col text-black"
+            >
+              <Waiting />
+            </Tab>
+            <Tab
+              key="prepare"
+              title="Prepare"
               className="flex flex-col text-black"
             >
               <Deliver />
             </Tab>
             <Tab
-              key="return"
-              title="Return"
+              key="shipping"
+              title="Shipping"
               className="flex flex-col text-black"
             >
               <Return />
+            </Tab>
+            <Tab
+              key="delivered"
+              title="Delivered"
+              className="flex flex-col text-black"
+            >
+              <Deliver />
+            </Tab>
+            <Tab
+              key="retured"
+              title="Retured"
+              className="flex flex-col text-black"
+            >
+              <Deliver />
+            </Tab>
+            <Tab
+              key="checking"
+              title="Checking"
+              className="flex flex-col text-black"
+            >
+              <Deliver />
             </Tab>
             <Tab
               key="history"
