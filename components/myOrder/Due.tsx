@@ -16,39 +16,43 @@ const Due = () => {
         <p className="mb-2">สินค้าครบกำหนดคืน</p>
 
         {myOrder.allOrder.filter(
-                  (item) =>
-                    item.renting.status === RentingStatus.DELIVERED &&
-                    Math.abs(
-                      DateTime.now().diff(
-                        DateTime.fromISO(item.renting.endDate),
-                        "days"
-                      ).days
-                    ) >= 1
-                ).length > 0
-            ? myOrder.allOrder
-                .filter(
-                  (item) =>
-                    item.renting.status === RentingStatus.DELIVERED &&
-                    Math.abs(
-                      DateTime.now().diff(
-                        DateTime.fromISO(item.renting.endDate),
-                        "days"
-                      ).days
-                    ) >= 1
-                )
-                .map((item) => (
-                  <div
-                    onClick={() => {
-                      var index = myOrder.allOrder.indexOf(item);
-                      rounter.push(`/orderDetail/${index}`);
-                    }}
-                  >
-                    <MyOrderCard rentItem={item} />
-                  </div>
-                ))
-            : (
-              <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ครบกำหนดคืน</div>
-            )}
+          (item) =>
+            item.renting.status === RentingStatus.DELIVERED &&
+            Math.abs(
+              DateTime.now().diff(
+                DateTime.fromISO(item.renting.endDate),
+                "days"
+              ).days
+            ) >= 1
+        ).length > 0 ? (
+          myOrder.allOrder
+            .filter(
+              (item) =>
+                item.renting.status === RentingStatus.DELIVERED &&
+                Math.abs(
+                  DateTime.now().diff(
+                    DateTime.fromISO(item.renting.endDate),
+                    "days"
+                  ).days
+                ) >= 1
+            )
+            .map((item) => (
+              <React.Fragment key={item.renting._id}>
+                <div
+                  onClick={() => {
+                    var index = myOrder.allOrder.indexOf(item);
+                    rounter.push(`/orderDetail/${index}`);
+                  }}
+                >
+                  <MyOrderCard rentItem={item} />
+                </div>
+              </React.Fragment>
+            ))
+        ) : (
+          <div className="text-slate-400 text-sm">
+            ไม่พบสินค้าที่ครบกำหนดคืน
+          </div>
+        )}
       </div>
     </>
   );
