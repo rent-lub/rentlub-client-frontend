@@ -108,27 +108,29 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
                 <div className="justify-self-start">Subtotal</div>
                 <div className="justify-self-end">
-                  {currentOrder.renting.price.rent}
+                  {Number(currentOrder.renting.price.rent).toLocaleString()}
                 </div>
               </div>
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
                 <div className="justify-self-start">ค่ามัดจำ</div>
                 <div className="justify-self-end">
-                  {currentOrder.renting.price.deposit}
+                  {Number(currentOrder.renting.price.deposit).toLocaleString()}
                 </div>
               </div>
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch">
                 <div className="justify-self-start">Total</div>
                 <div className="justify-self-end">
-                  {currentOrder.renting.price.rent +
-                    currentOrder.renting.price.deposit}
+                  {Number(
+                    currentOrder.renting.price.rent +
+                      currentOrder.renting.price.deposit
+                  ).toLocaleString()}
                 </div>
               </div>
             </div>
             <div className=" rounded-xl w-full border border-slate-200 "></div>
 
             {/* More Detail */}
-            <div className="py-3 px-5 bg-slate-200 rounded-md mb-3">
+            <div className="py-3 px-5 bg-slate-200 rounded-md mb-16">
               <p className="text-base font-bold">More Detail</p>
               <span className="text-sm">ไปที่หน้า </span>
               <span className="text-sm underline underline-offset-2">
@@ -137,11 +139,11 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
             </div>
           </div>
         </div>
+        <div className="bg-white py-5 border-t-2 border-slate-200 sticky z-50">
+          <ReturnSheet order={currentOrder} />
+        </div>
       </div>
       {/* return button */}
-      <div className="bg-white py-5 border-t-2 border-slate-200 sticky bottom-0 z-50">
-        <ReturnSheet order={currentOrder} />
-      </div>
     </>
   );
 };

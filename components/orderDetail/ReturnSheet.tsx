@@ -7,6 +7,7 @@ import { MyOrder } from "~/lib/features/myOrderSlice";
 import { Resolver, useForm } from "react-hook-form";
 import { updateStatusReturn } from "~/services/rentService";
 import { useRouter } from "next/navigation";
+import { DateTime } from "luxon";
 
 interface ReturnSheetProps {
   order: MyOrder;
@@ -71,14 +72,22 @@ const ReturnSheet: React.FC<ReturnSheetProps> = ({ order, ...props }) => {
                             <p className="text-slate-400 text-xs">
                               Return Date
                             </p>
-                            <p className="text-sm">Fri 14 Feb</p>
+                            <p className="text-sm">
+                              {DateTime.fromISO(order.renting.endDate).toFormat(
+                                "d MMMM yyyy"
+                              )}
+                            </p>
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
                           <Vault className="fill-black" size={35} />
                           <div className="flex flex-col gap-0">
                             <p className="text-slate-400 text-xs">ค่ามัดจำ</p>
-                            <p className="text-sm">1,200 บาท</p>
+                            <p className="text-sm">
+                              {Number(
+                                order.renting.price.deposit
+                              ).toLocaleString()}
+                            </p>
                           </div>
                         </div>
                       </div>
