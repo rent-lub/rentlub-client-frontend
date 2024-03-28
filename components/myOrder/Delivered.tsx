@@ -29,7 +29,7 @@ const Delivered = ({}) => {
                 </React.Fragment>
               ))
           : (
-            <div className=" text-black text-sm">ไม่พบสินค้าที่ต้องได้รับ</div>
+            <div className=" text-slate-400 text-sm">ไม่พบสินค้าที่ต้องได้รับ</div>
           )}
       </div>
     </>
