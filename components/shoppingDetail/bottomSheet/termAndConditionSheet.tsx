@@ -34,7 +34,7 @@ const TermAndConditionSheet = () => {
   const handleOnCreateRenting = async () => {
     console.log("click");
     const rentingPayload: CreateRentingPayload = {
-      userLineId: liffProfile.id ?? "dfgfdgfdgfdg",
+      userLineId: liffProfile.id!,
       productId: openBottomSheet.currentProduct?._id!,
       startDate: DateTime.fromJSDate(
         selectDateFromCalendar.selectStartDate!
@@ -43,9 +43,10 @@ const TermAndConditionSheet = () => {
         selectDateFromCalendar.selectEndDate!
       ).toFormat("yyyy-MM-dd"),
     };
-    console.log(rentingPayload);
+
     var result = await createRenting(rentingPayload);
     if (result?.checkoutLink != null) {
+      router.push("/myOrder/");
       window.open(result?.checkoutLink, "_self");
     }
   };

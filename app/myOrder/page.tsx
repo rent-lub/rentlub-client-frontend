@@ -28,7 +28,7 @@ const MyOrder = ({ params }: { params: { tab_index: string } }) => {
     };
 
     if (liffProfile.id) {
-      fetchMyOrder();
+    fetchMyOrder();
     }
   }, [dispatch, liffProfile.id]);
 

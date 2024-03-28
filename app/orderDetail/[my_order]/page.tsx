@@ -19,6 +19,7 @@ import { MyOrder } from "~/lib/features/myOrderSlice";
 import { useParams } from "next/navigation";
 import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
+import { DateTime } from "luxon";
 
 const OrderDetail = ({ params }: { params: { my_order: string } }) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -27,7 +28,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
   return (
     <>
       {/* carousal */}
-      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative">
         <ImageCarousel
           images={currentOrder.product.images}
           width={320}
@@ -62,7 +63,11 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
                 <CalendarBlank className="fill-black" size={35} />
                 <div className="flex flex-col gap-0">
                   <p className="text-slate-400 text-xs">Start Date</p>
-                  <p className="text-sm">Mon 10 Feb</p>
+                  <p className="text-sm">
+                    {DateTime.fromISO(currentOrder.renting.startDate).toFormat(
+                      "d MMMM yyyy"
+                    )}
+                  </p>
                 </div>
               </div>
               <div className="rounded-xl h-auto w-px bg-slate-300">&nbsp;</div>
@@ -70,7 +75,11 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
                 <CalendarBlank className="fill-black" size={35} />
                 <div className="flex flex-col gap-0">
                   <p className="text-slate-400 text-xs">Return Date</p>
-                  <p className="text-sm">Fri 14 Feb</p>
+                  <p className="text-sm">
+                    {DateTime.fromISO(currentOrder.renting.endDate).toFormat(
+                      "d MMMM yyyy"
+                    )}
+                  </p>
                 </div>
               </div>
             </div>
@@ -131,7 +140,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
       </div>
       {/* return button */}
       <div className="bg-white py-5 border-t-2 border-slate-200 sticky bottom-0 z-50">
-        <ReturnSheet />
+        <ReturnSheet order={currentOrder} />
       </div>
     </>
   );

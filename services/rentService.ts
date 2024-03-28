@@ -77,3 +77,19 @@ export const getAllMyOrder = async (
     return null;
   }
 };
+
+
+
+export const updateStatusReturn = async (
+  id: string,
+  trackingNumber: string
+): Promise<boolean> => {
+  var result = await axios.post(
+    process.env.NEXT_PUBLIC_API_BASE_URL + `/api/v1/rentings/${id}/returned`,
+    {
+      trackingNumber: trackingNumber,
+    }
+  );
+
+  return result.status == 200 ? true : false;
+};
