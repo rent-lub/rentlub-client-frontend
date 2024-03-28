@@ -13,7 +13,7 @@ import { useAppSelector } from "~/lib/hooks";
 import { getAllMyOrder } from "~/services/rentService";
 import { setAllMyOrder } from "~/lib/features/myOrderSlice";
 
-const MyOrder = () => {
+const MyOrder = ({ params }: { params: { tab_index: string } }) => {
   const [selected, setSelected] = useState("deliver");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -21,17 +21,17 @@ const MyOrder = () => {
     (selector) => selector.LIFFProfile
   );
 
+  const [initialTab, setInitialTab] = useState<string>("Deliver");
+
   useEffect(() => {
     const fetchMyOrder = async () => {
-      if (liffProfile.id) {
-        const result = await getAllMyOrder(liffProfile.id);
-        dispatch(setAllMyOrder(result ?? []));
-      }
+      const result = await getAllMyOrder("Udf51e744c9b01d4d97490ac292333683");
+      dispatch(setAllMyOrder(result ?? []));
     };
 
-    if (liffProfile.id) {
-      fetchMyOrder();
-    }
+    // if (liffProfile.id) {
+    fetchMyOrder();
+    // }
   }, [dispatch, liffProfile.id]);
 
   return (
