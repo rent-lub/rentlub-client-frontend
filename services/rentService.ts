@@ -25,6 +25,10 @@ export interface Renting {
   verify: {
     images: string[];
   };
+  price: {
+    rent: number;
+    deposit: number;
+  };
 }
 
 export const createRenting = async (
@@ -34,6 +38,8 @@ export const createRenting = async (
     process.env.NEXT_PUBLIC_API_BASE_URL + "/api/v1/rentings",
     payload
   );
+  console.log(payload);
+  console.log(response.status);
   return response.status === 201 ? response.data ?? null : null;
 };
 

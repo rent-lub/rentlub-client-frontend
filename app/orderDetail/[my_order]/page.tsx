@@ -18,6 +18,7 @@ import ReturnSheet from "~/components/orderDetail/ReturnSheet";
 import { MyOrder } from "~/lib/features/myOrderSlice";
 import { useParams } from "next/navigation";
 import { useAppSelector } from "~/lib/hooks";
+import { RentingStatus } from "~/types/rentingEnum";
 
 const OrderDetail = ({ params }: { params: { my_order: string } }) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -44,17 +45,15 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
             <div className="flex flex-col gap-1">
               <p className="mb-2">สถานะสินค้า</p>
               <p className="text-sm">ได้รับสินค้าแล้ว</p>
-              <div className="bg-slate-100 rounded-md flex px-6 py-2 gap-2 justify-center items-center">
-                <Package className="fill-green" size={27} />
-                <div className="rounded-xl border-1 w-1/12 h-0 border-green justify-center "></div>
-                <Truck className="fill-green" size={27} />
-                <div className="rounded-xl border-1 w-1/12 h-0 border-green justify-center "></div>
-                <CheckCircle className="fill-green" size={27} />
-                <div className="rounded-xl border-1 w-1/12 h-0 border-slate-400 justify-center "></div>
-                <ArrowsClockwise className="fill-slate-400" size={27} />
-                <div className="rounded-xl border-1 w-1/12 h-0 border-slate-400 justify-center "></div>
-                <Clipboard className="fill-slate-400" size={27} />
-              </div>
+              {
+                <StatusBar
+                  index={
+                    Object.keys(RentingStatus).indexOf(
+                      currentOrder.renting.status
+                    ) + 1
+                  }
+                />
+              }
             </div>
             <div className=" rounded-xl w-full border border-slate-200 "></div>
 
@@ -93,7 +92,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
                 <p className="text-xs font-bold">ET 134 34 2343 234 4 xxx</p>
               </div>
             </div>
-            <Textarea minRows={1} label="ADDRESS" placeholder="" className="" />
+
             <div className=" rounded-xl w-full border border-slate-200 "></div>
 
             {/* Paid */}
@@ -101,19 +100,22 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
             <div className="flex flex-col space-y-2">
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
                 <div className="justify-self-start">Subtotal</div>
-                <div className="justify-self-end">2,500</div>
-              </div>
-              <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
-                <div className="justify-self-start">Shipping fee</div>
-                <div className="justify-self-end">32</div>
+                <div className="justify-self-end">
+                  {currentOrder.renting.price.rent}
+                </div>
               </div>
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
                 <div className="justify-self-start">ค่ามัดจำ</div>
-                <div className="justify-self-end">1,200</div>
+                <div className="justify-self-end">
+                  {currentOrder.renting.price.deposit}
+                </div>
               </div>
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch">
                 <div className="justify-self-start">Total</div>
-                <div className="justify-self-end">3,732</div>
+                <div className="justify-self-end">
+                  {currentOrder.renting.price.rent +
+                    currentOrder.renting.price.deposit}
+                </div>
               </div>
             </div>
             <div className=" rounded-xl w-full border border-slate-200 "></div>
@@ -136,5 +138,77 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
     </>
   );
 };
+
+interface Props {
+  index: number;
+}
+
+const StatusBar: React.FC<Props> = ({ index }) => {
+  const icons = [
+    {
+      icon: (
+        <Package
+          className={index >= 1 ? "fill-green" : "fill-slate-400"}
+          size={27}
+        />
+      ),
+      filled: index > 1,
+    },
+    {
+      icon: (
+        <Truck
+          className={index >= 2 ? "fill-green" : "fill-slate-400"}
+          size={27}
+        />
+      ),
+      filled: index > 2,
+    },
+    {
+      icon: (
+        <CheckCircle
+          className={index >= 3 ? "fill-green" : "fill-slate-400"}
+          size={27}
+        />
+      ),
+      filled: index > 3,
+    },
+    {
+      icon: (
+        <ArrowsClockwise
+          className={index >= 4 ? "fill-green" : "fill-slate-400"}
+          size={27}
+        />
+      ),
+      filled: index > 4,
+    },
+    {
+      icon: (
+        <Clipboard
+          className={index >= 5 ? "fill-green" : "fill-slate-400"}
+          size={27}
+        />
+      ),
+      filled: index > 5,
+    },
+  ];
+
+  return (
+    <div className="bg-slate-100 rounded-md flex px-6 py-2 gap-2 justify-center items-center">
+      {icons.map(({ icon, filled }, i) => (
+        <React.Fragment key={i}>
+          {icon}
+          {i < icons.length - 1 && (
+            <div
+              className={`rounded-xl border-1 w-1/12 h-0 ${
+                filled ? "border-green" : "border-slate-400"
+              } justify-center`}
+            ></div>
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  );
+};
+
 
 export default OrderDetail;
