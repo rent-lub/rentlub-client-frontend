@@ -4,6 +4,7 @@ import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { DateTime } from "luxon";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const Return = ({}) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -12,8 +13,8 @@ const Return = ({}) => {
   return (
     <>
       <div className="mx-5">
-        <h1 className="font-medium text-xl mb-3">Going Back</h1>
-        <p className="mb-2">ครบกำหนดคืน</p>
+        <h1 className="font-medium text-xl mb-1">Going Back</h1>
+        <p className="mb-2">สินค้าที่กำลังถูกส่งกลับคืนร้าน</p>
         {myOrder.allOrder?.length > 0 ? (
           myOrder.allOrder
             .filter((item) => item.renting.status === RentingStatus.RETURNED)
@@ -31,7 +32,10 @@ const Return = ({}) => {
             ))
         )
             :  (
-              <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ครบกำหนดคืน</div>
+              <div className="flex flex-col items-center gap-2 pt-20">
+                <Image src="/return.svg" alt="" width={200} height={200} className="opacity-65 mr-5" />
+                <div className="text-slate-400 text-sm">ไม่พบสินค้าที่กำลังส่งกลับไปยังร้าน</div>
+              </div>
             )}
       </div>
     </>

@@ -3,6 +3,7 @@ import MyOrderCard from "./MyOrderCard";
 import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const Delivered = ({}) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -10,7 +11,7 @@ const Delivered = ({}) => {
   return (
     <>
       <div className="mx-5">
-        <h1 className="font-medium text-xl mb-3">Delivered</h1>
+        <h1 className="font-medium text-xl mb-1">Delivered</h1>
         <p className="mb-2">สินค้าที่ต้องได้รับ</p>
         {myOrder.allOrder
               .filter((item) => item.renting.status === RentingStatus.SHIPPING).length > 0
@@ -29,7 +30,10 @@ const Delivered = ({}) => {
                 </React.Fragment>
               ))
           : (
-            <div className=" text-slate-400 text-sm">ไม่พบสินค้าที่ต้องได้รับ</div>
+            <div className="flex flex-col items-center gap-2 pt-20">
+                          <Image src="/Delivered.svg" alt="" width={175} height={175} className="opacity-65" />
+                        <div className=" text-slate-400 text-sm">ไม่พบสินค้าที่ต้องได้รับ</div>
+            </div>
           )}
       </div>
     </>

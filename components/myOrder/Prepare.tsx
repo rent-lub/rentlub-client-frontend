@@ -3,6 +3,7 @@ import MyOrderCard from "./MyOrderCard";
 import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const Prepare = ({}) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -11,7 +12,7 @@ const Prepare = ({}) => {
   return (
     <>
       <div className="mx-5">
-        <h1 className="font-medium text-xl mb-3">Preparing To Ship</h1>
+        <h1 className="font-medium text-xl mb-1">Preparing To Ship</h1>
         <p className="mb-2">ร้านค้ากำลังเตรียมจัดส่ง</p>
 
         { myOrder.allOrder
@@ -31,7 +32,10 @@ const Prepare = ({}) => {
               </React.Fragment>
             ))
         ) : (
-          <div className="text-slate-400 text-sm">ไม่พบสินค้าที่เตรียมจัดส่ง</div>
+            <div className="flex flex-col items-center gap-2 pt-20">
+            <Image src="/Prepare.svg" alt="" width={150} height={150} className="opacity-65"/>
+            <div className="text-slate-400 text-sm">ไม่พบสินค้าที่เตรียมจัดส่ง</div>
+            </div>
         )}
       </div>
     </>

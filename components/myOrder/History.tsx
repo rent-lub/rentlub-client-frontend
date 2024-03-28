@@ -3,6 +3,7 @@ import MyOrderCard from "./MyOrderCard";
 import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const History = ({}) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -29,7 +30,10 @@ const History = ({}) => {
                 </React.Fragment>
               ))
           :  (
-            <div className="text-slate-400 text-sm">ตอนนี้ยังไม่มีสินค้าที่คุณเคยเช่า</div>
+            <div className="flex flex-col items-center gap-2 pt-16">
+                <Image src="/history.svg" alt="" width={175} height={175} className="opacity-65" />
+                <div className="text-slate-400 text-sm">ตอนนี้ยังไม่มีสินค้าที่คุณเคยเช่า</div>
+              </div>
           )}
       </div>
     </>

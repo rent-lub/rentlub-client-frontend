@@ -4,6 +4,7 @@ import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DateTime } from "luxon";
+import Image from "next/image";
 
 const Due = () => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
@@ -12,7 +13,7 @@ const Due = () => {
   return (
     <>
       <div className="mx-5">
-        <h1 className="font-medium text-xl mb-3">Due To Return</h1>
+        <h1 className="font-medium text-xl mb-1">Due To Return</h1>
         <p className="mb-2">สินค้าครบกำหนดคืน</p>
 
         {myOrder.allOrder.filter(
@@ -47,7 +48,10 @@ const Due = () => {
                   </div>
                 ))
             : (
-              <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ครบกำหนดคืน</div>
+              <div className="flex flex-col items-center gap-2 pt-20">
+                <Image src="/Prepare.svg" alt="" width={150} height={150} className="opacity-65" />
+                <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ครบกำหนดคืน</div>
+              </div>
             )}
       </div>
     </>
