@@ -28,7 +28,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
   return (
     <>
       {/* carousal */}
-      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative">
+      <div className="bg-white h-screen min-w-full overflow-x-hidden overflow-y-auto relative pb-20">
         <ImageCarousel
           images={currentOrder.product.images}
           width={320}
@@ -141,7 +141,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
         </div>
       </div>
       {/* return button */}
-      <div className="bg-white py-5 border-t-2 border-slate-200 absolute bottom-0 z-50">
+      <div className="bg-white py-5 border-t-2 border-slate-200 sticky bottom-0 z-50">
         <ReturnSheet order={currentOrder} />
       </div>
     </>
