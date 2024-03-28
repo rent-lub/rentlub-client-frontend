@@ -47,11 +47,9 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
               <p className="text-sm">ได้รับสินค้าแล้ว</p>
               {
                 <StatusBar
-                  index={
-                    Object.keys(RentingStatus).indexOf(
-                      currentOrder.renting.status
-                    ) + 1
-                  }
+                  index={Object.keys(RentingStatus).indexOf(
+                    currentOrder.renting.status
+                  )}
                 />
               }
             </div>
