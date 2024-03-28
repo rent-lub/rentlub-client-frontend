@@ -4,18 +4,18 @@ import { useAppSelector } from "~/lib/hooks";
 import { RentingStatus } from "~/types/rentingEnum";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const History = ({}) => {
+const Shipping = ({}) => {
   const myOrder = useAppSelector((selector) => selector.myOrder);
   const rounter = useRouter();
-
   return (
     <>
       <div className="mx-5">
-        <h1 className="font-medium text-xl mb-3">History</h1>
-        <p className="mb-2">ประวัติ</p>
-        {myOrder.allOrder?.length > 0
+        <h1 className="font-medium text-xl mb-3">Shipping</h1>
+        <p className="mb-2">สินค้าที่กำลังนำส่ง</p>
+        {myOrder.allOrder
+              .filter((item) => item.renting.status === RentingStatus.SHIPPING).length > 0
           ? myOrder.allOrder
-              .filter((item) => item.renting.status === RentingStatus.VERIFIED)
+              .filter((item) => item.renting.status === RentingStatus.SHIPPING)
               .map((item) => (
                 <React.Fragment key={item.renting._id}>
                   <div
@@ -23,17 +23,15 @@ const History = ({}) => {
                       var index = myOrder.allOrder.indexOf(item);
                       rounter.push(`/orderDetail/${index}`);
                     }}
-                  ></div>
-                  <a href="/orderDetail/">
-                  </a>
+                  >
+                    <MyOrderCard rentItem={item} />
+                  </div>
                 </React.Fragment>
               ))
-          :  (
-            <div className="text-slate-400 text-sm">ตอนนี้ยังไม่มีสินค้าที่คุณเคยเช่า</div>
-          )}
+          : (<div className="text-slate-400 text-sm">ไม่พบสินค้าที่กำลังนำส่ง</div>)}
       </div>
     </>
   );
 };
   
-  export default History;
+export default Shipping;

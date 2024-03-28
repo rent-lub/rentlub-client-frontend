@@ -51,6 +51,8 @@ export const getAllMyOrder = async (
       process.env.NEXT_PUBLIC_API_BASE_URL + `/api/v1/users/${id}/rentings`
     );
 
+    console.log(response.data)
+
     if (response.status === 200) {
       const rentProductList: { renting: Renting; product: Product }[] = [];
       await Promise.all(
