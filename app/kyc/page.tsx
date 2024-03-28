@@ -11,11 +11,14 @@ import {
 import { useAppDispatch, useAppSelector } from "~/lib/hooks";
 import { LIFFProfile } from "~/lib/features/LIFFProfileSlice";
 import { Button, ButtonGroup } from "@nextui-org/button";
+import { useSearchParams } from "next/navigation";
 
 const KYC = () => {
   const liffProfile: LIFFProfile = useAppSelector(
     (selector) => selector.LIFFProfile
   );
+  const searchParams = useSearchParams();
+  const checkoutLink = searchParams.get("url");
 
   const dispatch = useAppDispatch();
 
@@ -35,7 +38,7 @@ const KYC = () => {
           </p>
         </div>
         <div className="pt-6 px-8 w-full">
-          <KYCForm />
+          <KYCForm checkoutLink={checkoutLink ?? ""} />
         </div>
       </div>
     </>

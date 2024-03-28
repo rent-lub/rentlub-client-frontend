@@ -32,7 +32,6 @@ const TermAndConditionSheet = () => {
   const [isAgree, setIsAgree] = useState<boolean>(false);
 
   const handleOnCreateRenting = async () => {
-    console.log("click");
     const rentingPayload: CreateRentingPayload = {
       userLineId: liffProfile.id!,
       productId: openBottomSheet.currentProduct?._id!,
@@ -45,9 +44,15 @@ const TermAndConditionSheet = () => {
     };
 
     var result = await createRenting(rentingPayload);
-    if (result?.checkoutLink != null) {
-      router.push("/myOrder/");
-      window.open(result?.checkoutLink, "_self");
+    if (liffProfile.isVerify) {
+      if (result?.checkoutLink != null) {
+        router.push("/myOrder/");
+        window.open(result?.checkoutLink, "_self");
+      }
+    } else {
+      if (result?.checkoutLink != null) {
+        router.push(`/kyc?url=${result?.checkoutLink}`);
+      }
     }
   };
 
@@ -116,11 +121,7 @@ const TermAndConditionSheet = () => {
                   isDisabled={!isAgree}
                   className="font-bold w-full h-12 rounded-xl text-md bg-[#40C090] text-white"
                   onClick={async () => {
-                    isAgree
-                      ? liffProfile.isVerify
-                        ? await handleOnCreateRenting()
-                        : router.push("/kyc")
-                      : () => {};
+                    isAgree ? await handleOnCreateRenting() : () => {};
                   }}
                 >
                   Continue
