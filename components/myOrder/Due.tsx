@@ -17,45 +17,46 @@ const Due = () => {
         <p className="mb-2">สินค้าครบกำหนดคืน</p>
 
         {myOrder.allOrder.filter(
-                  (item) =>
-                    item.renting.status === RentingStatus.DELIVERED &&
-                    Math.abs(
-                      DateTime.now().diff(
-                        DateTime.fromISO(item.renting.endDate),
-                        "days"
-                      ).days
-                    ) >= 1
-                ).length > 0
-            ? myOrder.allOrder
-                .filter(
-                  (item) =>
-                    item.renting.status === RentingStatus.DELIVERED &&
-                    Math.abs(
-                      DateTime.now().diff(
-                        DateTime.fromISO(item.renting.endDate),
-                        "days"
-                      ).days
-                    ) >= 1
-                )
-                .map((item) => (
-                  <div
-                    onClick={() => {
-                      var index = myOrder.allOrder.indexOf(item);
-                      rounter.push(`/orderDetail/${index}`);
-                    }}
-                  >
-                    <MyOrderCard rentItem={item} />
-                  </div>
-                ))
-            : (
-              <div className="flex flex-col items-center gap-2 pt-20">
-                <Image src="/Prepare.svg" alt="" width={150} height={150} className="opacity-65" />
-                <div className="text-slate-400 text-sm">ไม่พบสินค้าที่ครบกำหนดคืน</div>
-              </div>
-            )}
+          (item) =>
+            item.renting.status === RentingStatus.DELIVERED &&
+            Math.abs(
+              DateTime.now().diff(
+                DateTime.fromISO(item.renting.endDate),
+                "days"
+              ).days
+            ) >= 1
+        ).length > 0 ? (
+          myOrder.allOrder
+            .filter(
+              (item) =>
+                item.renting.status === RentingStatus.DELIVERED &&
+                Math.abs(
+                  DateTime.now().diff(
+                    DateTime.fromISO(item.renting.endDate),
+                    "days"
+                  ).days
+                ) >= 1
+            )
+            .map((item) => (
+              <React.Fragment key={item.renting._id}>
+                <div
+                  onClick={() => {
+                    var index = myOrder.allOrder.indexOf(item);
+                    rounter.push(`/orderDetail/${index}`);
+                  }}
+                >
+                  <MyOrderCard rentItem={item} />
+                </div>
+              </React.Fragment>
+            ))
+        ) : (
+          <div className="text-slate-400 text-sm">
+            ไม่พบสินค้าที่ครบกำหนดคืน
+          </div>
+        )}
       </div>
     </>
   );
 };
-  
+
 export default Due;

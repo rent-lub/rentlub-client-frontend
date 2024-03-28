@@ -40,7 +40,11 @@ type FormValues = {
   postCode: string;
 };
 
-const KYCForm = () => {
+interface KYFProps {
+  checkoutLink: string;
+}
+
+const KYCForm: React.FC<KYFProps> = ({ checkoutLink, ...props }) => {
   const methods = useForm();
   const liff = useLiff();
   const liffProfile: LIFFProfile = useAppSelector(
@@ -77,7 +81,7 @@ const KYCForm = () => {
     var result = await verifyUser(payload);
     if (result == true) {
       dispatch(setIsVerify(true));
-      router.back();
+      window.location.href = checkoutLink;
     } else {
       methods.reset();
       onOpen();
