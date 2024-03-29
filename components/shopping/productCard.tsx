@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCard> = ({ product, ...props }) => {
             onClick={(e) => {
               dispatch(clearAllSelectDate());
               e.preventDefault();
-              router.push("/shoppingDetail/");
+              router.push(`/shoppingDetail/${product._id}`);
             }}
           >
             {product.name}
@@ -68,7 +68,7 @@ const ProductCard: React.FC<ProductCard> = ({ product, ...props }) => {
           onClick={(e) => {
             dispatch(clearAllSelectDate());
             e.preventDefault();
-            router.push("/shoppingDetail/");
+            router.push(`/shoppingDetail/${product._id}`);
           }}
         >
           ฿ {Number(product.pricePerDay).toLocaleString()}
