@@ -141,9 +141,15 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
         </div>
       </div>
       {/* return button */}
-      <div className="bg-white py-5 border-t-2 border-slate-200 sticky bottom-0 z-50">
-        <ReturnSheet order={currentOrder} />
-      </div>
+      {currentOrder.renting.status != RentingStatus.RETURNED &&
+      currentOrder.renting.status != RentingStatus.CHECKING &&
+      currentOrder.renting.status != RentingStatus.VERIFIED ? (
+        <div className="bg-white py-5 border-t-2 border-slate-200 sticky bottom-0 z-50">
+          <ReturnSheet order={currentOrder} />
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
