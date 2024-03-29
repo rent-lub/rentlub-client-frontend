@@ -103,7 +103,7 @@ const OrderDetail = ({ params }: { params: { my_order: string } }) => {
             <div className=" rounded-xl w-full border border-slate-200 "></div>
 
             {/* Paid */}
-            <p className="">จ่ายเงินแล้ว</p>
+            <p className="">จ่ายเงินแล้ว (ไม่รวมค่าส่ง)</p>
             <div className="flex flex-col space-y-2">
               <div className="w-full grid grid-row-1 grid-flow-col justify-items-stretch text-slate-400 text-xs">
                 <div className="justify-self-start">Subtotal</div>
