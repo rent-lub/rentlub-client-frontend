@@ -52,7 +52,7 @@ const Due = () => {
         ) : (
           <div className="flex flex-col items-center gap-2 pt-20">
             <Image
-              src="/checking.svg"
+              src="/due.svg"
               alt=""
               width={175}
               height={175}
