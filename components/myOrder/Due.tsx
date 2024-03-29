@@ -24,7 +24,7 @@ const Due = () => {
                 DateTime.fromISO(item.renting.endDate),
                 "days"
               ).days
-            ) <= 1
+            ) >= 1
         ).length > 0 ? (
           myOrder.allOrder
             .filter(
@@ -35,7 +35,7 @@ const Due = () => {
                     DateTime.fromISO(item.renting.endDate),
                     "days"
                   ).days
-                ) <= 1
+                ) >= 1
             )
             .map((item) => (
               <React.Fragment key={item.renting._id}>
