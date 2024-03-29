@@ -46,8 +46,7 @@ const TermAndConditionSheet = () => {
     var result = await createRenting(rentingPayload);
     if (liffProfile.isVerify) {
       if (result?.checkoutLink != null) {
-        router.push("/myOrder/");
-        window.open(result?.checkoutLink, "_self");
+        window.location.href = result?.checkoutLink;
       }
     } else {
       if (result?.checkoutLink != null) {
